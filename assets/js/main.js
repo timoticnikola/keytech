@@ -38,6 +38,10 @@ window.onload = () => {
     iTag.setAttribute("class", "fa-solid fa-basket-shopping");
     iTag.setAttribute("id", "shopping-card");
     liTag.appendChild(iTag);
+    let pTag = document.createElement("span");
+    let pTagContent = document.createTextNode(`(${inCardCount()})`);
+    pTag.appendChild(pTagContent);
+    liTag.appendChild(pTag);
     ulTag.appendChild(liTag);
   }
 
@@ -309,23 +313,6 @@ window.onload = () => {
       });
     }
   }
-  // function cardMessages(text) {
-  //   let messageDiv = document.createElement("div");
-  //   messageDiv.setAttribute("class", "message");
-  //   let pTag = document.createElement("p");
-  //   let pTagContent = document.createTextNode(`${text}`);
-  //   pTag.appendChild(pTagContent)
-  //   messageDiv.appendChild(pTag);
-  //   let bodyTag = document.getElementsByTagName("body");
-  //   console.log(bodyTag);
-  //   bodyTag[0].appendChild(messageDiv);
-  //   setTimeout(() => {
-  //     messageDiv.setAttribute("class", "test-test");
-  //   }, 3000);
-  //   setTimeout(() => {
-  //     bodyTag[0].removeChild(bodyTag[0].lastElementChild);
-  //   }, 5000);
-  // }
   function cardMessages(text) {
     let messageDivTest = document.querySelector(".message");
     if (messageDivTest) {
@@ -340,8 +327,25 @@ window.onload = () => {
     let bodyTag = document.getElementsByTagName("body");
     console.log(bodyTag);
     bodyTag[0].appendChild(messageDiv);
-    setInterval(() => {
-      messageDiv.parentElement.removeChild(messageDiv);
+    var clearElement = setInterval(() => {
+      if (messageDiv.parentElement == null) {
+        clearInterval(clearElement);
+      } else {
+        messageDiv.parentElement.removeChild(messageDiv);
+      }
     }, 5000);
+  }
+  //! Promeni inCardCount funkciju.
+  //! Unutaer kreiranja menia treba postaviti "span" tag sa id-em, i njemu samo venjati vrednost prilikom dodavanjaa proizvoda u korpu, odnosno klikom na dugme "add to card"
+  function inCardCount() {
+    if (localStorage.getItem("addToCardList")) {
+      let cardCounts = jsonParse("addToCardList").length;
+      console.log(cardCounts);
+      return cardCounts;
+    }
+    else {
+      return 0;
+    }
+
   }
 };
