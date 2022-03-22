@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name": "Ketts1",
+    "image": {
+      "src": "assets/img/photo1.png",
+      "alt": "photo1"
+    },
+    "categoryID": 1,
+    "brandID": 1,
+    "price": {
+      "old": 12,
+      "new": 20
+    },
+    "descript": "This keyboard have: ",
+    "score": 2.1
+  },
+  {
+    "id": 1,
+    "name": "Jok",
+    "image": {
+      "src": "assets/img/photo1.png",
+      "alt": "photo1"
+    },
+    "categoryID": 3,
+    "brandID": 1,
+    "price": {
+      "old": 45,
+      "new": 12
+    },
+    "descript": "Steyts",
+    "score": 4.7
+  },
+  {
+    "id": 2,
+    "name": "Tesdd",
+    "image": {
+      "src": "assets/img/photo1.png",
+      "alt": "photo1"
+    },
+    "categoryID": 2,
+    "brandID": 2,
+    "price": {
+      "old": 10,
+      "new": 24
+    },
+    "descript": "Steyts",
+    "score": 3.5
+  }
+]
