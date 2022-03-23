@@ -264,8 +264,6 @@ window.onload = () => {
         let categoryArray = jsonParse("categoryArray");
         for (let category of categoryArray) {
           if (category.name == this.value) {
-            // console.log(category.name);
-            // console.log(category.id);
             filterCategory(category.id);
           }
         }
@@ -278,7 +276,6 @@ window.onload = () => {
     shoppingCard.addEventListener("click", function () {
       let shoppingCardContainer = document.querySelector(".shopping-card-container");
       shoppingCardContainer.classList.add("shopping-card-active");
-      // shoppingCardContainer.style.right = "0";
     });
     let shoppingCardClose = document.getElementById("card-close");
     shoppingCardClose.addEventListener("click", function () {
@@ -311,9 +308,12 @@ window.onload = () => {
           localStorage.setItem("addToCardList", JSON.stringify(jsonTe));
         }
         inCardCount();
+        inCardProductsShow();
+        classGe();
       });
     }
   }
+  // Add to card message
   function cardMessages(text) {
     let messageDivTest = document.querySelector(".message");
     if (messageDivTest) {
@@ -335,6 +335,7 @@ window.onload = () => {
       }
     }, 5000);
   }
+  // In card counter
   function inCardCount() {
     let pTag = document.getElementById("incard-product-number");
     if (localStorage.getItem("addToCardList")) {
@@ -343,6 +344,72 @@ window.onload = () => {
     }
     else {
       pTag.innerHTML = " (0)";
+    }
+  }
+  function inCardProductsShow() {
+    let addToCardList = jsonParse("addToCardList");
+    let html = "";
+    for (let item of addToCardList) {
+      console.log(item);
+      html += `<div class="card-product">
+          <img src="assets/img/test.webp" alt="img" />
+          <div class="card-product-right">
+            <p>${item.id}</p>
+            <p>BrandName</p>
+            <p>ProductPrice</p>
+            <div class="card-product-tools">
+              <div class="card-product-quantity">
+                <input type="button" class="quantityRegul" data-id="${item.id}" value="-" />
+                <p>${item.quantity}</p>
+                <input type="button" class="quantityRegul" data-id="${item.id}" value="+" />
+              </div>
+              <i class="fa fa-trash" data-id="${item.id}" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>`;
+    }
+    document.getElementById("card-products").innerHTML = html;
+    // console.log(html);
+  }
+  // function showProductName(itemID) {
+
+  // }
+  function classGe() {
+    let quantityRegulList = document.querySelectorAll(".quantityRegul");
+    // console.log(test);
+    for (let item of quantityRegulList) {
+      item.addEventListener("click", function () {
+        let dataQuantity = jsonParse("addToCardList");
+        console.log(this.value);
+        if (this.value == "+") {
+          console.log(dataQuantity);
+          for (let data of dataQuantity) {
+            if (data.id == this.getAttribute("data-id")) {
+              console.log(data.id);
+              data.quantity += 1;
+              localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
+              console.log(data.quantity);
+            }
+          }
+        } else {
+          for (let data of dataQuantity) {
+            if (data.id == this.getAttribute("data-id")) {
+              if (data.quantity > 1) {
+                data.quantity -= 1;
+                localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
+                console.log(data.quantity);
+              } else {
+                // ! obrisati proizvod
+                // data.quantity -= 1;
+                // localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
+                console.log(data.quantity);
+              }
+            }
+          }
+        }
+        // ! Promeniti na create element 
+        // inCardProductsShow();
+      });
     }
   }
 };
