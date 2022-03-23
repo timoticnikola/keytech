@@ -39,10 +39,13 @@ window.onload = () => {
     iTag.setAttribute("id", "shopping-card");
     liTag.appendChild(iTag);
     let pTag = document.createElement("span");
-    let pTagContent = document.createTextNode(`(${inCardCount()})`);
-    pTag.appendChild(pTagContent);
+    pTag.setAttribute("id", "incard-product-number");
+    // let pTagContent = document.createTextNode(`(${inCardCount()})`);
+
+    // pTag.appendChild(pTagContent);
     liTag.appendChild(pTag);
     ulTag.appendChild(liTag);
+    inCardCount();
   }
 
   function navLinks(id, navLinksArray) {
@@ -287,19 +290,16 @@ window.onload = () => {
     for (let addToCardBtn of addToCardBtnsList) {
       addToCardBtn.addEventListener("click", function () {
         let dataID = this.getAttribute("data-id");
-        console.log(dataID);
         if (localStorage.getItem("addToCardList")) {
           let addToCardList = jsonParse("addToCardList");
-          console.log(addToCardList.filter((e) => e.id == dataID));
           if (addToCardList.filter((e) => e.id == dataID).length) {
-            console.log("Ima u korpi");
-            // alert("Ima u korpi");
-            cardMessages("Proizvod je vec dodat u krpu!");
+            cardMessages("Product already in card!");
           } else {
             addToCardList.push({
               id: dataID,
               quantity: 1,
             });
+            cardMessages("Product added to card!");
             localStorage.setItem("addToCardList", JSON.stringify(addToCardList));
           }
         } else {
@@ -310,6 +310,7 @@ window.onload = () => {
           };
           localStorage.setItem("addToCardList", JSON.stringify(jsonTe));
         }
+        inCardCount();
       });
     }
   }
@@ -325,7 +326,6 @@ window.onload = () => {
     pTag.appendChild(pTagContent)
     messageDiv.appendChild(pTag);
     let bodyTag = document.getElementsByTagName("body");
-    console.log(bodyTag);
     bodyTag[0].appendChild(messageDiv);
     var clearElement = setInterval(() => {
       if (messageDiv.parentElement == null) {
@@ -335,17 +335,14 @@ window.onload = () => {
       }
     }, 5000);
   }
-  //! Promeni inCardCount funkciju.
-  //! Unutaer kreiranja menia treba postaviti "span" tag sa id-em, i njemu samo venjati vrednost prilikom dodavanjaa proizvoda u korpu, odnosno klikom na dugme "add to card"
   function inCardCount() {
+    let pTag = document.getElementById("incard-product-number");
     if (localStorage.getItem("addToCardList")) {
       let cardCounts = jsonParse("addToCardList").length;
-      console.log(cardCounts);
-      return cardCounts;
+      pTag.innerHTML = ` (${cardCounts})`;
     }
     else {
-      return 0;
+      pTag.innerHTML = " (0)";
     }
-
   }
 };
