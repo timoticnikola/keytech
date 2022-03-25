@@ -223,7 +223,7 @@ footer .wrapper #footer-down {
   background-color: red;
 }
 .card-product {
-  min-height: 130px;
+  min-height: 140px;
   display: flex;
 }
 .card-product img {
@@ -236,7 +236,7 @@ footer .wrapper #footer-down {
 .card-product-tools {
   display: flex;
   justify-content: space-between;
-  margin-top: 35px;
+  margin-top: 20px;
 }
 .card-product-quantity {
   display: flex;
@@ -272,6 +272,32 @@ footer .wrapper #footer-down {
   width: 100%;
   height: 3px;
   background-color: red;
+}
+/* Empty card */
+#empty-card {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.fa-trash:hover {
+  color: red;
+}
+/* Btns */
+#card-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+#card-btns input[type="button"] {
+  background-color: rgb(181, 129, 233);
+  padding: 5px 10px;
+  /* border: 1px solid gray; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#card-btns input[type="button"]:hover {
+  background-color: green;
 }
 /* Message modal */
 .message {

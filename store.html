@@ -1,129 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <title>KeyTech</title>
-  </head>
-  <body>
-    <nav>
-      <div id="nav-warpper" class="wrapper">
-        <img src="#" id="logo" alt="logo" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <title>KeyTech</title>
+</head>
+
+<body>
+  <nav>
+    <div id="nav-warpper" class="wrapper">
+      <img src="#" id="logo" alt="logo" />
+    </div>
+  </nav>
+  <header>
+    <div class="wrapper">
+      <h1>Products</h1>
+      <div id="sort-products">
+        <select name="sortProduct" id="sort-product-placeholder">
+          <option value="0">Sort</option>
+          <option value="1">Price asc</option>
+          <option value="2">Price desc</option>
+          <option value="3">Name asc</option>
+          <option value="4">Name desc</option>
+          <option value="5">Reviews asc</option>
+          <option value="6">Reviews desc</option>
+        </select>
       </div>
-    </nav>
-    <header>
-      <div class="wrapper">
-        <h1>Products</h1>
-        <div id="sort-products">
-          <select name="sortProduct" id="sort-product-placeholder">
-            <option value="0">Sort</option>
-            <option value="1">Price asc</option>
-            <option value="2">Price desc</option>
-            <option value="3">Name asc</option>
-            <option value="4">Name desc</option>
-            <option value="5">Reviews asc</option>
-            <option value="6">Reviews desc</option>
-          </select>
-        </div>
-        <div id="products">
-          <div class="product">
-            <img src="assets/img/test.webp" alt="photo" />
-            <p class="product-category-name">categoryName</p>
-            <p class="product-name">Name</p>
-            <p class="product-brandname">BrandName</p>
-            <div class="product-price">
-              <p>Price:</p>
-              <p class="product-price-new">priceValue</p>
-              <s class="product-price-old">oldPrice</s>
-            </div>
-            <p class="product-reviews">Reviews</p>
-            <input class="product-add-to-card-btn" type="button" value="Add to card" />
+      <div id="products">
+        <div class="product">
+          <img src="assets/img/test.webp" alt="photo" />
+          <p class="product-category-name">categoryName</p>
+          <p class="product-name">Name</p>
+          <p class="product-brandname">BrandName</p>
+          <div class="product-price">
+            <p>Price:</p>
+            <p class="product-price-new">priceValue</p>
+            <s class="product-price-old">oldPrice</s>
           </div>
+          <p class="product-reviews">Reviews</p>
+          <input class="product-add-to-card-btn" type="button" value="Add to card" />
         </div>
       </div>
-      <div id="side-filter">
-        <div id="search-container">
-          <input type="text" name="search" id="search" />
-        </div>
-        <div id="brands-filter"></div>
-        <div id="category-filter"></div>
-        <div id="reviews-filter">
-          <p>Reviews</p>
-          <div class="slidecontainer">
-            <input type="range" min="10" max="50" value="1" class="slider" id="reviews-range-sllider" />
-            <p id="reviews-range-place"></p>
-            <input type="text" id="reviews-range-placeholder" />
-          </div>
+    </div>
+    <div id="side-filter">
+      <div id="search-container">
+        <input type="text" name="search" id="search" />
+      </div>
+      <div id="brands-filter"></div>
+      <div id="category-filter"></div>
+      <div id="reviews-filter">
+        <p>Reviews</p>
+        <div class="slidecontainer">
+          <input type="range" min="10" max="50" value="1" class="slider" id="reviews-range-sllider" />
+          <p id="reviews-range-place"></p>
+          <input type="text" id="reviews-range-placeholder" />
         </div>
       </div>
-    </header>
-    <section class="shopping-card-container">
-      <div id="card-close"></div>
-      <p id="card-heading">Card</p>
-      <div id="card-products">
-        <div class="card-product">
-          <img src="assets/img/test.webp" alt="img" />
-          <div class="card-product-right">
-            <p>ItemName</p>
-            <p>BrandName</p>
-            <p>ProductPrice</p>
-            <div class="card-product-tools">
-              <div class="card-product-quantity">
-                <input type="button" value="-" />
-                <p>1</p>
-                <input type="button" value="+" />
-              </div>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </div>
-        </div>
-        <div class="card-product">
-          <img src="assets/img/test.webp" alt="img" />
-          <div class="card-product-right">
-            <p>ItemName</p>
-            <p>BrandName</p>
-            <div class="card-product-tools">
-              <div class="card-product-quantity">
-                <input type="button" value="-" />
-                <p>1</p>
-                <input type="button" value="+" />
-              </div>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </div>
-        </div>
-        <div class="card-product">
-          <img src="assets/img/test.webp" alt="img" />
-          <div class="card-product-right">
-            <p>ItemName</p>
-            <p>BrandName</p>
-            <div class="card-product-tools">
-              <div class="card-product-quantity">
-                <input type="button" value="-" />
-                <p>1</p>
-                <input type="button" value="+" />
-              </div>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="card-total-price">
-        <p>$100</p>
-      </div>
-      <div id="card-btns">
-        <input type="button" value="Checkout" />
-        <input type="button" id="delete-all-products" value="Clear" />
-      </div>
-    </section>
-    <!-- <div id="message">
+    </div>
+  </header>
+  <section class="shopping-card-container">
+    <div id="card-close"></div>
+    <p id="card-heading">Card</p>
+    <div id="card-products">
+    </div>
+    </div>
+    <div id="card-total-price">
+      <p>$100</p>
+    </div>
+    <div id="card-btns">
+      <input type="button" value="Checkout" />
+      <input type="button" id="delete-all-products" value="Clear" />
+    </div>
+  </section>
+  <!-- <div id="message">
       <p>Dodali ste proizvod u korpu</p>
     </div> -->
-    <footer id="footer"></footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://kit.fontawesome.com/92e251ce56.js" crossorigin="anonymous"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+  <footer id="footer"></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://kit.fontawesome.com/92e251ce56.js" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
 </html>

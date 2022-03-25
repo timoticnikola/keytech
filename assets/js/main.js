@@ -412,6 +412,12 @@ window.onload = () => {
       }
     }
     else {
+      cardMessages("Deleted all products from card");
+      let pTag = document.createElement("p");
+      let pTagContent = document.createTextNode("Card is empty.");
+      pTag.appendChild(pTagContent);
+      pTag.setAttribute("id", "empty-card");
+      container.appendChild(pTag);
       console.log("Empty");
     }
     deleteProducts();
