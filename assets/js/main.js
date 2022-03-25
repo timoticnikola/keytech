@@ -365,7 +365,12 @@ window.onload = () => {
         cardProduictsRight.setAttribute("class", "card-product-right");
         cardProdict.appendChild(cardProduictsRight);
         let pProductName = document.createElement("p");
-        let pProductNameContent = document.createTextNode(`ProductName`);
+        // let pProductNameContent = document.createTextNode(`ProductName`);
+        let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
+        // let pProductNameContent = document.createTextNode(`${showProductName(item.id)}`);
+        // showProductName
+        // showInCardProductData
+        console.log(item.id);
         pProductName.appendChild(pProductNameContent);
         cardProduictsRight.appendChild(pProductName);
         let pBrandName = document.createElement("p");
@@ -373,7 +378,7 @@ window.onload = () => {
         pBrandName.appendChild(pPBrandNameContent);
         cardProduictsRight.appendChild(pBrandName);
         let pProductPrice = document.createElement("p");
-        let pProductPriceContent = document.createTextNode(`ProductPrice`);
+        let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
         pProductPrice.appendChild(pProductPriceContent);
         cardProduictsRight.appendChild(pProductPrice);
         let cardProductTools = document.createElement("div");
@@ -426,9 +431,34 @@ window.onload = () => {
   inCardProductsShow();
   classGe();
 
-  // function showProductName(itemID) {
 
+  // function showProductName(itemID) {
+  //   console.log(itemID);
+  //   let productsArray = jsonParse("productsArray");
+  //   let productName = productsArray.filter(function (el) {
+  //     return el.id == itemID;
+  //   });
+  //   console.log(productName[0]);
+  //   return productName[0].name;
   // }
+  function showInCardProductData(itemID, objectName, objectName2 = null) {
+    // console.log(itemID);
+    let productsArray = jsonParse("productsArray");
+    let productName = productsArray.filter(function (el) {
+      return el.id == itemID;
+    });
+    let test = objectName;
+    // console.log(test);
+    // console.log(productName[0].name);
+    if (objectName2 != null) {
+      // console.log(productName[0][objectName][objectName2]);
+      return productName[0][objectName][objectName2];
+    } else {
+      // console.log(productName[0][objectName]);
+      return productName[0][objectName];
+    }
+  }
+
   function classGe() {
     let quantityRegulList = document.querySelectorAll(".quantityRegul");
     // console.log(test);
