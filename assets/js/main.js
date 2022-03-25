@@ -441,7 +441,7 @@ window.onload = () => {
     container.innerHTML = "";
 
     for (let item of addToCardList) {
-      console.log(item);
+      // console.log(item);
       let cardProdict = document.createElement("div");
       cardProdict.setAttribute("class", "card-product");
       let imgContainer = document.createElement("img");
@@ -510,10 +510,10 @@ window.onload = () => {
     for (let item of quantityRegulList) {
       item.addEventListener("click", function () {
         let dataQuantity = jsonParse("addToCardList");
-        console.log(this.value);
-        console.log(this.parentElement.getElementsByTagName("p").innerHTML);
+        // console.log(this.value);
+        // console.log(this.parentElement.getElementsByTagName("p").innerHTML);
         if (this.value == "+") {
-          console.log(dataQuantity);
+          // console.log(dataQuantity);
           for (let data of dataQuantity) {
             if (data.id == this.getAttribute("data-id")) {
               // console.log(data.id);
