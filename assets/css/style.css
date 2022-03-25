@@ -282,6 +282,7 @@ footer .wrapper #footer-down {
   background-color: rgb(121, 121, 121);
   animation: addToCardMessageAnimation 5s;
   opacity: 0;
+  z-index: 5;
 }
 .message::before {
   content: "";
