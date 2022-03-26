@@ -67,7 +67,7 @@ window.onload = () => {
   showProducts(productsArray);
   function showProducts(productsArray) {
     if (jsonParse("productsArrayFiltered")) {
-      console.log(1);
+      // console.log(1);
     }
     let html = "";
     let container = document.getElementById("products");
@@ -107,8 +107,8 @@ window.onload = () => {
     let brandArray = jsonParse("brandArray");
     for (let brand of brandArray) {
       html += `<li>
-              <input type="checkbox" name="" id="" />
-              <label for="">${brand.name} [${countProductsBy("productsArray", "brandID", brand.id)}]</label>
+              <input type="checkbox" name="${brand.name}" id="${brand.name}" class="brands-filter-item" />
+              <label for="${brand.name}">${brand.name} [${countProductsBy("productsArray", "brandID", brand.id)}]</label>
             </li>`;
     }
     html += `</ul>`;
@@ -131,14 +131,14 @@ window.onload = () => {
     html += `<p>Category</p>
           <ul>
             <li>
-                <input type="radio" name="categoryRadio" class="categoryRadioAny" id="categoryRadioAny" checked="checked">
+                <input type="radio" name="categoryRadio" value="any" class="categoryRadioAny category-filter-item" id="categoryRadioAny" checked="checked">
                 <label for="categoryRadioAny">Any type</label>
             </li>`;
     let container = document.getElementById("category-filter");
     let categoryArray = jsonParse("categoryArray");
     for (let category of categoryArray) {
       html += `<li>
-                <input type="radio" name="categoryRadio" class="categoryRadioAny" value="${category.name}" id="${category.name}">
+                <input type="radio" name="categoryRadio" class="categoryRadioAny category-filter-item" value="${category.name}" id="${category.name}">
                 <label for="${category.name}">${category.name} [${countProductsBy("productsArray", "categoryID", category.id)}]</label>
               </li>`;
     }
@@ -245,30 +245,30 @@ window.onload = () => {
     console.log(filteredData);
     showProducts(filteredData);
   }
-  function filterCategory(categoryID) {
-    if (jsonParse("productsArrayFiltered")) {
-      var productsArray = jsonParse("productsArrayFiltered");
-    } else {
-      var productsArray = jsonParse("productsArray");
-    }
-    dataFiltered = productsArray.filter((productObj) => productObj.categoryID == categoryID);
-    localStorage.setItem("productsArrayFiltered", JSON.stringify(dataFiltered));
-    console.log(dataFiltered);
-    showProducts(dataFiltered);
-  }
+  // function filterCategory(categoryID) {
+  //   if (jsonParse("productsArrayFiltered")) {
+  //     var productsArray = jsonParse("productsArrayFiltered");
+  //   } else {
+  //     var productsArray = jsonParse("productsArray");
+  //   }
+  //   dataFiltered = productsArray.filter((productObj) => productObj.categoryID == categoryID);
+  //   localStorage.setItem("productsArrayFiltered", JSON.stringify(dataFiltered));
+  //   // console.log(dataFiltered);
+  //   showProducts(dataFiltered);
+  // }
   const url = window.location.pathname;
   if (url == "/store.html") {
-    let categoryRadioBtns = document.querySelectorAll(".categoryRadioAny");
-    for (let item of categoryRadioBtns) {
-      item.addEventListener("change", function () {
-        let categoryArray = jsonParse("categoryArray");
-        for (let category of categoryArray) {
-          if (category.name == this.value) {
-            filterCategory(category.id);
-          }
-        }
-      });
-    }
+    // let categoryRadioBtns = document.querySelectorAll(".categoryRadioAny");
+    // for (let item of categoryRadioBtns) {
+    //   item.addEventListener("change", function () {
+    //     let categoryArray = jsonParse("categoryArray");
+    //     for (let category of categoryArray) {
+    //       if (category.name == this.value) {
+    //         filterCategory(category.id);
+    //       }
+    //     }
+    //   });
+    // }
     localStorage.removeItem("productsArrayFiltered");
 
     // Test shopping-card-container
@@ -349,7 +349,7 @@ window.onload = () => {
   // InCardProducts
   function inCardProductsShow() {
     let addToCardList = jsonParse("addToCardList");
-    console.log(addToCardList);
+    // console.log(addToCardList);
     let container = document.getElementById("card-products");
     container.innerHTML = "";
     if (addToCardList != null) {
@@ -370,7 +370,7 @@ window.onload = () => {
         // let pProductNameContent = document.createTextNode(`${showProductName(item.id)}`);
         // showProductName
         // showInCardProductData
-        console.log(item.id);
+        // console.log(item.id);
         pProductName.appendChild(pProductNameContent);
         cardProduictsRight.appendChild(pProductName);
         let pBrandName = document.createElement("p");
@@ -533,4 +533,62 @@ window.onload = () => {
     });
   }
   deleteAllProducts();
+  let brandsFilterItem = document.querySelectorAll(".brands-filter-item");
+  for (let item of brandsFilterItem) {
+    item.addEventListener("change", filterAllData);
+  }
+
+  let categoryFilterItem = document.querySelectorAll(".category-filter-item");
+  for (let item of categoryFilterItem) {
+    item.addEventListener("check", filterAllData);
+  }
+  function filterAllData() {
+    let allProducts = jsonParse("productsArray");
+    let categoryFilterSelected = "any";
+    let rangeReview = 1;
+    let brandFilterSelected = [];
+    if (this.type == "radio") {
+      categoryFilterSelected = this.value;
+    }
+    if (this.type == "range") {
+      rangeReview = this.value / 10;
+    }
+    if (this.type == "checkbox") {
+      // brandFilterSelected == 
+      // console.log(this.name);
+      if (this.checked) {
+        console.log("checked");
+        brandFilterSelected.push(`${this.name}`)
+      } else {
+        console.log("unchecked");
+        brandFilterSelected.fileName((e) => e != `${this.name}`);
+      }
+    }
+    if (categoryFilterSelected != "any") {
+      console.log(`Your category is: ${this.value}`);
+      allProducts.filter(function (el) {
+        return el;
+        // moramo dodati filtriranje u odnosu na listuKategorija iz JSON fajla.
+      });
+    }
+    if (rangeReview != 1) {
+      console.log(`Your range is: ${this.score / 10}`);
+      allProducts.filter(function (el) {
+        return el.score >= rangeReview;
+        // moramo dodati filtriranje u odnosu na listuKategorija iz JSON fajla.
+      });
+    }
+    if (brandFilterSelected.length != 0) {
+      console.log(brandFilterSelected);
+      console.log("You have selected some brands");
+      // moramo izmeniti
+    }
+    console.log("Execute confirm");
+    // console.log(this.value);
+    // let brandFilterSelected = document.querySelectorAll("input[type=checkbox]:checked");
+    // console.log(brandFilterSelected);
+    // let categoryFilterSelected = document.querySelector("input[type=radio]:checked");
+    // console.log(categoryFilterSelected);
+  }
+
 };
