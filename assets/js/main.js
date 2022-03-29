@@ -1,33 +1,38 @@
 window.onload = () => {
 
-  function jsonRequest(fileName, functionName, localName) {
+  function jsonRequest(fileName) {
     var htReq = new XMLHttpRequest();
     htReq.open("GET", `assets/data/${fileName}.json`, true);
     htReq.send();
     htReq.onreadystatechange = function () {
       if (htReq.readyState == 4 && htReq.status == 200) {
         var array = JSON.parse(htReq.responseText);
-        console.log(array);
-        functionName(array, localName);
+        localStorage.setItem(`${fileName}Local`, JSON.stringify(array));
+        // functionName(array);
       }
     }
   }
 
-  jsonRequest("navLinks", createLocal, "navLinksArray");
-  jsonRequest("category", createLocal, "categoryArray");
-  jsonRequest("socialLinks", createLocal, "socialLinksArray");
-  jsonRequest("products", createLocal, "productsArray");
-  jsonRequest("brand", createLocal, "brandArray");
-  jsonRequest("documentLinks", createLocal, "documentLinksArray");
-  createNavBar();
-  createFooter();
+  // jsonRequest("navLinks", createLocal, "navLinksArray");
+  // jsonRequest("category", createLocal, "categoryArray");
+  // jsonRequest("socialLinks", createLocal, "socialLinksArray");
+  // jsonRequest("products", createLocal, "productsArray");
+  // jsonRequest("brand", createLocal, "brandArray");
+  // jsonRequest("documentLinks", createLocal, "documentLinksArray");
+  jsonRequest("navLinks");
+  jsonRequest("category");
+  jsonRequest("socialLinks");
+  jsonRequest("products");
+  jsonRequest("brand");
+  jsonRequest("documentLinks");
 
-  function createLocal(response, localName) {
-    localStorage.setItem(`${localName}`, JSON.stringify(response));
-  }
+  // Run functions
+  createNavBar("navLinksLocal");
+  createFooter("navLinksLocal");
 
-  function createNavBar() {
-    let navLinksArray = JSON.parse(localStorage.getItem("navLinksArray"));
+  function createNavBar(data) {
+    let navLinksArray = JSON.parse(localStorage.getItem(`${data}`));
+
     navLinks("nav-warpper", navLinksArray);
     navLinkShop("nav");
   }
@@ -53,7 +58,9 @@ window.onload = () => {
     let container = document.getElementById(`${id}`);
     let ulTag = document.createElement("ul");
     ulTag.setAttribute("id", "nav");
+    // console.log(navLinksArray);
     for (let link of navLinksArray) {
+      // console.log(link);
       let liTag = document.createElement("li");
       let aTag = document.createElement("a");
       let aTagContent = document.createTextNode(`${link.name}`);
@@ -64,36 +71,32 @@ window.onload = () => {
     }
     container.appendChild(ulTag);
   }
-  let productsArray = jsonParse("productsArray");
+  let productsArray = jsonParse("productsLocal");
   showProducts(productsArray);
   function showProducts(productsArray) {
-    // if (jsonParse("productsArrayFiltered")) {
-    //   // console.log(1);
-    // }
-    console.log(productsArray);
     let html = "";
     let container = document.getElementById("products");
     for (let product of productsArray) {
       html += `<div class="product">
-            <img src="assets/img/test.webp" alt="photo" />
-            <p class="product-category-name">categoryName</p>
-            <p class="product-brandname">${showBrand(product.brandID)}</p>
-            <p class="product-name">${product.name}</p>
-            <p class="product-description">${product.descript}</p>
-            <div class="product-price">
-              <p>Price:</p>
-              <p class="product-price-new">${product.price.new}</p>
-              <s class="product-price-old">${product.price.old}</s>
-            </div>
-            <p class="product-reviews">Reviews: ${product.score}</p>
-            <input class="product-add-to-card-btn" type="button" data-id="${product.id}" value="Add to card" />
-          </div>`;
+              <img src="assets/img/test.webp" alt="photo" />
+              <p class="product-category-name">categoryName</p>
+              <p class="product-brandname">${showBrand(product.brandID)}</p>
+              <p class="product-name">${product.name}</p>
+              <p class="product-description">${product.descript}</p>
+              <div class="product-price">
+                <p>Price:</p>
+                <p class="product-price-new">${product.price.new}</p>
+                <s class="product-price-old">${product.price.old}</s>
+              </div>
+              <p class="product-reviews">Reviews: ${product.score}</p>
+              <input class="product-add-to-card-btn" type="button" data-id="${product.id}" value="Add to card" />
+            </div>`;
     }
     container.innerHTML = html;
   }
   function showBrand(brandID) {
     let html = "";
-    let brandArray = jsonParse("brandArray");
+    let brandArray = jsonParse("brandLocal");
     for (let brand of brandArray) {
       if (brand.id == brandID) {
         html += `${brand.name}`;
@@ -104,14 +107,14 @@ window.onload = () => {
   function showBrandsCategory() {
     let html = "";
     html += `<p>Brands</p>
-          <ul>`;
+            <ul>`;
     let container = document.getElementById("brands-filter");
-    let brandArray = jsonParse("brandArray");
+    let brandArray = jsonParse("brandLocal");
     for (let brand of brandArray) {
       html += `<li>
-              <input type="checkbox" name="${brand.name}" id="${brand.name}" class="brands-filter-item" />
-              <label for="${brand.name}">${brand.name} [${countProductsBy("productsArray", "brandID", brand.id)}]</label>
-            </li>`;
+                <input type="checkbox" name="${brand.name}" id="${brand.name}" class="brands-filter-item" />
+                <label for="${brand.name}">${brand.name} [${countProductsBy("productsLocal", "brandID", brand.id)}]</label>
+              </li>`;
     }
     html += `</ul>`;
     container.innerHTML = html;
@@ -131,26 +134,26 @@ window.onload = () => {
   function showProductsCategory() {
     let html = "";
     html += `<p>Category</p>
-          <ul>
-            <li>
-                <input type="radio" name="categoryRadio" value="any" class="categoryRadioAny category-filter-item" id="categoryRadioAny" checked="checked">
-                <label for="categoryRadioAny">Any type</label>
-            </li>`;
+            <ul>
+              <li>
+                  <input type="radio" name="categoryRadio" value="any" class="categoryRadioAny category-filter-item" id="categoryRadioAny" checked="checked">
+                  <label for="categoryRadioAny">Any type</label>
+              </li>`;
     let container = document.getElementById("category-filter");
-    let categoryArray = jsonParse("categoryArray");
+    let categoryArray = jsonParse("categoryLocal");
     for (let category of categoryArray) {
       html += `<li>
-                <input type="radio" name="categoryRadio" class="categoryRadioAny category-filter-item" value="${category.name}" id="${category.name}">
-                <label for="${category.name}">${category.name} [${countProductsBy("productsArray", "categoryID", category.id)}]</label>
-              </li>`;
+                  <input type="radio" name="categoryRadio" class="categoryRadioAny category-filter-item" value="${category.name}" id="${category.name}">
+                  <label for="${category.name}">${category.name} [${countProductsBy("productsLocal", "categoryID", category.id)}]</label>
+                </li>`;
     }
     html += `</ul>`;
     container.innerHTML = html;
   }
   showBrandsCategory();
 
-  function createFooter() {
-    let navLinksArray = JSON.parse(localStorage.getItem("navLinksArray"));
+  function createFooter(data) {
+    let navLinksArray = JSON.parse(localStorage.getItem(`${data}`));
     let footerId = document.getElementById("footer");
     let footerWrapper = document.createElement("div");
     footerWrapper.setAttribute("class", "wrapper");
@@ -181,7 +184,7 @@ window.onload = () => {
 
   var sortingPlaceholder = document.getElementById("sort-product-placeholder");
   sortingPlaceholder.addEventListener("change", function () {
-    let productsArray = jsonParse("productsArray");
+    let productsArray = jsonParse("productsLocal");
     productsArray.sort(function (a, b) {
       if (sortingPlaceholder.value == 0) {
         return 0;
@@ -396,7 +399,7 @@ window.onload = () => {
 
   function showInCardProductData(itemID, objectName, objectName2 = null) {
     // console.log(itemID);
-    let productsArray = jsonParse("productsArray");
+    let productsArray = jsonParse("productsLocal");
     let productName = productsArray.filter(function (el) {
       return el.id == itemID;
     });
@@ -544,11 +547,6 @@ window.onload = () => {
     }
     console.log(filteredData);
     console.log("Execute confirm");
-    // console.log(this.value);
-    // let brandFilterSelected = document.querySelectorAll("input[type=checkbox]:checked");
-    // console.log(brandFilterSelected);
-    // let categoryFilterSelected = document.querySelector("input[type=radio]:checked");
-    // console.log(categoryFilterSelected);
     showProducts(filteredData);
   }
 
