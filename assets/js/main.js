@@ -1,23 +1,24 @@
 window.onload = () => {
-  function ajaxCallBack(fileName, callBack, localName) {
-    $.ajax({
-      type: "GET",
-      url: "assets/data/" + fileName + ".json",
-      dataType: "JSON",
-      success: function (response) {
-        callBack(response, localName);
-      },
-      error: function (err) {
-        console.log(err);
-      },
-    });
+
+  function jsonRequest(fileName, functionName, localName) {
+    var htReq = new XMLHttpRequest();
+    htReq.open("GET", `assets/data/${fileName}.json`, true);
+    htReq.send();
+    htReq.onreadystatechange = function () {
+      if (htReq.readyState == 4 && htReq.status == 200) {
+        var array = JSON.parse(htReq.responseText);
+        console.log(array);
+        functionName(array, localName);
+      }
+    }
   }
-  ajaxCallBack("navLinks", createLocal, "navLinksArray");
-  ajaxCallBack("category", createLocal, "categoryArray");
-  ajaxCallBack("socialLinks", createLocal, "socialLinksArray");
-  ajaxCallBack("products", createLocal, "productsArray");
-  ajaxCallBack("brand", createLocal, "brandArray");
-  ajaxCallBack("documentLinks", createLocal, "documentLinksArray");
+
+  jsonRequest("navLinks", createLocal, "navLinksArray");
+  jsonRequest("category", createLocal, "categoryArray");
+  jsonRequest("socialLinks", createLocal, "socialLinksArray");
+  jsonRequest("products", createLocal, "productsArray");
+  jsonRequest("brand", createLocal, "brandArray");
+  jsonRequest("documentLinks", createLocal, "documentLinksArray");
   createNavBar();
   createFooter();
 
@@ -227,42 +228,10 @@ window.onload = () => {
   });
 
 
-  // function reviewsRangeFilter(score) {
-  //   if (jsonParse("productsArrayFiltered")) {
-  //     var productsArray = jsonParse("productsArrayFiltered");
-  //   } else {
-  //     var productsArray = jsonParse("productsArray");
-  //   }
-  //   let reviewsSlider = document.getElementById("reviews-range-sllider");
-  //   let filteredData = productsArray.filter((objProduct) => objProduct.score >= score);
-  //   localStorage.setItem("productsArrayFiltered", JSON.stringify(filteredData));
-  //   console.log(filteredData);
-  //   showProducts(filteredData);
-  // }
-  // function filterCategory(categoryID) {
-  //   if (jsonParse("productsArrayFiltered")) {
-  //     var productsArray = jsonParse("productsArrayFiltered");
-  //   } else {
-  //     var productsArray = jsonParse("productsArray");
-  //   }
-  //   dataFiltered = productsArray.filter((productObj) => productObj.categoryID == categoryID);
-  //   localStorage.setItem("productsArrayFiltered", JSON.stringify(dataFiltered));
-  //   // console.log(dataFiltered);
-  //   showProducts(dataFiltered);
-  // }
+
   const url = window.location.pathname;
   if (url == "/store.html") {
-    // let categoryRadioBtns = document.querySelectorAll(".categoryRadioAny");
-    // for (let item of categoryRadioBtns) {
-    //   item.addEventListener("change", function () {
-    //     let categoryArray = jsonParse("categoryArray");
-    //     for (let category of categoryArray) {
-    //       if (category.name == this.value) {
-    //         filterCategory(category.id);
-    //       }
-    //     }
-    //   });
-    // }
+
     localStorage.removeItem("productsArrayFiltered");
 
     // Test shopping-card-container
@@ -425,16 +394,6 @@ window.onload = () => {
   inCardProductsShow();
   classGe();
 
-
-  // function showProductName(itemID) {
-  //   console.log(itemID);
-  //   let productsArray = jsonParse("productsArray");
-  //   let productName = productsArray.filter(function (el) {
-  //     return el.id == itemID;
-  //   });
-  //   console.log(productName[0]);
-  //   return productName[0].name;
-  // }
   function showInCardProductData(itemID, objectName, objectName2 = null) {
     // console.log(itemID);
     let productsArray = jsonParse("productsArray");
@@ -536,14 +495,7 @@ window.onload = () => {
   for (let item of categoryFilterItem) {
     item.addEventListener("change", filterAllData);
   }
-  // let reviewsSlider = document.getElementById("reviews-range-sllider");
-  // reviewsSlider.addEventListener("change", function () {
-  //   let score = reviewsSlider.value / 10;
-  //   console.log(reviewsSlider.value / 10);
-  //   let contaiener = document.getElementById("reviews-range-place");
-  //   contaiener.innerText = score;
-  //   filterAllData();
-  // });
+
   let reviewsSlider = document.getElementById("reviews-range-sllider");
   reviewsSlider.addEventListener("change", filterAllData);
   // Filter all data
