@@ -66,9 +66,10 @@ window.onload = () => {
   let productsArray = jsonParse("productsArray");
   showProducts(productsArray);
   function showProducts(productsArray) {
-    if (jsonParse("productsArrayFiltered")) {
-      // console.log(1);
-    }
+    // if (jsonParse("productsArrayFiltered")) {
+    //   // console.log(1);
+    // }
+    console.log(productsArray);
     let html = "";
     let container = document.getElementById("products");
     for (let product of productsArray) {
@@ -225,26 +226,19 @@ window.onload = () => {
     showProducts(productsArray);
   });
 
-  let reviewsSlider = document.getElementById("reviews-range-sllider");
-  reviewsSlider.addEventListener("change", function () {
-    let score = reviewsSlider.value / 10;
-    console.log(reviewsSlider.value / 10);
-    let contaiener = document.getElementById("reviews-range-place");
-    contaiener.innerText = score;
-    reviewsRangeFilter(score);
-  });
-  function reviewsRangeFilter(score) {
-    if (jsonParse("productsArrayFiltered")) {
-      var productsArray = jsonParse("productsArrayFiltered");
-    } else {
-      var productsArray = jsonParse("productsArray");
-    }
-    let reviewsSlider = document.getElementById("reviews-range-sllider");
-    let filteredData = productsArray.filter((objProduct) => objProduct.score >= score);
-    localStorage.setItem("productsArrayFiltered", JSON.stringify(filteredData));
-    console.log(filteredData);
-    showProducts(filteredData);
-  }
+
+  // function reviewsRangeFilter(score) {
+  //   if (jsonParse("productsArrayFiltered")) {
+  //     var productsArray = jsonParse("productsArrayFiltered");
+  //   } else {
+  //     var productsArray = jsonParse("productsArray");
+  //   }
+  //   let reviewsSlider = document.getElementById("reviews-range-sllider");
+  //   let filteredData = productsArray.filter((objProduct) => objProduct.score >= score);
+  //   localStorage.setItem("productsArrayFiltered", JSON.stringify(filteredData));
+  //   console.log(filteredData);
+  //   showProducts(filteredData);
+  // }
   // function filterCategory(categoryID) {
   //   if (jsonParse("productsArrayFiltered")) {
   //     var productsArray = jsonParse("productsArrayFiltered");
@@ -540,40 +534,53 @@ window.onload = () => {
 
   let categoryFilterItem = document.querySelectorAll(".category-filter-item");
   for (let item of categoryFilterItem) {
-    item.addEventListener("check", filterAllData);
+    item.addEventListener("change", filterAllData);
   }
+  // let reviewsSlider = document.getElementById("reviews-range-sllider");
+  // reviewsSlider.addEventListener("change", function () {
+  //   let score = reviewsSlider.value / 10;
+  //   console.log(reviewsSlider.value / 10);
+  //   let contaiener = document.getElementById("reviews-range-place");
+  //   contaiener.innerText = score;
+  //   filterAllData();
+  // });
+  let reviewsSlider = document.getElementById("reviews-range-sllider");
+  reviewsSlider.addEventListener("change", filterAllData);
+  // Filter all data
   function filterAllData() {
     let allProducts = jsonParse("productsArray");
+    console.log(this.type);
+    console.log(allProducts);
     let categoryFilterSelected = "any";
     let rangeReview = 1;
     let brandFilterSelected = [];
+    let filteredData;
     if (this.type == "radio") {
       categoryFilterSelected = this.value;
     }
     if (this.type == "range") {
       rangeReview = this.value / 10;
+      console.log(`Test: ${this.value}`);
     }
     if (this.type == "checkbox") {
-      // brandFilterSelected == 
-      // console.log(this.name);
       if (this.checked) {
         console.log("checked");
         brandFilterSelected.push(`${this.name}`)
       } else {
         console.log("unchecked");
-        brandFilterSelected.fileName((e) => e != `${this.name}`);
+        brandFilterSelected.filter((e) => e != `${this.name}`);
       }
     }
     if (categoryFilterSelected != "any") {
       console.log(`Your category is: ${this.value}`);
-      allProducts.filter(function (el) {
-        return el;
+      filteredData = allProducts.filter(function (el) {
+        return el.categoryID == 1;
         // moramo dodati filtriranje u odnosu na listuKategorija iz JSON fajla.
       });
     }
-    if (rangeReview != 1) {
-      console.log(`Your range is: ${this.score / 10}`);
-      allProducts.filter(function (el) {
+    if (rangeReview >= 1) {
+      filteredData = allProducts.filter(function (el) {
+        console.log(el.score >= rangeReview);
         return el.score >= rangeReview;
         // moramo dodati filtriranje u odnosu na listuKategorija iz JSON fajla.
       });
@@ -583,12 +590,15 @@ window.onload = () => {
       console.log("You have selected some brands");
       // moramo izmeniti
     }
+    console.log(filteredData);
     console.log("Execute confirm");
     // console.log(this.value);
     // let brandFilterSelected = document.querySelectorAll("input[type=checkbox]:checked");
     // console.log(brandFilterSelected);
     // let categoryFilterSelected = document.querySelector("input[type=radio]:checked");
     // console.log(categoryFilterSelected);
+    showProducts(filteredData);
   }
+
 
 };
