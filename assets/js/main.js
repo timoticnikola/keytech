@@ -1,39 +1,36 @@
 window.onload = () => {
 
-  function jsonRequest(fileName) {
-    var htReq = new XMLHttpRequest();
-    htReq.open("GET", `assets/data/${fileName}.json`, true);
-    htReq.send();
-    htReq.onreadystatechange = function () {
-      if (htReq.readyState == 4 && htReq.status == 200) {
-        var array = JSON.parse(htReq.responseText);
-        localStorage.setItem(`${fileName}Local`, JSON.stringify(array));
-        // functionName(array);
-      }
-    }
-  }
-
-  // jsonRequest("navLinks", createLocal, "navLinksArray");
-  // jsonRequest("category", createLocal, "categoryArray");
-  // jsonRequest("socialLinks", createLocal, "socialLinksArray");
-  // jsonRequest("products", createLocal, "productsArray");
-  // jsonRequest("brand", createLocal, "brandArray");
-  // jsonRequest("documentLinks", createLocal, "documentLinksArray");
   jsonRequest("navLinks");
   jsonRequest("category");
   jsonRequest("socialLinks");
   jsonRequest("products");
   jsonRequest("brand");
   jsonRequest("documentLinks");
+  function jsonRequest(fileName) {
+    var htReq = new XMLHttpRequest();
+    htReq.open("GET", `assets/data/${fileName}.json`, true);
+    htReq.send();
+    htReq.onreadystatechange = function () {
+      if (htReq.readyState == 4 && htReq.status == 200) {
+        const array = JSON.parse(htReq.responseText);
+        localStorage.setItem(`${fileName}Local`, JSON.stringify(array));
+        // functionName(array);
+        console.log(localStorage.getItem(`${fileName}Local`));
+      }
+    }
+  }
+
+
 
   // Run functions
+  console.log(localStorage.getItem("navLinksLocal"));
   createNavBar("navLinksLocal");
   createFooter("navLinksLocal");
 
   function createNavBar(data) {
-    let navLinksArray = JSON.parse(localStorage.getItem(`${data}`));
-
-    navLinks("nav-warpper", navLinksArray);
+    let navLinksLocal = JSON.parse(localStorage.getItem(`${data}`));
+    console.log(navLinksLocal);
+    navLinks("nav-warpper", navLinksLocal);
     navLinkShop("nav");
   }
 
@@ -46,21 +43,20 @@ window.onload = () => {
     liTag.appendChild(iTag);
     let pTag = document.createElement("span");
     pTag.setAttribute("id", "incard-product-number");
-    // let pTagContent = document.createTextNode(`(${inCardCount()})`);
-
-    // pTag.appendChild(pTagContent);
     liTag.appendChild(pTag);
     ulTag.appendChild(liTag);
     inCardCount();
   }
 
-  function navLinks(id, navLinksArray) {
+  function navLinks(id, navLinksLocal) {
     let container = document.getElementById(`${id}`);
     let ulTag = document.createElement("ul");
     ulTag.setAttribute("id", "nav");
-    // console.log(navLinksArray);
-    for (let link of navLinksArray) {
-      // console.log(link);
+    let test = navLinksLocal;
+    console.log(test);
+    console.log(navLinksLocal);
+    for (let link of navLinksLocal) {
+      console.log(link);
       let liTag = document.createElement("li");
       let aTag = document.createElement("a");
       let aTagContent = document.createTextNode(`${link.name}`);
@@ -71,12 +67,12 @@ window.onload = () => {
     }
     container.appendChild(ulTag);
   }
-  let productsArray = jsonParse("productsLocal");
-  showProducts(productsArray);
-  function showProducts(productsArray) {
+  let productsLocal = jsonParse("productsLocal");
+  showProducts(productsLocal);
+  function showProducts(productsLocal) {
     let html = "";
     let container = document.getElementById("products");
-    for (let product of productsArray) {
+    for (let product of productsLocal) {
       html += `<div class="product">
               <img src="assets/img/test.webp" alt="photo" />
               <p class="product-category-name">categoryName</p>
@@ -232,53 +228,53 @@ window.onload = () => {
 
 
 
-  const url = window.location.pathname;
-  if (url == "/store.html") {
+  // const url = window.location.pathname;
+  // if (url == "/store.html") {
+  // }
+  localStorage.removeItem("productsArrayFiltered");
 
-    localStorage.removeItem("productsArrayFiltered");
-
-    // Test shopping-card-container
-    let shoppingCard = document.getElementById("shopping-card");
-    shoppingCard.addEventListener("click", function () {
-      let shoppingCardContainer = document.querySelector(".shopping-card-container");
-      shoppingCardContainer.classList.add("shopping-card-active");
-    });
-    let shoppingCardClose = document.getElementById("card-close");
-    shoppingCardClose.addEventListener("click", function () {
-      let shoppingCardContainer = document.querySelector(".shopping-card-container");
-      shoppingCardContainer.classList.remove("shopping-card-active");
-    });
-    // Add to card
-    const addToCardBtnsList = document.querySelectorAll(".product-add-to-card-btn");
-    for (let addToCardBtn of addToCardBtnsList) {
-      addToCardBtn.addEventListener("click", function () {
-        let dataID = this.getAttribute("data-id");
-        if (localStorage.getItem("addToCardList")) {
-          let addToCardList = jsonParse("addToCardList");
-          if (addToCardList.filter((e) => e.id == dataID).length) {
-            cardMessages("Product already in card!");
-          } else {
-            addToCardList.push({
-              id: dataID,
-              quantity: 1,
-            });
-            cardMessages("Product added to card!");
-            localStorage.setItem("addToCardList", JSON.stringify(addToCardList));
-          }
+  // Test shopping-card-container
+  let shoppingCard = document.getElementById("shopping-card");
+  shoppingCard.addEventListener("click", function () {
+    let shoppingCardContainer = document.querySelector(".shopping-card-container");
+    shoppingCardContainer.classList.add("shopping-card-active");
+  });
+  let shoppingCardClose = document.getElementById("card-close");
+  shoppingCardClose.addEventListener("click", function () {
+    let shoppingCardContainer = document.querySelector(".shopping-card-container");
+    shoppingCardContainer.classList.remove("shopping-card-active");
+  });
+  // Add to card
+  const addToCardBtnsList = document.querySelectorAll(".product-add-to-card-btn");
+  for (let addToCardBtn of addToCardBtnsList) {
+    addToCardBtn.addEventListener("click", function () {
+      let dataID = this.getAttribute("data-id");
+      if (localStorage.getItem("addToCardList")) {
+        let addToCardList = jsonParse("addToCardList");
+        if (addToCardList.filter((e) => e.id == dataID).length) {
+          cardMessages("Product already in card!");
         } else {
-          let jsonTe = [];
-          jsonTe[0] = {
+          addToCardList.push({
             id: dataID,
             quantity: 1,
-          };
-          localStorage.setItem("addToCardList", JSON.stringify(jsonTe));
+          });
+          cardMessages("Product added to card!");
+          localStorage.setItem("addToCardList", JSON.stringify(addToCardList));
         }
-        inCardCount();
-        inCardProductsShow();
-        classGe();
-      });
-    }
+      } else {
+        let jsonTe = [];
+        jsonTe[0] = {
+          id: dataID,
+          quantity: 1,
+        };
+        localStorage.setItem("addToCardList", JSON.stringify(jsonTe));
+      }
+      inCardCount();
+      inCardProductsShow();
+      classGe();
+    });
   }
+
   // Add to card message
   function cardMessages(text) {
     let messageDivTest = document.querySelector(".message");
