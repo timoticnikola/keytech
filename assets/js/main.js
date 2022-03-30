@@ -22,10 +22,10 @@ window.onload = () => {
     return JSON.parse(localStorage.getItem(`${fileName}Local`));
   }
 
-  const url = window.location.pathname;
-  if (url == "/store.html") {
-    console.log(1);
-  }
+  // const url = window.location.pathname;
+  // if (url == "/store.html") {
+  //   console.log(1);
+  // }
 
 
   // Run functions
@@ -183,9 +183,7 @@ window.onload = () => {
   }
 
   eventListener("product-add-to-card-btn", "class", "click", addToCard);
-  function loggge() {
-    console.log(1);
-  }
+
 
   function addToCard() {
     let dataID = this.getAttribute("data-id");
@@ -307,7 +305,6 @@ window.onload = () => {
       }
       inCardCount();
       inCardProductsShow();
-      classGe();
     });
   }
 
@@ -352,6 +349,7 @@ window.onload = () => {
     // console.log(addToCardList);
     let container = document.getElementById("card-products");
     container.innerHTML = "";
+    console.log(addToCardList);
     if (addToCardList != null) {
       for (let item of addToCardList) {
         // console.log(item);
@@ -396,6 +394,7 @@ window.onload = () => {
         // PTag
         let itemQuantity = document.createElement("p");
         let itemQuantityContent = document.createTextNode(`${item.quantity}`);
+        console.log(item.quantity);
         itemQuantity.appendChild(itemQuantityContent);
         cardProductQuantity.appendChild(itemQuantity);
         // Plus
@@ -427,6 +426,7 @@ window.onload = () => {
     }
     deleteProducts();
     inCardCount();
+    classGe();
   }
 
   // inCardProductsShow();
@@ -476,13 +476,6 @@ window.onload = () => {
                 data.quantity -= 1;
                 localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
                 this.parentElement.getElementsByTagName("p")[0].innerHTML = data.quantity;
-                // console.log(data.quantity);
-              } else {
-                // ! obrisati proizvod
-                // data.quantity -= 1;
-                // localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
-                // console.log(data.quantity);
-
               }
             }
           }
@@ -491,6 +484,12 @@ window.onload = () => {
         // ! Mora da se azurira samo p tag
         // inCardProductsShow();
       });
+    }
+  }
+  function updateCardQuantity(dataID) {
+    for (let id of dataID) {
+      // for(let)
+      // if(id == )
     }
   }
   function deleteProducts() {
@@ -517,18 +516,14 @@ window.onload = () => {
     }
   }
   function deleteAllProducts() {
-    // document.getElementById("delete-all-products").addEventListener("click", () => {
-
     localStorage.removeItem("addToCardList");
     inCardProductsShow();
-    // });
   }
-  deleteAllProducts();
 
   eventListener("delete-all-products", "id", "click", deleteAllProducts);
 
   function jsonParse(data) {
-    let jsonData = JSON.parse(localStorage.getItem(data));
+    let jsonData = JSON.parse(localStorage.getItem(`${data}`));
     return jsonData;
   }
 };
