@@ -1,30 +1,30 @@
 window.onload = () => {
 
-  const navLinksArray = fetchLocalStorage("navLinks");
-  const productsArray = fetchLocalStorage("products");
-  const socialLinksArray = fetchLocalStorage("socialLinks");
-  const categoriesArray = fetchLocalStorage("categories");
-  const brandsArray = fetchLocalStorage("brands");
-
-  async function jsonRequest(fileName) {
-    try {
-      res = await fetch(`./assets/data/${fileName}.json`);
-      return res.json();
-    } catch (error) {
-      console.error(error);
+  jsonRequest("navLinks", createNavBar);
+  jsonRequest("products", showProducts);
+  // jsonRequest("category");
+  // jsonRequest("socialLinks");
+  // jsonRequest("products");
+  // jsonRequest("brand");
+  // jsonRequest("documentLinks");
+  function jsonRequest(fileName, functionName) {
+    var htReq = new XMLHttpRequest();
+    htReq.open("GET", `assets/data/${fileName}.json`, true);
+    htReq.send();
+    htReq.onreadystatechange = function () {
+      if (htReq.readyState == 4 && htReq.status == 200) {
+        // console.log(1);
+        const array = JSON.parse(htReq.responseText);
+        localStorage.setItem(`${fileName}Local`, JSON.stringify(array));
+        functionName(array);
+      }
     }
   }
 
-  function fetchLocalStorage(fileName) {
-    jsonRequest(fileName).then(instance => {
-      localStorage.setItem(`${fileName}Local`, JSON.stringify(instance));
-    });
-    return JSON.parse(localStorage.getItem(`${fileName}Local`));
-  }
-
   // Run functions
-  createFooter(navLinksArray);
-  createNavBar(navLinksArray);
+  // console.log(localStorage.getItem("navLinksLocal"));
+  // createNavBar("navLinksLocal");
+  // createFooter("navLinksLocal");
 
   function createNavBar(data) {
     navLinks("nav-warpper", data);
@@ -61,11 +61,11 @@ window.onload = () => {
     container.appendChild(ulTag);
   }
   // let productsLocal = jsonParse("productsLocal");
-  showProducts(productsArray);
-  function showProducts(productsArray) {
+  // showProducts(productsLocal);
+  function showProducts(productsLocal) {
     let html = "";
     let container = document.getElementById("products");
-    for (let product of productsArray) {
+    for (let product of productsLocal) {
       html += `<div class="product">
               <img src="assets/img/test.webp" alt="photo" />
               <p class="product-category-name">categoryName</p>
@@ -83,14 +83,14 @@ window.onload = () => {
     }
     container.innerHTML = html;
   }
+  function retrunJson(data) {
 
+    return 1;
+  }
   function showBrand(brandID) {
     let html = "";
-    for (let brand of brandsArray) {
-      if (brand.id == brandID) {
-        html += `${brand.name}`;
-      }
-    }
+    var test = jsonRequest("brands", retrunJson);
+    console.log(test);
     return html;
   }
   // function showBrandsCategory() {
@@ -141,30 +141,31 @@ window.onload = () => {
   // }
   // showBrandsCategory();
 
-  function createFooter(data) {
-    let footerId = document.getElementById("footer");
-    let footerWrapper = document.createElement("div");
-    footerWrapper.setAttribute("class", "wrapper");
-    let footerTop = document.createElement("div");
-    let footerNavLinks = document.createElement("div");
-    footerNavLinks.setAttribute("id", "footer-navlinks");
-    let footerNavLinksP = document.createElement("p");
-    let footerNavLinksPContent = document.createTextNode("Navigation");
-    footerNavLinksP.appendChild(footerNavLinksPContent);
-    footerNavLinks.appendChild(footerNavLinksP);
-    footerTop.appendChild(footerNavLinks);
-    footerTop.setAttribute("id", "footer-top");
-    let footerBottom = document.createElement("div");
-    let footerCopyright = document.createElement("p");
-    let footerCopyrightContent = document.createTextNode("© Copyright 2022");
-    footerCopyright.appendChild(footerCopyrightContent);
-    footerBottom.appendChild(footerCopyright);
-    footerBottom.setAttribute("id", "footer-top");
-    footerWrapper.appendChild(footerTop);
-    footerWrapper.appendChild(footerBottom);
-    footerId.appendChild(footerWrapper);
-    navLinks("footer-navlinks", data);
-  }
+  // function createFooter(data) {
+  //   let navLinksArray = JSON.parse(localStorage.getItem(`${data}`));
+  //   let footerId = document.getElementById("footer");
+  //   let footerWrapper = document.createElement("div");
+  //   footerWrapper.setAttribute("class", "wrapper");
+  //   let footerTop = document.createElement("div");
+  //   let footerNavLinks = document.createElement("div");
+  //   footerNavLinks.setAttribute("id", "footer-navlinks");
+  //   let footerNavLinksP = document.createElement("p");
+  //   let footerNavLinksPContent = document.createTextNode("Navigation");
+  //   footerNavLinksP.appendChild(footerNavLinksPContent);
+  //   footerNavLinks.appendChild(footerNavLinksP);
+  //   footerTop.appendChild(footerNavLinks);
+  //   footerTop.setAttribute("id", "footer-top");
+  //   let footerBottom = document.createElement("div");
+  //   let footerCopyright = document.createElement("p");
+  //   let footerCopyrightContent = document.createTextNode("© Copyright 2022");
+  //   footerCopyright.appendChild(footerCopyrightContent);
+  //   footerBottom.appendChild(footerCopyright);
+  //   footerBottom.setAttribute("id", "footer-top");
+  //   footerWrapper.appendChild(footerTop);
+  //   footerWrapper.appendChild(footerBottom);
+  //   footerId.appendChild(footerWrapper);
+  //   navLinks("footer-navlinks", navLinksArray);
+  // }
   function jsonParse(localName) {
     let parsed = JSON.parse(localStorage.getItem(`${localName}`));
     return parsed;
