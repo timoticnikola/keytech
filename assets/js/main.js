@@ -349,7 +349,7 @@ window.onload = () => {
     // console.log(addToCardList);
     let container = document.getElementById("card-products");
     container.innerHTML = "";
-    console.log(addToCardList);
+    // console.log(addToCardList);
     if (addToCardList != null) {
       for (let item of addToCardList) {
         // console.log(item);
@@ -372,7 +372,7 @@ window.onload = () => {
         pProductName.appendChild(pProductNameContent);
         cardProduictsRight.appendChild(pProductName);
         let pBrandName = document.createElement("p");
-        let pPBrandNameContent = document.createTextNode(`BrandName`);
+        let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
         pBrandName.appendChild(pPBrandNameContent);
         cardProduictsRight.appendChild(pBrandName);
         let pProductPrice = document.createElement("p");
@@ -394,7 +394,7 @@ window.onload = () => {
         // PTag
         let itemQuantity = document.createElement("p");
         let itemQuantityContent = document.createTextNode(`${item.quantity}`);
-        console.log(item.quantity);
+        // console.log(item.quantity);
         itemQuantity.appendChild(itemQuantityContent);
         cardProductQuantity.appendChild(itemQuantity);
         // Plus
@@ -438,9 +438,14 @@ window.onload = () => {
     let productName = productsArray.filter(function (el) {
       return el.id == itemID;
     });
-    let test = objectName;
-    // console.log(test);
-    // console.log(productName[0].name);
+    // console.log(productName[0].brandID);
+    if (objectName == "brandID") {
+      for (let item of brandsArray) {
+        if (productName[0].brandID == item.id) {
+          return item.name;
+        }
+      }
+    }
     if (objectName2 != null) {
       // console.log(productName[0][objectName][objectName2]);
       return productName[0][objectName][objectName2];
