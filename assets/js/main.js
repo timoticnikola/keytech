@@ -429,26 +429,51 @@ window.onload = () => {
     classGe();
   }
 
-  // inCardProductsShow();
-  // classGe();
-  totalPrice();
   function totalPrice() {
     let addToCardList = jsonParse("addToCardList")
     let totalPrice = 0;
-    let quantityPrice = addToCardList.map(function (el) {
-      for (let item of productsArray) {
-        if (item.id == el.id) {
-          return el.quantity * item.price.new;
+    let priceContainer = document.getElementById("card-total-price");
+    // console.log(addToCardList);
+    if (addToCardList != null && addToCardList != "undefined") {
+      let quantityPrice = addToCardList.map(function (el) {
+        for (let item of productsArray) {
+          if (item.id == el.id) {
+            return el.quantity * item.price.new;
+          }
         }
+      });
+      for (let item of quantityPrice) {
+        totalPrice += item;
       }
-    });
-    console.log(quantityPrice)
-    for (let item of quantityPrice) {
-      totalPrice += item;
+      // let priceContainer = document.getElementById("card-total-price");
+      priceContainer.innerHTML = `Total: ${totalPrice}$`;
+    } else {
+      priceContainer.innerHTML = `Total: ${totalPrice}$`;
     }
-    console.log(totalPrice);
-  }
+    // ! DODATI ELSE BLOCK
+    // console.log(quantityPrice);
+    // console.log(totalPrice);
 
+  }
+  function calculateItemPrice(itemID, price = null) {
+    let addToCardList = jsonParse("addToCardList");
+    let filtered = addToCardList.filter(function (el) {
+      // if()
+      return el.id == itemID;
+    });
+    if (price == null) {
+      let filteredPrice = productsArray.filter(function (el) {
+        return el.id == itemID;
+      });
+      price = filteredPrice[0].price.new;
+      console.log(1);
+      // ! Selektovati element i dodati sa inner html metodom 
+      // ! Dodati klasu p tagu
+    }
+    // console.log(filtered);
+    let totalPrice = filtered[0].quantity * price;
+    return `${filtered[0].quantity} x ${price} = ${totalPrice}`;
+  }
 
   function showInCardProductData(itemID, objectName, objectName2 = null) {
     let productsArray = jsonParse("productsLocal");
@@ -461,6 +486,10 @@ window.onload = () => {
           return item.name;
         }
       }
+    }
+    if (objectName == "price") {
+      // console.log(productName[0]);
+      return calculateItemPrice(productName[0].id, productName[0][objectName][objectName2]);
     }
     if (objectName2 != null) {
       return productName[0][objectName][objectName2];
@@ -503,6 +532,8 @@ window.onload = () => {
         // ! Mora da se azurira samo p tag
         // inCardProductsShow();
         totalPrice();
+        console.log(item)
+        calculateItemPrice(item.getAttribute("data-id"));
         // ! DODATI AZURIRANJE
         // ? 11:58 AM 
       });
@@ -536,10 +567,12 @@ window.onload = () => {
         cardMessages("Product deleted from card!");
       });
     }
+    totalPrice();
   }
   function deleteAllProducts() {
     localStorage.removeItem("addToCardList");
     inCardProductsShow();
+    totalPrice();
   }
 
   eventListener("delete-all-products", "id", "click", deleteAllProducts);
