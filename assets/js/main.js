@@ -431,14 +431,30 @@ window.onload = () => {
 
   // inCardProductsShow();
   // classGe();
+  totalPrice();
+  function totalPrice() {
+    let addToCardList = jsonParse("addToCardList")
+    let totalPrice = 0;
+    let quantityPrice = addToCardList.map(function (el) {
+      for (let item of productsArray) {
+        if (item.id == el.id) {
+          return el.quantity * item.price.new;
+        }
+      }
+    });
+    console.log(quantityPrice)
+    for (let item of quantityPrice) {
+      totalPrice += item;
+    }
+    console.log(totalPrice);
+  }
+
 
   function showInCardProductData(itemID, objectName, objectName2 = null) {
-    // console.log(itemID);
     let productsArray = jsonParse("productsLocal");
     let productName = productsArray.filter(function (el) {
       return el.id == itemID;
     });
-    // console.log(productName[0].brandID);
     if (objectName == "brandID") {
       for (let item of brandsArray) {
         if (productName[0].brandID == item.id) {
@@ -447,10 +463,8 @@ window.onload = () => {
       }
     }
     if (objectName2 != null) {
-      // console.log(productName[0][objectName][objectName2]);
       return productName[0][objectName][objectName2];
     } else {
-      // console.log(productName[0][objectName]);
       return productName[0][objectName];
     }
   }
@@ -488,6 +502,9 @@ window.onload = () => {
         // ! Promeniti na create element 
         // ! Mora da se azurira samo p tag
         // inCardProductsShow();
+        totalPrice();
+        // ! DODATI AZURIRANJE
+        // ? 11:58 AM 
       });
     }
   }
