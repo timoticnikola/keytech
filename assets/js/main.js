@@ -75,8 +75,19 @@ window.onload = () => {
     for (let element of brandsElements) {
       selectedBrands.push(parseInt(element.value));
     }
+    console.log(selectedBrands);
     if (selectedBrands.length != 0) {
-      return productsArray.filter(x => x.zanrovi.some(y => selectedBrands.includes(y)));
+      // return productsArray.filter(x => x.brandID.some(y => selectedBrands.includes(y)));
+      // return productsArray.filter(x => x.brandID.some(y => selectedBrands.includes(y)));
+
+      return productsArray.filter(function (el) {
+        for (let item of selectedBrands) {
+          console.log(item);
+          if (el.brandID == item) {
+            return el;
+          }
+        }
+      });
     }
     return productsArray;
   }
@@ -84,6 +95,7 @@ window.onload = () => {
   function showProducts(productsArray) {
     productsArray = brandsFilter(productsArray);
     console.log(productsArray);
+    // console.log(productsArray);
     // productsArray = dostupnostFilter(productsArray);
     // productsArray = sort(productsArray);
     // productsArray = filterByPrice(productsArray);
@@ -126,25 +138,24 @@ window.onload = () => {
     let container = document.getElementById("brands-filter");
     for (let brand of brandsArray) {
       html += `<li>
-                <input type="checkbox" name="${brand.name}" id="${brand.name}" class="brands-filter-item" />
+                <input type="checkbox" name="${brand.name}" value="${brand.id}" id="${brand.name}" class="brands-filter-item" />
                 <label for="${brand.name}">${brand.name} [${countProductsBy(productsArray, "brandID", brand.id)}]</label>
               </li>`;
     }
     html += `</ul>`;
-    let brandsElements = document.querySelectorAll(".brands-filter-item");
-    console.log(brandsElements);
     // ! Izmena - nije moguće sa innerHtml'om
-    for (let item of brandsElements) {
-      item.addEventListener("change", test)
-    }
     container.innerHTML = html;
+    let brandsElements = document.querySelectorAll(".brands-filter-item");
+    // console.log(brandsElements);
+    for (let item of brandsElements) {
+      // console.log(item);
+      item.addEventListener("change", filterProducts);
+    }
   }
-  function test(data) {
-    console.log(data);
+  function filterProducts() {
+    showProducts(productsArray);
   }
-  function filterChange() {
-    // jsonRequest("knjige", prikaziKnjige);
-  }
+
 
   function countProductsBy(itemArrayName, nameID, compereID) {
     let countProduct = 0;
