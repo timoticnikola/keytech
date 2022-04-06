@@ -472,7 +472,7 @@ window.onload = () => {
     }
     // console.log(filtered);
     let totalPrice = filtered[0].quantity * price;
-    return `${filtered[0].quantity} x ${price} = ${totalPrice}`;
+    return `${price}$ x ${filtered[0].quantity} = ${totalPrice}$`;
   }
 
   function showInCardProductData(itemID, objectName, objectName2 = null) {
@@ -534,6 +534,7 @@ window.onload = () => {
         totalPrice();
         console.log(item)
         calculateItemPrice(item.getAttribute("data-id"));
+        inCardProductsShow();
         // ! DODATI AZURIRANJE
         // ? 11:58 AM 
       });
