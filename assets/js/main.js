@@ -68,7 +68,25 @@ window.onload = () => {
   }
   // let productsLocal = jsonParse("productsLocal");
   showProducts(productsArray);
+
+  function brandsFilter(productsArray) {
+    let selectedBrands = [];
+    let brandsElements = document.querySelectorAll(".brands-filter-item:checked");
+    for (let element of brandsElements) {
+      selectedBrands.push(parseInt(element.value));
+    }
+    if (selectedBrands.length != 0) {
+      return productsArray.filter(x => x.zanrovi.some(y => selectedBrands.includes(y)));
+    }
+    return productsArray;
+  }
+
   function showProducts(productsArray) {
+    productsArray = brandsFilter(productsArray);
+    console.log(productsArray);
+    // productsArray = dostupnostFilter(productsArray);
+    // productsArray = sort(productsArray);
+    // productsArray = filterByPrice(productsArray);
     let html = "";
     let container = document.getElementById("products");
     for (let product of productsArray) {
@@ -113,7 +131,19 @@ window.onload = () => {
               </li>`;
     }
     html += `</ul>`;
+    let brandsElements = document.querySelectorAll(".brands-filter-item");
+    console.log(brandsElements);
+    // ! Izmena - nije moguće sa innerHtml'om
+    for (let item of brandsElements) {
+      item.addEventListener("change", test)
+    }
     container.innerHTML = html;
+  }
+  function test(data) {
+    console.log(data);
+  }
+  function filterChange() {
+    // jsonRequest("knjige", prikaziKnjige);
   }
 
   function countProductsBy(itemArrayName, nameID, compereID) {
