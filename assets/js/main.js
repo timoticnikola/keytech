@@ -77,9 +77,6 @@ window.onload = () => {
     }
     console.log(selectedBrands);
     if (selectedBrands.length != 0) {
-      // return productsArray.filter(x => x.brandID.some(y => selectedBrands.includes(y)));
-      // return productsArray.filter(x => x.brandID.some(y => selectedBrands.includes(y)));
-
       return productsArray.filter(function (el) {
         for (let item of selectedBrands) {
           console.log(item);
@@ -92,11 +89,15 @@ window.onload = () => {
     return productsArray;
   }
 
+  function categoryFilter(productsArray) {
+    // let selectedCategory = ;
+    return productsArray;
+  }
   function showProducts(productsArray) {
     productsArray = brandsFilter(productsArray);
     console.log(productsArray);
     // console.log(productsArray);
-    // productsArray = dostupnostFilter(productsArray);
+    productsArray = categoryFilter(productsArray);
     // productsArray = sort(productsArray);
     // productsArray = filterByPrice(productsArray);
     let html = "";
@@ -253,53 +254,53 @@ window.onload = () => {
     classGe();
   }
 
-  // var sortingPlaceholder = document.getElementById("sort-product-placeholder");
-  // sortingPlaceholder.addEventListener("change", function () {
-  //   let productsArray = jsonParse("productsLocal");
-  //   productsArray.sort(function (a, b) {
-  //     if (sortingPlaceholder.value == 0) {
-  //       return 0;
-  //     } else if (sortingPlaceholder.value == 1) {
-  //       if (a.price.new < b.price.new) {
-  //         return -1;
-  //       }
-  //       if (a.price.new > b.price.new) {
-  //         return 1;
-  //       }
-  //       if (a.price.new == b.price.new) {
-  //         return 0;
-  //       }
-  //     } else if (sortingPlaceholder.value == 2) {
-  //       if (a.price.new > b.price.new) {
-  //         return -1;
-  //       }
-  //       if (a.price.new < b.price.new) {
-  //         return 1;
-  //       } else {
-  //         return 0;
-  //       }
-  //     } else if (sortingPlaceholder.value == 3) {
-  //       if (a.name < b.name) {
-  //         return -1;
-  //       }
-  //       if (a.name > b.name) {
-  //         return 1;
-  //       } else {
-  //         return 0;
-  //       }
-  //     } else if (sortingPlaceholder.value == 4) {
-  //       if (a.name > b.name) {
-  //         return -1;
-  //       }
-  //       if (a.name < b.name) {
-  //         return 1;
-  //       } else {
-  //         return 0;
-  //       }
-  //     }
-  //   });
-  //   showProducts(productsArray);
-  // });
+  var sortingPlaceholder = document.getElementById("sort-product-placeholder");
+  sortingPlaceholder.addEventListener("change", function () {
+    let productsArray = jsonParse("productsLocal");
+    productsArray.sort(function (a, b) {
+      if (sortingPlaceholder.value == 0) {
+        return 0;
+      } else if (sortingPlaceholder.value == 1) {
+        if (a.price.new < b.price.new) {
+          return -1;
+        }
+        if (a.price.new > b.price.new) {
+          return 1;
+        }
+        if (a.price.new == b.price.new) {
+          return 0;
+        }
+      } else if (sortingPlaceholder.value == 2) {
+        if (a.price.new > b.price.new) {
+          return -1;
+        }
+        if (a.price.new < b.price.new) {
+          return 1;
+        } else {
+          return 0;
+        }
+      } else if (sortingPlaceholder.value == 3) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      } else if (sortingPlaceholder.value == 4) {
+        if (a.name > b.name) {
+          return -1;
+        }
+        if (a.name < b.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    });
+    showProducts(productsArray);
+  });
 
 
 
