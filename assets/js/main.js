@@ -75,11 +75,11 @@ window.onload = () => {
     for (let element of brandsElements) {
       selectedBrands.push(parseInt(element.value));
     }
-    console.log(selectedBrands);
+    // console.log(selectedBrands);
     if (selectedBrands.length != 0) {
       return productsArray.filter(function (el) {
         for (let item of selectedBrands) {
-          console.log(item);
+          // console.log(item);
           if (el.brandID == item) {
             return el;
           }
@@ -95,11 +95,8 @@ window.onload = () => {
   }
   function showProducts(productsArray) {
     productsArray = brandsFilter(productsArray);
-    console.log(productsArray);
-    // console.log(productsArray);
-    productsArray = categoryFilter(productsArray);
-    // productsArray = sort(productsArray);
-    // productsArray = filterByPrice(productsArray);
+    // productsArray = categoryFilter(productsArray);
+    productsArray = reviewsFilter(productsArray);
     let html = "";
     let container = document.getElementById("products");
     for (let product of productsArray) {
@@ -131,6 +128,9 @@ window.onload = () => {
     }
     return html;
   }
+
+
+
   showBrandsCategory();
   function showBrandsCategory() {
     let html = "";
@@ -185,6 +185,36 @@ window.onload = () => {
     }
     html += `</ul>`;
     container.innerHTML = html;
+  }
+  // Show Reviews side filter
+  showReviews();
+  function showReviews() {
+    let container = document.getElementById("reviews-filter");
+    let html = `<p>Reviews</p>
+        <div class="slidecontainer">
+          <input type="range" min="10" max="50" value="1" class="slider reviews-filter-item" id="reviews-range-sllider" />
+          <p id="reviews-range-place"></p>
+          <input type="text" id="reviews-range-placeholder" />
+        </div>`;
+    container.innerHTML = html;
+    let score = document.getElementById("reviews-range-sllider");
+    score.addEventListener("click", filterProducts)
+  }
+  // Filter products per reviews
+  function reviewsFilter(productsArray) {
+    let scoreContainer = document.getElementById("reviews-range-sllider");
+    let score;
+    if (scoreContainer == null) {
+      score = 1;
+    }
+    else {
+      score = scoreContainer.value / 10;
+    }
+    return productsArray.filter(function (el) {
+      if (el.score >= score) {
+        return el;
+      }
+    });
   }
 
   function createFooter(data) {
