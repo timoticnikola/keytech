@@ -108,7 +108,7 @@ window.onload = () => {
               <p class="product-description">${product.descript}</p>
               <div class="product-price">
                 <p>Price:</p>
-                <p class="product-price-new">${product.price.new}</p>
+                <p class="product-price-new">${priceCalculator(product.price.old, product.price.discount)}</p>
                 <s class="product-price-old">${product.price.old}</s>
               </div>
               <p class="product-reviews">Reviews: ${product.score}</p>
@@ -118,7 +118,10 @@ window.onload = () => {
     container.innerHTML = html;
     inCardProductsShow();
   }
-
+  function priceCalculator(productPrice, productDiscount) {
+    let price = productPrice * ((100 - productDiscount) / 100);
+    return price.toFixed(2);
+  }
   function showBrand(brandID) {
     let html = "";
     for (let brand of brandsArray) {
@@ -291,20 +294,24 @@ window.onload = () => {
       if (sortingPlaceholder.value == 0) {
         return 0;
       } else if (sortingPlaceholder.value == 1) {
-        if (a.price.new < b.price.new) {
+        a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+        b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+        if (a < b) {
           return -1;
         }
-        if (a.price.new > b.price.new) {
+        if (a > b) {
           return 1;
         }
-        if (a.price.new == b.price.new) {
+        if (a == b) {
           return 0;
         }
       } else if (sortingPlaceholder.value == 2) {
-        if (a.price.new > b.price.new) {
+        a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+        b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+        if (a > b) {
           return -1;
         }
-        if (a.price.new < b.price.new) {
+        if (a < b) {
           return 1;
         } else {
           return 0;
@@ -331,8 +338,6 @@ window.onload = () => {
     });
     showProducts(productsArray);
   });
-
-
 
 
   // localStorage.removeItem("productsArrayFiltered");

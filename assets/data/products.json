@@ -10,7 +10,7 @@
     "brandID": 1,
     "price": {
       "old": 12,
-      "new": 20
+      "discount": 20
     },
     "descript": "This keyboard have: ",
     "score": 2.1
@@ -26,7 +26,7 @@
     "brandID": 1,
     "price": {
       "old": 45,
-      "new": 12
+      "discount": 12
     },
     "descript": "Steyts",
     "score": 4.7
@@ -42,7 +42,7 @@
     "brandID": 2,
     "price": {
       "old": 10,
-      "new": 24
+      "discount": 24
     },
     "descript": "Steyts",
     "score": 3.5
