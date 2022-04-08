@@ -147,9 +147,12 @@ window.onload = () => {
 
 
 
-  showBrandsCategory();
+  // showBrandsCategory();
   // ! brands same as category
   // ! Make function
+
+  showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
+
   function showBrandsCategory() {
     let html = "";
     html += `<p>Brands</p>
@@ -158,7 +161,7 @@ window.onload = () => {
     for (let brand of brandsArray) {
       html += `<li>
                 <input type="checkbox" name="${brand.name}" value="${brand.id}" id="${brand.name}" class="brands-filter-item" />
-                <label for="${brand.name}">${brand.name} [${countProductsBy(productsArray, "brandID", brand.id)}]</label>
+                <label for="${brand.name}">${brand.name}</label>
               </li>`;
     }
     html += `</ul>`;
@@ -176,38 +179,29 @@ window.onload = () => {
   }
 
 
-  function countProductsBy(itemArrayName, nameID, compereID) {
-    let countProduct = 0;
-    for (let item of itemArrayName) {
-      if (item[nameID] == compereID) {
-        countProduct++;
-      }
-    }
-    return countProduct;
-  }
-  showProductsCategory();
+
+  // showProductsCategory();
   // ! Category same as brands
   // ! Make function
-  function showProductsCategory() {
+  function showProductsFilter(filterName, containerName, arrayName, className) {
     let html = "";
-    html += `<p>Category</p>
-             <ul>`;
-    let container = document.getElementById("category-filter");
-    for (let category of categoriesArray) {
+    html += `<p>${filterName}</p>
+            <ul>`;
+    let container = document.getElementById(containerName);
+    for (let item of arrayName) {
       html += `<li>
-                  <input type="checkbox" name="${category.name}" class="categoryRadioAny category-filter-item" value="${category.id}" id="${category.name}">
-                  <label for="${category.name}">${category.name} [${countProductsBy(productsArray, "categoryID", category.id)}]</label>
+                  <input type="checkbox" name="${item.name}" class="${className}" value="${item.id}" id="${item.name}">
+                  <label for="${item.name}">${item.name} </label>
                 </li>`;
     }
     html += `</ul>`;
     container.innerHTML = html;
-    let categoryElements = document.querySelectorAll(".category-filter-item");
-    // console.log(brandsElements);
-    for (let item of categoryElements) {
-      // console.log(item);
-      item.addEventListener("change", filterProducts);
-    }
+    eventListener(className, "class", "change", filterProducts);
   }
+
+  showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
+
+
   // Show Reviews side filter
   showReviews();
   function showReviews() {
@@ -216,7 +210,6 @@ window.onload = () => {
         <div class="slidecontainer">
           <input type="range" min="10" max="50" value="1" class="slider reviews-filter-item" id="reviews-range-sllider" />
           <p id="reviews-range-place"></p>
-          <input type="text" id="reviews-range-placeholder" />
         </div>`;
     container.innerHTML = html;
     let score = document.getElementById("reviews-range-sllider");
