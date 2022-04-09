@@ -112,8 +112,9 @@ window.onload = () => {
     productsArray = reviewsFilter(productsArray);
     let html = "";
     let container = document.getElementById("products");
-    for (let product of productsArray) {
-      html += `<div class="product">
+    if (productsArray.length != 0) {
+      for (let product of productsArray) {
+        html += `<div class="product">
               <img src="assets/img/test.webp" alt="photo" />
               <p class="product-category-name">categoryName</p>
               <p class="product-brandname">${showBrand(product.brandID)}</p>
@@ -127,7 +128,14 @@ window.onload = () => {
               <p class="product-reviews">Reviews: ${product.score}</p>
               <input class="product-add-to-card-btn" type="button" data-id="${product.id}" value="Add to card" />
             </div>`;
+      }
+    } else {
+      html += `<div id="product-message">
+                <h2>There is no products with selected criteria!</h2>
+              </div>`;
+      console.log(1);
     }
+
     container.innerHTML = html;
     inCardProductsShow();
     let scoreP = document.getElementById("reviews-range-place");
@@ -135,6 +143,7 @@ window.onload = () => {
       let rangeSlider = document.getElementById("reviews-range-sllider");
       scoreP.innerHTML = rangeSlider.value / 10;
     }
+    eventListener("product-add-to-card-btn", "class", "click", addToCard);
   }
   function priceCalculator(productPrice, productDiscount) {
     let price = productPrice * ((100 - productDiscount) / 100);
@@ -276,7 +285,7 @@ window.onload = () => {
     // ! Dodaj proveru da li je niz ili ne..
   }
 
-  eventListener("product-add-to-card-btn", "class", "click", addToCard);
+  // eventListener("product-add-to-card-btn", "class", "click", addToCard);
 
 
   function addToCard() {
@@ -518,7 +527,6 @@ window.onload = () => {
       pTag.appendChild(pTagContent);
       pTag.setAttribute("id", "empty-card");
       container.appendChild(pTag);
-      console.log("Empty");
     }
     deleteProducts();
     inCardCount();
@@ -534,17 +542,18 @@ window.onload = () => {
       let quantityPrice = addToCardList.map(function (el) {
         for (let item of productsArray) {
           if (item.id == el.id) {
-            return el.quantity * item.price.new;
+            return el.quantity * priceCalculator(item.price.old, item.price.discount);
           }
         }
+        // priceCalculator(filteredPrice[0].price.old, filteredPrice[0].price.discount)
       });
       for (let item of quantityPrice) {
         totalPrice += item;
       }
       // let priceContainer = document.getElementById("card-total-price");
-      priceContainer.innerHTML = `Total: ${totalPrice}$`;
+      priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
     } else {
-      priceContainer.innerHTML = `Total: ${totalPrice}$`;
+      priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
     }
     // ! DODATI ELSE BLOCK
     // console.log(quantityPrice);
@@ -561,14 +570,19 @@ window.onload = () => {
       let filteredPrice = productsArray.filter(function (el) {
         return el.id == itemID;
       });
-      price = filteredPrice[0].price.new;
-      console.log(1);
+      // price = filteredPrice[0].price.new;
+      price = priceCalculator(filteredPrice[0].price.old, filteredPrice[0].price.discount);
       // ! Selektovati element i dodati sa inner html metodom 
       // ! Dodati klasu p tagu
+      // ! Zamenjeno new sa discount
+      // function priceCalculator(productPrice, productDiscount) {
+      //   let price = productPrice * ((100 - productDiscount) / 100);
+      //   return price.toFixed(2);
+      // }
     }
     // console.log(filtered);
     let totalPrice = filtered[0].quantity * price;
-    return `${price}$ x ${filtered[0].quantity} = ${totalPrice}$`;
+    return `${price}$ x ${filtered[0].quantity} = ${totalPrice.toFixed(2)}$`;
   }
 
   function showInCardProductData(itemID, objectName, objectName2 = null) {
@@ -628,20 +642,12 @@ window.onload = () => {
         // ! Mora da se azurira samo p tag
         // inCardProductsShow();
         totalPrice();
-        console.log(item)
         calculateItemPrice(item.getAttribute("data-id"));
         inCardProductsShow();
-        // ! DODATI AZURIRANJE
-        // ? 11:58 AM 
       });
     }
   }
-  function updateCardQuantity(dataID) {
-    for (let id of dataID) {
-      // for(let)
-      // if(id == )
-    }
-  }
+
   function deleteProducts() {
     let binItems = document.querySelectorAll(".fa-trash");
     // console.log(binItems);
@@ -678,4 +684,21 @@ window.onload = () => {
     let jsonData = JSON.parse(localStorage.getItem(`${data}`));
     return jsonData;
   }
+  function resetFilters() {
+    let brandsFilters = document.querySelectorAll(".brands-filter-item");
+    let categoriesFilters = document.querySelectorAll(".category-filter-item");
+    resetCheckbox(brandsFilters);
+    resetCheckbox(categoriesFilters);
+    let reviewsFilter = document.getElementById("reviews-range-sllider");
+    reviewsFilter.value = 1;
+    showProducts(productsArray)
+  }
+  function resetCheckbox(arrayName) {
+    for (let item of arrayName) {
+      item.checked = false;
+    }
+  }
+  let resetBtn = document.getElementById("reset-filter");
+  resetBtn.addEventListener("click", resetFilters);
+
 };
