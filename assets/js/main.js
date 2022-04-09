@@ -8,7 +8,7 @@ window.onload = () => {
 
   async function jsonRequest(fileName) {
     try {
-      res = await fetch(`./assets/data/${fileName}.json`);
+      let res = await fetch(`./assets/data/${fileName}.json`);
       return res.json();
     } catch (error) {
       console.error(error);
