@@ -120,12 +120,12 @@ window.onload = () => {
               <p class="product-brandname">${showBrand(product.brandID)}</p>
               <p class="product-name">${product.name}</p>
               <p class="product-description">${product.descript}</p>
+              <p class="product-reviews">Reviews: ${product.score}<i class="fa-solid fa-star"></i></p>
               <div class="product-price">
                 <p>Price:</p>
+                <s class="product-price-old">${product.price.discount != 0 ? product.price.old + "$" : ""}</s>
                 <p class="product-price-new">${priceCalculator(product.price.old, product.price.discount)}$</p>
-                <s class="product-price-old">${product.price.old}$</s>
               </div>
-              <p class="product-reviews">Reviews: ${product.score}<i class="fa-solid fa-star"></i></p>
               <input class="product-add-to-card-btn" type="button" data-id="${product.id}" value="Add to card" />
             </div>`;
       }

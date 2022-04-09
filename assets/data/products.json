@@ -4,47 +4,31 @@
     "name": "Logitech Craft",
     "image": {
       "src": "assets/img/logitech-craft.png",
-      "alt": "photo1"
+      "alt": "logitech-craft-keyboard"
     },
     "categoryID": 1,
     "brandID": 1,
     "price": {
-      "old": 12,
-      "discount": 20
+      "old": 200,
+      "discount": 10
     },
     "descript": "This keyboard have: ",
-    "score": 2.1
+    "score": 4.8
   },
   {
     "id": 1,
-    "name": "Jok",
+    "name": "MX Keys",
     "image": {
-      "src": "assets/img/test.webp",
-      "alt": "photo1"
+      "src": "assets/img/logitech-mx-keys.png",
+      "alt": "logitech-mx-keys"
     },
-    "categoryID": 3,
+    "categoryID": 1,
     "brandID": 1,
     "price": {
-      "old": 45,
-      "discount": 12
+      "old": 119.9,
+      "discount": 0
     },
-    "descript": "Steyts",
+    "descript": "This keyboard have: ",
     "score": 4.7
-  },
-  {
-    "id": 2,
-    "name": "Tesdd",
-    "image": {
-      "src": "assets/img/ezgif.com-gif-maker-removebg-preview.png",
-      "alt": "photo1"
-    },
-    "categoryID": 2,
-    "brandID": 2,
-    "price": {
-      "old": 10,
-      "discount": 24
-    },
-    "descript": "Steyts",
-    "score": 3.5
   }
 ]
