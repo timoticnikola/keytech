@@ -130,6 +130,11 @@ window.onload = () => {
     }
     container.innerHTML = html;
     inCardProductsShow();
+    let scoreP = document.getElementById("reviews-range-place");
+    if (scoreP != null) {
+      let rangeSlider = document.getElementById("reviews-range-sllider");
+      scoreP.innerHTML = rangeSlider.value / 10;
+    }
   }
   function priceCalculator(productPrice, productDiscount) {
     let price = productPrice * ((100 - productDiscount) / 100);
@@ -213,6 +218,8 @@ window.onload = () => {
         </div>`;
     container.innerHTML = html;
     let score = document.getElementById("reviews-range-sllider");
+    let scoreP = document.getElementById("reviews-range-place");
+    scoreP.innerHTML = "1";
     score.addEventListener("click", filterProducts)
   }
   // Filter products per reviews
