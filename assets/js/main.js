@@ -1,5 +1,5 @@
 window.onload = () => {
-
+  // ! FIX NAVLINKS LOCAL - AFTER DELETE LOCALSTORAGE - NOT WORKING
   const navLinksArray = fetchLocalStorage("navLinks");
   const productsArray = fetchLocalStorage("products");
   const socialLinksArray = fetchLocalStorage("socialLinks");
@@ -115,17 +115,17 @@ window.onload = () => {
     if (productsArray.length != 0) {
       for (let product of productsArray) {
         html += `<div class="product">
-              <img src="assets/img/test.webp" alt="photo" />
-              <p class="product-category-name">categoryName</p>
+              <img src="${product.image.src}" alt="${product.image.alt}" />
+              <p class="product-category-name">${categoryName(product.categoryID)}</p>
               <p class="product-brandname">${showBrand(product.brandID)}</p>
               <p class="product-name">${product.name}</p>
               <p class="product-description">${product.descript}</p>
               <div class="product-price">
                 <p>Price:</p>
-                <p class="product-price-new">${priceCalculator(product.price.old, product.price.discount)}</p>
-                <s class="product-price-old">${product.price.old}</s>
+                <p class="product-price-new">${priceCalculator(product.price.old, product.price.discount)}$</p>
+                <s class="product-price-old">${product.price.old}$</s>
               </div>
-              <p class="product-reviews">Reviews: ${product.score}</p>
+              <p class="product-reviews">Reviews: ${product.score}<i class="fa-solid fa-star"></i></p>
               <input class="product-add-to-card-btn" type="button" data-id="${product.id}" value="Add to card" />
             </div>`;
       }
@@ -135,7 +135,6 @@ window.onload = () => {
               </div>`;
       console.log(1);
     }
-
     container.innerHTML = html;
     inCardProductsShow();
     let scoreP = document.getElementById("reviews-range-place");
@@ -144,6 +143,12 @@ window.onload = () => {
       scoreP.innerHTML = rangeSlider.value / 10;
     }
     eventListener("product-add-to-card-btn", "class", "click", addToCard);
+  }
+  function categoryName(productCategoryID) {
+    let categoryName = categoriesArray.filter(function (el) {
+      return el.id == productCategoryID;
+    });
+    return categoryName[0].name;
   }
   function priceCalculator(productPrice, productDiscount) {
     let price = productPrice * ((100 - productDiscount) / 100);
@@ -158,45 +163,13 @@ window.onload = () => {
     }
     return html;
   }
-
-
-
-  // showBrandsCategory();
-  // ! brands same as category
-  // ! Make function
-
+  showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
   showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
 
-  function showBrandsCategory() {
-    let html = "";
-    html += `<p>Brands</p>
-            <ul>`;
-    let container = document.getElementById("brands-filter");
-    for (let brand of brandsArray) {
-      html += `<li>
-                <input type="checkbox" name="${brand.name}" value="${brand.id}" id="${brand.name}" class="brands-filter-item" />
-                <label for="${brand.name}">${brand.name}</label>
-              </li>`;
-    }
-    html += `</ul>`;
-    // ! Izmena - nije moguće sa innerHtml'om
-    container.innerHTML = html;
-    let brandsElements = document.querySelectorAll(".brands-filter-item");
-    // console.log(brandsElements);
-    for (let item of brandsElements) {
-      // console.log(item);
-      item.addEventListener("change", filterProducts);
-    }
-  }
   function filterProducts() {
     showProducts(productsArray);
   }
-
-
-
-  // showProductsCategory();
-  // ! Category same as brands
-  // ! Make function
+  // Make side filters
   function showProductsFilter(filterName, containerName, arrayName, className) {
     let html = "";
     html += `<p>${filterName}</p>
@@ -212,9 +185,6 @@ window.onload = () => {
     container.innerHTML = html;
     eventListener(className, "class", "change", filterProducts);
   }
-
-  showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
-
 
   // Show Reviews side filter
   showReviews();
@@ -284,9 +254,6 @@ window.onload = () => {
     }
     // ! Dodaj proveru da li je niz ili ne..
   }
-
-  // eventListener("product-add-to-card-btn", "class", "click", addToCard);
-
 
   function addToCard() {
     let dataID = this.getAttribute("data-id");
@@ -367,9 +334,6 @@ window.onload = () => {
     showProducts(productsArray);
   });
 
-
-  // localStorage.removeItem("productsArrayFiltered");
-
   // Test shopping-card-container
   eventListener("shopping-card", "id", "click", openCard);
   function openCard() {
@@ -447,17 +411,13 @@ window.onload = () => {
       pTag.innerHTML = " (0)";
     }
   }
-  // ! Test START
   // InCardProducts
   function inCardProductsShow() {
     let addToCardList = jsonParse("addToCardList");
-    // console.log(addToCardList);
     let container = document.getElementById("card-products");
     container.innerHTML = "";
-    // console.log(addToCardList);
     if (addToCardList != null) {
       for (let item of addToCardList) {
-        // console.log(item);
         let cardProdict = document.createElement("div");
         cardProdict.setAttribute("class", "card-product");
         let imgContainer = document.createElement("img");
@@ -468,12 +428,7 @@ window.onload = () => {
         cardProduictsRight.setAttribute("class", "card-product-right");
         cardProdict.appendChild(cardProduictsRight);
         let pProductName = document.createElement("p");
-        // let pProductNameContent = document.createTextNode(`ProductName`);
         let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
-        // let pProductNameContent = document.createTextNode(`${showProductName(item.id)}`);
-        // showProductName
-        // showInCardProductData
-        // console.log(item.id);
         pProductName.appendChild(pProductNameContent);
         cardProduictsRight.appendChild(pProductName);
         let pBrandName = document.createElement("p");
@@ -489,29 +444,23 @@ window.onload = () => {
         cardProduictsRight.appendChild(cardProductTools);
         let cardProductQuantity = document.createElement("div");
         cardProductQuantity.setAttribute("class", "card-product-quantity");
-        // Minus
         let inputValueMinus = document.createElement("input");
         inputValueMinus.setAttribute("type", "button");
         inputValueMinus.setAttribute("class", "quantityRegul");
         inputValueMinus.setAttribute("data-id", `${item.id}`);
         inputValueMinus.setAttribute("value", "-");
         cardProductQuantity.appendChild(inputValueMinus);
-        // PTag
         let itemQuantity = document.createElement("p");
         let itemQuantityContent = document.createTextNode(`${item.quantity}`);
-        // console.log(item.quantity);
         itemQuantity.appendChild(itemQuantityContent);
         cardProductQuantity.appendChild(itemQuantity);
-        // Plus
         let inputValuePlus = document.createElement("input");
         inputValuePlus.setAttribute("type", "button");
         inputValuePlus.setAttribute("class", "quantityRegul");
         inputValuePlus.setAttribute("data-id", `${item.id}`);
         inputValuePlus.setAttribute("value", "+");
         cardProductQuantity.appendChild(inputValuePlus);
-        // Append to cardProductTools
         cardProductTools.appendChild(cardProductQuantity)
-        // iTag
         let iBin = document.createElement("i");
         iBin.setAttribute("class", "fa fa-trash");
         iBin.setAttribute("data-id", `${item.id}`);
@@ -537,7 +486,6 @@ window.onload = () => {
     let addToCardList = jsonParse("addToCardList")
     let totalPrice = 0;
     let priceContainer = document.getElementById("card-total-price");
-    // console.log(addToCardList);
     if (addToCardList != null && addToCardList != "undefined") {
       let quantityPrice = addToCardList.map(function (el) {
         for (let item of productsArray) {
@@ -545,42 +493,26 @@ window.onload = () => {
             return el.quantity * priceCalculator(item.price.old, item.price.discount);
           }
         }
-        // priceCalculator(filteredPrice[0].price.old, filteredPrice[0].price.discount)
       });
       for (let item of quantityPrice) {
         totalPrice += item;
       }
-      // let priceContainer = document.getElementById("card-total-price");
       priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
     } else {
       priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
     }
-    // ! DODATI ELSE BLOCK
-    // console.log(quantityPrice);
-    // console.log(totalPrice);
-
   }
   function calculateItemPrice(itemID, price = null) {
     let addToCardList = jsonParse("addToCardList");
     let filtered = addToCardList.filter(function (el) {
-      // if()
       return el.id == itemID;
     });
     if (price == null) {
       let filteredPrice = productsArray.filter(function (el) {
         return el.id == itemID;
       });
-      // price = filteredPrice[0].price.new;
       price = priceCalculator(filteredPrice[0].price.old, filteredPrice[0].price.discount);
-      // ! Selektovati element i dodati sa inner html metodom 
-      // ! Dodati klasu p tagu
-      // ! Zamenjeno new sa discount
-      // function priceCalculator(productPrice, productDiscount) {
-      //   let price = productPrice * ((100 - productDiscount) / 100);
-      //   return price.toFixed(2);
-      // }
     }
-    // console.log(filtered);
     let totalPrice = filtered[0].quantity * price;
     return `${price}$ x ${filtered[0].quantity} = ${totalPrice.toFixed(2)}$`;
   }
@@ -598,7 +530,6 @@ window.onload = () => {
       }
     }
     if (objectName == "price") {
-      // console.log(productName[0]);
       return calculateItemPrice(productName[0].id, productName[0][objectName][objectName2]);
     }
     if (objectName2 != null) {
@@ -607,24 +538,17 @@ window.onload = () => {
       return productName[0][objectName];
     }
   }
-  // ! Test END
   function classGe() {
     let quantityRegulList = document.querySelectorAll(".quantityRegul");
-    // console.log(test);
     for (let item of quantityRegulList) {
       item.addEventListener("click", function () {
         let dataQuantity = jsonParse("addToCardList");
-        // console.log(this.value);
-        // console.log(this.parentElement.getElementsByTagName("p").innerHTML);
         if (this.value == "+") {
-          // console.log(dataQuantity);
           for (let data of dataQuantity) {
             if (data.id == this.getAttribute("data-id")) {
-              // console.log(data.id);
               data.quantity += 1;
               localStorage.setItem("addToCardList", JSON.stringify(dataQuantity));
               this.parentElement.getElementsByTagName("p")[0].innerHTML = data.quantity;
-              // console.log(data.quantity);
             }
           }
         } else {
@@ -638,9 +562,6 @@ window.onload = () => {
             }
           }
         }
-        // ! Promeniti na create element 
-        // ! Mora da se azurira samo p tag
-        // inCardProductsShow();
         totalPrice();
         calculateItemPrice(item.getAttribute("data-id"));
         inCardProductsShow();
@@ -650,11 +571,9 @@ window.onload = () => {
 
   function deleteProducts() {
     let binItems = document.querySelectorAll(".fa-trash");
-    // console.log(binItems);
     for (let item of binItems) {
       item.addEventListener("click", () => {
         let addToCardList = jsonParse("addToCardList");
-        // console.log(addToCardList);
         for (let data of addToCardList) {
           if (data.id == item.getAttribute("data-id")) {
             let filteredList = addToCardList.filter(function (el) {
@@ -700,5 +619,4 @@ window.onload = () => {
   }
   let resetBtn = document.getElementById("reset-filter");
   resetBtn.addEventListener("click", resetFilters);
-
 };

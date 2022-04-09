@@ -119,6 +119,10 @@ footer .wrapper #footer-down {
 .product img {
   margin-bottom: 20px;
   border-radius: 5px;
+  background-color: #ffffff;
+  /* height: 200px;
+  width: 200px; */
+  object-fit: contain;
 }
 .product .product-category-name {
   color: gray;

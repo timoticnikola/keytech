@@ -1,9 +1,9 @@
 [
   {
     "id": 0,
-    "name": "Ketts1",
+    "name": "Logitech Craft",
     "image": {
-      "src": "assets/img/photo1.png",
+      "src": "assets/img/logitech-craft.png",
       "alt": "photo1"
     },
     "categoryID": 1,
@@ -19,7 +19,7 @@
     "id": 1,
     "name": "Jok",
     "image": {
-      "src": "assets/img/photo1.png",
+      "src": "assets/img/test.webp",
       "alt": "photo1"
     },
     "categoryID": 3,
@@ -35,7 +35,7 @@
     "id": 2,
     "name": "Tesdd",
     "image": {
-      "src": "assets/img/photo1.png",
+      "src": "assets/img/ezgif.com-gif-maker-removebg-preview.png",
       "alt": "photo1"
     },
     "categoryID": 2,
