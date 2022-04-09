@@ -22,11 +22,6 @@ window.onload = () => {
     return JSON.parse(localStorage.getItem(`${fileName}Local`));
   }
 
-  // const url = window.location.pathname;
-  // if (url == "/store.html") {
-  //   console.log(1);
-  // }
-
 
   // Run functions
   createNavBar(navLinksArray);
@@ -67,7 +62,7 @@ window.onload = () => {
     container.appendChild(ulTag);
   }
   // let productsLocal = jsonParse("productsLocal");
-  showProducts(productsArray);
+  // showProducts(productsArray);
 
   function brandsFilter(productsArray) {
     let selectedBrands = [];
@@ -163,8 +158,7 @@ window.onload = () => {
     }
     return html;
   }
-  showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
-  showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
+
 
   function filterProducts() {
     showProducts(productsArray);
@@ -187,7 +181,7 @@ window.onload = () => {
   }
 
   // Show Reviews side filter
-  showReviews();
+
   function showReviews() {
     let container = document.getElementById("reviews-filter");
     let html = `<p>Reviews</p>
@@ -282,57 +276,7 @@ window.onload = () => {
     classGe();
   }
 
-  var sortingPlaceholder = document.getElementById("sort-product-placeholder");
-  sortingPlaceholder.addEventListener("change", function () {
-    let productsArray = jsonParse("productsLocal");
-    productsArray.sort(function (a, b) {
-      if (sortingPlaceholder.value == 0) {
-        return 0;
-      } else if (sortingPlaceholder.value == 1) {
-        a = parseFloat(priceCalculator(a.price.old, a.price.discount));
-        b = parseFloat(priceCalculator(b.price.old, b.price.discount));
-        if (a < b) {
-          return -1;
-        }
-        if (a > b) {
-          return 1;
-        }
-        if (a == b) {
-          return 0;
-        }
-      } else if (sortingPlaceholder.value == 2) {
-        a = parseFloat(priceCalculator(a.price.old, a.price.discount));
-        b = parseFloat(priceCalculator(b.price.old, b.price.discount));
-        if (a > b) {
-          return -1;
-        }
-        if (a < b) {
-          return 1;
-        } else {
-          return 0;
-        }
-      } else if (sortingPlaceholder.value == 3) {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      } else if (sortingPlaceholder.value == 4) {
-        if (a.name > b.name) {
-          return -1;
-        }
-        if (a.name < b.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    });
-    showProducts(productsArray);
-  });
+
 
   // Test shopping-card-container
   eventListener("shopping-card", "id", "click", openCard);
@@ -421,8 +365,8 @@ window.onload = () => {
         let cardProdict = document.createElement("div");
         cardProdict.setAttribute("class", "card-product");
         let imgContainer = document.createElement("img");
-        imgContainer.setAttribute("src", "assets/img/test.webp");
-        imgContainer.setAttribute("alt", "img");
+        imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
+        imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
         cardProdict.appendChild(imgContainer);
         let cardProduictsRight = document.createElement("div");
         cardProduictsRight.setAttribute("class", "card-product-right");
@@ -470,7 +414,7 @@ window.onload = () => {
       }
     }
     else {
-      cardMessages("Deleted all products from card");
+      // cardMessages("Deleted all products from card");
       let pTag = document.createElement("p");
       let pTagContent = document.createTextNode("Card is empty.");
       pTag.appendChild(pTagContent);
@@ -593,6 +537,7 @@ window.onload = () => {
   }
   function deleteAllProducts() {
     localStorage.removeItem("addToCardList");
+    cardMessages("Deleted all products from card");
     inCardProductsShow();
     totalPrice();
   }
@@ -610,13 +555,76 @@ window.onload = () => {
     resetCheckbox(categoriesFilters);
     let reviewsFilter = document.getElementById("reviews-range-sllider");
     reviewsFilter.value = 1;
-    showProducts(productsArray)
+    showProducts(productsArray);
   }
   function resetCheckbox(arrayName) {
     for (let item of arrayName) {
       item.checked = false;
     }
   }
-  let resetBtn = document.getElementById("reset-filter");
-  resetBtn.addEventListener("click", resetFilters);
+
+  inCardProductsShow();
+
+
+  const url = window.location.pathname;
+  if (url == "/store.html") {
+    showProducts(productsArray);
+    showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
+    showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
+    showReviews();
+    var sortingPlaceholder = document.getElementById("sort-product-placeholder");
+    sortingPlaceholder.addEventListener("change", function () {
+      let productsArray = jsonParse("productsLocal");
+      productsArray.sort(function (a, b) {
+        if (sortingPlaceholder.value == 0) {
+          return 0;
+        } else if (sortingPlaceholder.value == 1) {
+          a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+          b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+          if (a < b) {
+            return -1;
+          }
+          if (a > b) {
+            return 1;
+          }
+          if (a == b) {
+            return 0;
+          }
+        } else if (sortingPlaceholder.value == 2) {
+          a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+          b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+          if (a > b) {
+            return -1;
+          }
+          if (a < b) {
+            return 1;
+          } else {
+            return 0;
+          }
+        } else if (sortingPlaceholder.value == 3) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          } else {
+            return 0;
+          }
+        } else if (sortingPlaceholder.value == 4) {
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      });
+      showProducts(productsArray);
+    });
+    let resetBtn = document.getElementById("reset-filter");
+    resetBtn.addEventListener("click", resetFilters);
+  }
+
 };
