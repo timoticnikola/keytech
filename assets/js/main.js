@@ -1,8 +1,8 @@
 window.onload = () => {
 	// ! FIX NAVLINKS LOCAL - AFTER DELETE LOCALSTORAGE - NOT WORKING
 	const navLinksArray = fetchData("navLinks", createNavBar);
-	const categoriesArray = fetchData("categories", showFiltersCategory);
-	const brandsArray = fetchData("brands", showFiltersBrand);
+	const categoriesArray = fetchData("categories");
+	const brandsArray = fetchData("brands");
 	const socialLinksArray = fetchData("socialLinks");
 	const productsArray = fetchData("products", showProducts);
 
@@ -15,7 +15,13 @@ window.onload = () => {
 				}
 				return response2;
 			})
-			.then((response3) => localStorage.setItem(`${fileName}Local`, JSON.stringify(response3)));
+			.then((response3) => {
+				localStorage.setItem(`${fileName}Local`, JSON.stringify(response3));
+				return response3;
+			})
+			.then((response4) => {
+				return response4;
+			});
 	}
 
 	function createNavBar(data) {
@@ -118,7 +124,6 @@ window.onload = () => {
 			html += `<div id="product-message">
 	                <h2>There is no products with selected criteria!</h2>
 	              </div>`;
-			console.log(1);
 		}
 		container.innerHTML = html;
 		inCardProductsShow();
@@ -152,6 +157,7 @@ window.onload = () => {
 	}
 
 	function filterProducts() {
+		let productsArray = jsonParse("productsLocal");
 		showProducts(productsArray);
 	}
 	// Make side filters
@@ -551,6 +557,7 @@ window.onload = () => {
 		resetCheckbox(categoriesFilters);
 		let reviewsFilter = document.getElementById("reviews-range-sllider");
 		reviewsFilter.value = 1;
+		let productsArray = jsonParse("productsLocal");
 		showProducts(productsArray);
 	}
 	function resetCheckbox(arrayName) {
@@ -563,11 +570,9 @@ window.onload = () => {
 
 	const url = window.location.pathname;
 	if (url == "/store.html") {
-		// showProducts(productsArray);
 		fetchData("products", showProducts);
-		// showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
-		// showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
-
+		fetchData("brands", showFiltersBrand);
+		fetchData("categories", showFiltersCategory);
 		showReviews();
 		var sortingPlaceholder = document.getElementById("sort-product-placeholder");
 		sortingPlaceholder.addEventListener("change", function () {
