@@ -21,6 +21,8 @@ window.onload = () => {
 	function createNavBar(data) {
 		navLinks("nav-warpper", data);
 		navLinkShop("nav");
+		eventListener("shopping-card", "id", "click", openCard);
+		eventListener("card-close", "id", "click", closeCard);
 	}
 
 	function navLinkShop(ulID) {
@@ -266,12 +268,12 @@ window.onload = () => {
 	}
 
 	// Test shopping-card-container
-	eventListener("shopping-card", "id", "click", openCard);
+	// eventListener("shopping-card", "id", "click", openCard);
 	function openCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.add("shopping-card-active");
 	}
-	eventListener("card-close", "id", "click", closeCard);
+	// eventListener("card-close", "id", "click", closeCard);
 	function closeCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.remove("shopping-card-active");
@@ -333,6 +335,7 @@ window.onload = () => {
 	// In card counter
 	function inCardCount() {
 		let pTag = document.getElementById("incard-product-number");
+		console.log(pTag);
 		if (localStorage.getItem("addToCardList")) {
 			let cardCounts = jsonParse("addToCardList").length;
 			pTag.innerHTML = ` (${cardCounts})`;
@@ -416,6 +419,7 @@ window.onload = () => {
 		let priceContainer = document.getElementById("card-total-price");
 		if (addToCardList != null && addToCardList != "undefined") {
 			let quantityPrice = addToCardList.map(function (el) {
+				let productsArray = jsonParse("productsLocal");
 				for (let item of productsArray) {
 					if (item.id == el.id) {
 						return el.quantity * priceCalculator(item.price.old, item.price.discount);
@@ -436,6 +440,7 @@ window.onload = () => {
 			return el.id == itemID;
 		});
 		if (price == null) {
+			let productsArray = jsonParse("productsLocal");
 			let filteredPrice = productsArray.filter(function (el) {
 				return el.id == itemID;
 			});
@@ -451,6 +456,7 @@ window.onload = () => {
 			return el.id == itemID;
 		});
 		if (objectName == "brandID") {
+			let brandsArray = jsonParse("brandsLocal");
 			for (let item of brandsArray) {
 				if (productName[0].brandID == item.id) {
 					return item.name;
