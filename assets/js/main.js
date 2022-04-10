@@ -625,6 +625,13 @@ window.onload = () => {
     });
     let resetBtn = document.getElementById("reset-filter");
     resetBtn.addEventListener("click", resetFilters);
+  } else if (url == "/index.html") {
+    topDiscountProducts(productsArray);
   }
-
+  function topDiscountProducts(productsArray) {
+    let filteredDiscount = productsArray.filter(function (el) {
+      return el.price.discount >= 50;
+    });
+    showProducts(filteredDiscount);
+  }
 };

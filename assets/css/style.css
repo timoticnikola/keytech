@@ -67,7 +67,7 @@ nav .wrapper {
 }
 header {
   position: relative;
-  height: 5000px;
+  min-height: 100vh;
 }
 #side-filter {
   position: absolute;
