@@ -1,8 +1,8 @@
 window.onload = () => {
 	// ! FIX NAVLINKS LOCAL - AFTER DELETE LOCALSTORAGE - NOT WORKING
 	const navLinksArray = fetchData("navLinks", createNavBar);
-	const categoriesArray = fetchData("categories");
-	const brandsArray = fetchData("brands");
+	const categoriesArray = fetchData("categories", showFiltersCategory);
+	const brandsArray = fetchData("brands", showFiltersBrand);
 	const socialLinksArray = fetchData("socialLinks");
 	const productsArray = fetchData("products", showProducts);
 
@@ -155,6 +155,13 @@ window.onload = () => {
 		showProducts(productsArray);
 	}
 	// Make side filters
+	function showFiltersBrand(data) {
+		showProductsFilter("Brands", "brands-filter", data, "brands-filter-item");
+	}
+	function showFiltersCategory(data) {
+		showProductsFilter("Category", "category-filter", data, "category-filter-item");
+	}
+
 	function showProductsFilter(filterName, containerName, arrayName, className) {
 		let html = "";
 		html += `<p>${filterName}</p>
@@ -335,7 +342,6 @@ window.onload = () => {
 	// In card counter
 	function inCardCount() {
 		let pTag = document.getElementById("incard-product-number");
-		console.log(pTag);
 		if (localStorage.getItem("addToCardList")) {
 			let cardCounts = jsonParse("addToCardList").length;
 			pTag.innerHTML = ` (${cardCounts})`;
@@ -409,7 +415,7 @@ window.onload = () => {
 			container.appendChild(pTag);
 		}
 		deleteProducts();
-		inCardCount();
+		// inCardCount();
 		classGe();
 	}
 
@@ -557,9 +563,11 @@ window.onload = () => {
 
 	const url = window.location.pathname;
 	if (url == "/store.html") {
-		showProducts(productsArray);
-		showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
-		showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
+		// showProducts(productsArray);
+		fetchData("products", showProducts);
+		// showProductsFilter("Category", "category-filter", categoriesArray, "category-filter-item");
+		// showProductsFilter("Brands", "brands-filter", brandsArray, "brands-filter-item");
+
 		showReviews();
 		var sortingPlaceholder = document.getElementById("sort-product-placeholder");
 		sortingPlaceholder.addEventListener("change", function () {
@@ -615,9 +623,10 @@ window.onload = () => {
 		let resetBtn = document.getElementById("reset-filter");
 		resetBtn.addEventListener("click", resetFilters);
 	} else if (url == "/index.html") {
-		topDiscountProducts(productsArray);
+		topDiscountProducts();
 	}
-	function topDiscountProducts(productsArray) {
+	function topDiscountProducts() {
+		let productsArray = jsonParse("productsLocal");
 		let filteredDiscount = productsArray.filter(function (el) {
 			return el.price.discount >= 50;
 		});
