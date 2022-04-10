@@ -267,6 +267,7 @@ window.onload = () => {
 				quantity: 1,
 			};
 			localStorage.setItem("addToCardList", JSON.stringify(jsonTe));
+			cardMessages("Product added to card!");
 		}
 		inCardCount();
 		inCardProductsShow();
