@@ -1,34 +1,87 @@
 [
-  {
-    "id": 0,
-    "name": "Logitech Craft",
-    "image": {
-      "src": "assets/img/logitech-craft.png",
-      "alt": "logitech-craft-keyboard"
-    },
-    "categoryID": 1,
-    "brandID": 1,
-    "price": {
-      "old": 200,
-      "discount": 60
-    },
-    "descript": "This keyboard have: ",
-    "score": 4.8
-  },
-  {
-    "id": 1,
-    "name": "MX Keys",
-    "image": {
-      "src": "assets/img/logitech-mx-keys.png",
-      "alt": "logitech-mx-keys"
-    },
-    "categoryID": 1,
-    "brandID": 1,
-    "price": {
-      "old": 119.9,
-      "discount": 0
-    },
-    "descript": "This keyboard have: ",
-    "score": 4.7
-  }
+	{
+		"id": 0,
+		"name": "Logitech Craft",
+		"image": {
+			"src": "assets/img/logitech-craft.png",
+			"alt": "logitech craft keyboard"
+		},
+		"brandID": 0,
+		"categoryID": 0,
+		"connectionTypeID": 1,
+		"price": {
+			"old": 200,
+			"discount": 15
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.8
+	},
+	{
+		"id": 1,
+		"name": "MX Keys",
+		"image": {
+			"src": "assets/img/logitech-mx-keys.png",
+			"alt": "logitech mx keys keyboard"
+		},
+		"brandID": 0,
+		"categoryID": 0,
+		"connectionTypeID": 1,
+		"price": {
+			"old": 119.9,
+			"discount": 10
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.7
+	},
+	{
+		"id": 2,
+		"name": "K845 Mechanical Illuminated",
+		"image": {
+			"src": "assets/img/k845-mechanical-illuminated.png",
+			"alt": "k845 mechanical illuminated keyboard"
+		},
+		"brandID": 0,
+		"categoryID": 1,
+		"connectionTypeID": 0,
+		"price": {
+			"old": 59.9,
+			"discount": 0
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.3
+	},
+	{
+		"id": 3,
+		"name": "Q60 QMK",
+		"image": {
+			"src": "assets/img/Keychron-Q60-QMK.png",
+			"alt": "Keychron Q60 QMK keyboard"
+		},
+		"brandID": 1,
+		"categoryID": 1,
+		"connectionTypeID": 1,
+		"price": {
+			"old": 219,
+			"discount": 0
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.5
+	},
+	{
+		"id": 4,
+		"name": "Keychron K14",
+		"image": {
+			"src": "assets/img/keychron-K14.png",
+			"alt": "Keychron Q60 QMK keyboard"
+		},
+		"brandID": 1,
+		"categoryID": 1,
+		"connectionTypeID": 1,
+		"price": {
+			"old": 59,
+			"discount": 0
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.9
+	}
 ]

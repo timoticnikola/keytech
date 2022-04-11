@@ -1,14 +1,14 @@
 [
-  {
-    "id": 1,
-    "name": "Membranska"
-  },
-  {
-    "id": 2,
-    "name": "Mehanicka"
-  },
-  {
-    "id": 3,
-    "name": "Neka treca"
-  }
+	{
+		"id": 0,
+		"name": "Membrane"
+	},
+	{
+		"id": 1,
+		"name": "Mechanical"
+	},
+	{
+		"id": 2,
+		"name": "Optical"
+	}
 ]

@@ -3,6 +3,7 @@ window.onload = () => {
 	const navLinksArray = fetchData("navLinks", createNavBar);
 	const categoriesArray = fetchData("categories");
 	const brandsArray = fetchData("brands");
+	const connectionArray = fetchData("connectionTypes");
 	const socialLinksArray = fetchData("socialLinks");
 	const productsArray = fetchData("products", showProducts);
 
@@ -97,9 +98,28 @@ window.onload = () => {
 		return productsArray;
 	}
 
+	function connectionTypeFilter(productsArray) {
+		let connectionTypes = [];
+		let connectionTypeElement = document.querySelectorAll(".connection-type-filter-item:checked");
+		for (let element of connectionTypeElement) {
+			connectionTypes.push(parseInt(element.value));
+		}
+		if (connectionTypes.length != 0) {
+			return productsArray.filter(function (el) {
+				for (let item of connectionTypes) {
+					if (el.connectionTypeID == item) {
+						return el;
+					}
+				}
+			});
+		}
+		return productsArray;
+	}
+
 	function showProducts(productsArray) {
 		productsArray = brandsFilter(productsArray);
 		productsArray = categoryFilter(productsArray);
+		productsArray = connectionTypeFilter(productsArray);
 		productsArray = reviewsFilter(productsArray);
 		let html = "";
 		let container = document.getElementById("products");
@@ -166,6 +186,9 @@ window.onload = () => {
 	}
 	function showFiltersCategory(data) {
 		showProductsFilter("Category", "category-filter", data, "category-filter-item");
+	}
+	function showFiltersConnectionType(data) {
+		showProductsFilter("Connection", "connection-type-filter", data, "connection-type-filter-item");
 	}
 
 	function showProductsFilter(filterName, containerName, arrayName, className) {
@@ -553,8 +576,10 @@ window.onload = () => {
 	function resetFilters() {
 		let brandsFilters = document.querySelectorAll(".brands-filter-item");
 		let categoriesFilters = document.querySelectorAll(".category-filter-item");
+		let connectionTypesFilters = document.querySelectorAll(".connection-type-filter-item");
 		resetCheckbox(brandsFilters);
 		resetCheckbox(categoriesFilters);
+		resetCheckbox(connectionTypesFilters);
 		let reviewsFilter = document.getElementById("reviews-range-sllider");
 		reviewsFilter.value = 1;
 		let productsArray = jsonParse("productsLocal");
@@ -573,6 +598,7 @@ window.onload = () => {
 		fetchData("products", showProducts);
 		fetchData("brands", showFiltersBrand);
 		fetchData("categories", showFiltersCategory);
+		fetchData("connectionTypes", showFiltersConnectionType);
 		showReviews();
 		var sortingPlaceholder = document.getElementById("sort-product-placeholder");
 		sortingPlaceholder.addEventListener("change", function () {
