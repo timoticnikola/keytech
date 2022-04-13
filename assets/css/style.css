@@ -333,6 +333,53 @@ footer .wrapper #footer-down {
 	background-color: red;
 }
 
+/* Slideshow */
+.slideshow-container {
+	/* background-color: rebeccapurple; */
+	max-height: 300px;
+	position: relative;
+}
+
+.slide {
+	display: none;
+	/* padding: 80px; */
+	height: 300px;
+	text-align: center;
+	transition: all;
+}
+.slide img {
+	/* object-fit: cover; */
+	/* height: 100%; */
+	/* width: 100%; */
+	display: block;
+	margin: 0 auto;
+	background-position: center;
+	/* background-color: red; */
+}
+.prev,
+.next {
+	position: absolute;
+	background: var(--move-bg);
+	padding: 10px;
+	top: 43%;
+	font-size: 24px;
+	margin-top: -10px;
+	color: #eee;
+	border-radius: 5px;
+	user-select: none;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.prev {
+	left: 5px;
+}
+.next {
+	right: 5px;
+}
+
+/* Animations */
+
 @keyframes addToCardMessageAnimation {
 	0% {
 		right: -100px;

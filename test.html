@@ -1,12 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script src="test.js"></script>
-  </body>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			:root {
+				font-family: sans-serif;
+				font-size: 16px;
+
+				--background-c: #eee;
+				--move-bg: #555;
+				--move-h: #222;
+				--pill-bg: #ddd;
+				--pill-h: #bbb;
+				--pill-a: #555;
+				--pill-border: transparent;
+				--bar-bg: #ccc;
+				--quote-c: #333;
+				--author-c: #9969a5;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			q,
+			p {
+				font-style: italic;
+				quotes: "' " " '";
+			}
+			q {
+				color: var(--quote-c);
+			}
+			p {
+				margin-block-start: 5px;
+			}
+
+			.signature {
+				color: var(--author-c);
+			}
+
+			.slideshow-container {
+				position: relative;
+				/* height: 225px; */
+				max-height: 100px;
+			}
+
+			.slide {
+				display: none;
+				padding: 80px;
+				height: 100%;
+				/* background-color: green; */
+				text-align: center;
+				background: var(--background-c);
+				transition: all;
+			}
+			.slide img {
+				object-fit: cover;
+				height: 100%;
+				width: 100%;
+				/* background-color: red; */
+			}
+
+			.prev,
+			.next {
+				position: absolute;
+				background: var(--move-bg);
+				padding: 10px;
+				top: 50%;
+				font-size: 24px;
+				margin-top: -10px;
+				color: #eee;
+				border-radius: 5px;
+				user-select: none;
+				cursor: pointer;
+				transition: all 0.2s;
+			}
+
+			.prev {
+				left: 5px;
+			}
+			.next {
+				right: 5px;
+			}
+
+			.prev:hover,
+			.next:hover {
+				background: var(--move-h);
+			}
+
+			.pill-container {
+				position: relative;
+				padding-bottom: 3px;
+				text-align: center;
+				background: var(--background-c);
+				user-select: none;
+			}
+
+			.pill {
+				margin: 3px;
+				width: 20px;
+				height: 20px;
+				background: var(--pill-bg);
+				display: inline-block;
+				border: 1px solid var(--pill-border);
+				border-radius: 5px;
+				transition: all 0.2s;
+				cursor: pointer;
+			}
+
+			.pill:hover {
+				background: var(--pill-h);
+			}
+
+			.active,
+			.active:hover {
+				background: var(--pill-a);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="slideshow-container">
+			<div class="slide">
+				<img src="assets/img/k845-mechanical-illuminated.png" alt="" />
+			</div>
+			<div class="slide">
+				<img src="assets/img/keychron-K14.png" alt="" />
+			</div>
+			<div class="slide">
+				<img src="assets/img/Keychron-Q60-QMK.png" alt="" />
+			</div>
+			<div class="slide">
+				<img src="assets/img/logitech-mx-keys.png" alt="" />
+			</div>
+
+			<a id="neg" class="prev">&#10094;</a>
+			<a id="pos" class="next">&#10095;</a>
+		</div>
+
+		<script src="test.js"></script>
+	</body>
 </html>
