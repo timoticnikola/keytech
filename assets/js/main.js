@@ -739,9 +739,11 @@ window.onload = () => {
 		aboutMeLink.addEventListener("click", () => {
 			console.log(1);
 			let bodyEl = document.getElementsByTagName("body");
+			let header = document.getElementsByTagName("header");
 			let aboutMeContainer = document.querySelector("#about-me-container");
 			console.log(aboutMeContainer);
-			bodyEl[0].innerHTML += `<section id="about-me-container">
+			// bodyEl[0].innerHTML +=
+			header[0].innerHTML += `<section id="about-me-container">
 				<div id="about-me">
 					<div id="about-me-left">
 						<img src="assets/img/nikola-timotic.png" alt="profile-img" />
@@ -797,16 +799,18 @@ window.onload = () => {
 					</div>
 				</div>
 			</section>`;
-
+			// appendChild;
 			console.log(bodyEl[0]);
+			console.log(header[0]);
 			// About me
 			let aboutMeExit = document.getElementById("about-me-close");
 			aboutMeExit.addEventListener("click", removeAboutMe);
 			let aboutMeModalRemoved = true;
 			function removeAboutMe() {
-				document.getElementById("about-me-container").style.display = "none";
+				header[0].removeChild(header[0].lastChild);
+				// document.getElementById("about-me-container").style.display = "none";
 				aboutMeModalRemoved = true;
-				clearInterval(quoteGeneratorInterval);
+				// clearInterval(quoteGeneratorInterval);
 			}
 			var aboutMeModal = document.querySelectorAll(".about-me-link");
 			aboutMeModal.forEach((item) =>
