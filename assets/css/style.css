@@ -612,3 +612,11 @@ footer .wrapper #footer-down {
 		opacity: 0;
 	}
 }
+@keyframes fade {
+	20% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+}
