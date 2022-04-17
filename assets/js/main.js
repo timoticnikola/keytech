@@ -735,13 +735,10 @@ window.onload = () => {
 
 	function aboutMePage() {
 		let aboutMeLink = document.querySelector(`[href="#about-me.html"]`);
-		// console.log(aboutMeLink);
 		aboutMeLink.addEventListener("click", () => {
 			let bodyEl = document.getElementsByTagName("body");
 			let header = document.getElementsByTagName("header");
 			let aboutMeContainer = document.querySelector("#about-me-container");
-			console.log(aboutMeContainer);
-
 			if (aboutMeContainer == null) {
 				header[0].innerHTML += `<section id="about-me-container">
 					<div id="about-me">
@@ -801,11 +798,7 @@ window.onload = () => {
 				</section>`;
 				quoteGeneratorInterval = setInterval(quoteGenerator, 2000);
 				aboutMeModalRemoved = false;
-			} else {
-				console.log("vec");
 			}
-			console.log(jsonParse("quotesLocal"));
-			let test = document.getElementById("quote-box");
 			// About me
 			let aboutMeExit = document.getElementById("about-me-close");
 			aboutMeExit.addEventListener("click", () => {
@@ -826,7 +819,6 @@ window.onload = () => {
 			while (random1 == random2) {
 				random1 = Math.floor(Math.random() * quoteList.length);
 			}
-			console.log(quoteList[random1]);
 			document.getElementById("quote").innerHTML = quoteList[random1].quote;
 			document.getElementById("author").innerHTML = quoteList[random1].author;
 			random2 = random1;

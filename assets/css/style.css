@@ -379,6 +379,31 @@ footer .wrapper #footer-down {
 	right: 5px;
 }
 
+/* Checkout */
+#checkout-container {
+	display: flex;
+}
+#checkout-left,
+#checkout-right {
+	width: 50%;
+}
+#checkout-left {
+	background-color: rgb(170, 170, 170);
+}
+#checkout-right {
+	background-color: gray;
+}
+/* #checkout-left label {
+	display: block;
+} */
+
+/* #checkout-name {
+	display: flex;
+	justify-content: space-between;
+} */
+#checkout-name label {
+	display: block;
+}
 /* About me */
 #about-me-container {
 	position: absolute;

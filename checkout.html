@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+		<title>KeyTech | checkout</title>
+	</head>
+	<body>
+		<nav>
+			<div id="nav-warpper" class="wrapper">
+				<img src="#" id="logo" alt="logo" />
+			</div>
+		</nav>
+		<header>
+			<div class="wrapper">
+				<h1>Checkout</h1>
+				<div id="checkout-container">
+					<div id="checkout-left">
+						<form>
+							<div id="form-top">
+								<div class="label-container">
+									<label for="fullName">Full Name:</label>
+									<input type="text" name="fullName" id="fullName" placeholder="eg. John Smith" />
+									<p></p>
+								</div>
+								<div class="label-container">
+									<label for="email">Email:</label>
+									<input type="text" name="email" id="email" placeholder="eg. johnsmith@mail.com" />
+									<p></p>
+								</div>
+							</div>
+							<div id="form-middle">
+								<div class="label-container">
+									<label for="message">Message:</label>
+									<textarea name="message" id="message" placeholder="Do you have some aditional questions?"></textarea>
+									<p></p>
+								</div>
+							</div>
+							<div id="form-bottom">
+								<input type="checkbox" name="newslist" id="newslist" />
+								<label for="newslist">Subscribe to our news list?</label>
+								<div class="button-container">
+									<input class="btn-primary" type="button" value="Send" id="contact-submit" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div id="checkout-right">
+						<div id="checkout-product-list">
+							<div class="checkout-item">
+								<p>1</p>
+							</div>
+							<div class="checkout-item">
+								<p>1</p>
+							</div>
+							<div class="checkout-item">
+								<p>1</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="shopping-card-container">
+			<div id="card-close"></div>
+			<p id="card-heading">Card</p>
+			<div id="card-products"></div>
+			<div>
+				<p id="card-total-price"></p>
+			</div>
+			<div id="card-btns">
+				<a href="checkout.html" class="btn-primary">Checkout</a>
+				<input type="button" id="delete-all-products" value="Clear" />
+			</div>
+		</section>
+		<footer id="footer"></footer>
+		<script src="https://kit.fontawesome.com/92e251ce56.js" crossorigin="anonymous"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
