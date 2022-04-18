@@ -397,32 +397,26 @@ footer .wrapper {
 
 /* Slideshow */
 .slideshow-container {
-	/* background-color: rebeccapurple; */
 	height: 300px;
 	position: relative;
 }
 
 .slide {
 	display: none;
-	/* padding: 80px; */
 	height: 100px;
 	text-align: center;
 	transition: all;
 }
 .slide img {
-	/* object-fit: cover; */
-	/* height: 100%; */
-	/* width: 100%; */
 	display: block;
 	margin: 0 auto;
 	background-position: center;
 	object-fit: contain;
-	/* background-color: red; */
 }
 .prev,
 .next {
 	position: absolute;
-	background: var(--move-bg);
+	background: rgb(185, 185, 185);
 	padding: 10px;
 	top: 43%;
 	font-size: 24px;
