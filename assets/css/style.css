@@ -79,19 +79,27 @@ header {
 	height: 100vh;
 }
 #side-filter {
-	/* position: absolute; */
-	/* top: -10px; */
-	/* height: 100%; */
 	width: 200px;
 	padding-top: 20px;
-	/* padding-top: 150px; */
 	padding-left: 10px;
-	/* min-width: 10vw; */
 	background-color: rgb(189, 189, 189);
 }
 #side-filter p {
 	font-weight: 600;
 	pointer-events: none;
+	margin: 5px 0;
+}
+#sort-product-placeholder {
+	padding: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+#reset-filter {
+	padding: 5px;
+	background-color: rgb(114, 114, 114);
+	border: none;
+	border-radius: 5px;
+	color: #f2f2f2;
 }
 footer {
 	background-color: gray;
@@ -166,7 +174,7 @@ footer .wrapper {
 	flex-direction: column;
 	position: relative;
 	height: 450px;
-	width: 20vw;
+	width: 250px;
 	background-color: rgb(255, 216, 216);
 	padding: 20px;
 	border-radius: 10px;

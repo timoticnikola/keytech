@@ -1,8 +1,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-  <loc>https://timoticnikola.github.io/keytech/index.html</loc>
-  <lastmod>2022-04-15T08:00:00+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.90</priority>
+    <loc>https://timoticnikola.github.io/keytech/index.html</loc>
+    <lastmod>2022-04-15T08:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://timoticnikola.github.io/keytech/store.html</loc>
+    <lastmod>2022-04-15T08:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://timoticnikola.github.io/keytech/checkout.html</loc>
+    <lastmod>2022-04-15T08:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://timoticnikola.github.io/keytech/about-us.html</loc>
+    <lastmod>2022-04-15T08:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
   </url>
 </urlset>
