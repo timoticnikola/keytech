@@ -22,11 +22,6 @@
 	{
 		"id": 4,
 		"name": "Contact us",
-		"link": "contact-us.html"
-	},
-	{
-		"id": 5,
-		"name": "Contact us",
 		"link": "contact-us.html",
 		"icon": "fa-solid fa-basket-shopping"
 	}
