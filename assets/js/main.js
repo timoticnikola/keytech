@@ -380,114 +380,63 @@ window.onload = () => {
 		}
 	}
 	// InCardProducts
-	function inCardProductsShow(productContainer = "card-products") {
+	function inCardProductsShow() {
 		let addToCardList = jsonParse("addToCardList");
-		let container = document.getElementById(productContainer);
+		let container = document.getElementById("card-products");
 		let checkoutContainer = document.getElementById("checkout-product-list");
 
 		container.innerHTML = "";
 		if (addToCardList != null) {
 			for (let item of addToCardList) {
-				if (productContainer == "card-products") {
-					let cardProdict = document.createElement("div");
-					cardProdict.setAttribute("class", "card-product");
-					let imgContainer = document.createElement("img");
-					imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
-					imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
-					cardProdict.appendChild(imgContainer);
-					let cardProduictsRight = document.createElement("div");
-					cardProduictsRight.setAttribute("class", "card-product-right");
-					cardProdict.appendChild(cardProduictsRight);
-					let pProductName = document.createElement("p");
-					let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
-					pProductName.appendChild(pProductNameContent);
-					cardProduictsRight.appendChild(pProductName);
-					let pBrandName = document.createElement("p");
-					let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
-					pBrandName.appendChild(pPBrandNameContent);
-					cardProduictsRight.appendChild(pBrandName);
-					let pProductPrice = document.createElement("p");
-					let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
-					pProductPrice.appendChild(pProductPriceContent);
-					cardProduictsRight.appendChild(pProductPrice);
-					let cardProductTools = document.createElement("div");
-					cardProductTools.setAttribute("class", "card-product-tools");
-					cardProduictsRight.appendChild(cardProductTools);
-					let cardProductQuantity = document.createElement("div");
-					cardProductQuantity.setAttribute("class", "card-product-quantity");
-					let inputValueMinus = document.createElement("input");
-					inputValueMinus.setAttribute("type", "button");
-					inputValueMinus.setAttribute("class", "quantityRegul");
-					inputValueMinus.setAttribute("data-id", `${item.id}`);
-					inputValueMinus.setAttribute("value", "-");
-					cardProductQuantity.appendChild(inputValueMinus);
-					let itemQuantity = document.createElement("p");
-					let itemQuantityContent = document.createTextNode(`${item.quantity}`);
-					itemQuantity.appendChild(itemQuantityContent);
-					cardProductQuantity.appendChild(itemQuantity);
-					let inputValuePlus = document.createElement("input");
-					inputValuePlus.setAttribute("type", "button");
-					inputValuePlus.setAttribute("class", "quantityRegul");
-					inputValuePlus.setAttribute("data-id", `${item.id}`);
-					inputValuePlus.setAttribute("value", "+");
-					cardProductQuantity.appendChild(inputValuePlus);
-					cardProductTools.appendChild(cardProductQuantity);
-					let iBin = document.createElement("i");
-					iBin.setAttribute("class", "fa fa-trash");
-					iBin.setAttribute("data-id", `${item.id}`);
-					iBin.setAttribute("aria-hidden", "true");
-					cardProductTools.appendChild(iBin);
-					container.appendChild(cardProdict);
-				} else {
-					let cardProdict = document.createElement("div");
-					cardProdict.setAttribute("class", "card-product");
-					let imgContainer = document.createElement("img");
-					imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
-					imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
-					cardProdict.appendChild(imgContainer);
-					let cardProduictsRight = document.createElement("div");
-					cardProduictsRight.setAttribute("class", "card-product-right");
-					cardProdict.appendChild(cardProduictsRight);
-					let pProductName = document.createElement("p");
-					let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
-					pProductName.appendChild(pProductNameContent);
-					cardProduictsRight.appendChild(pProductName);
-					let pBrandName = document.createElement("p");
-					let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
-					pBrandName.appendChild(pPBrandNameContent);
-					cardProduictsRight.appendChild(pBrandName);
-					let pProductPrice = document.createElement("p");
-					let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
-					pProductPrice.appendChild(pProductPriceContent);
-					cardProduictsRight.appendChild(pProductPrice);
-					container.appendChild(cardProdict);
-				}
-				// if (checkoutContainer != null) {
-				// 	document.getElementById("checkout-product-list");
-				// 	let cardProdict = document.createElement("div");
-				// 	cardProdict.setAttribute("class", "card-product");
-				// 	let imgContainer = document.createElement("img");
-				// 	imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
-				// 	imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
-				// 	cardProdict.appendChild(imgContainer);
-				// 	let cardProduictsRight = document.createElement("div");
-				// 	cardProduictsRight.setAttribute("class", "card-product-right");
-				// 	cardProdict.appendChild(cardProduictsRight);
-				// 	let pProductName = document.createElement("p");
-				// 	let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
-				// 	pProductName.appendChild(pProductNameContent);
-				// 	cardProduictsRight.appendChild(pProductName);
-				// 	let pBrandName = document.createElement("p");
-				// 	let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
-				// 	pBrandName.appendChild(pPBrandNameContent);
-				// 	cardProduictsRight.appendChild(pBrandName);
-				// 	let pProductPrice = document.createElement("p");
-				// 	let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
-				// 	pProductPrice.appendChild(pProductPriceContent);
-				// 	cardProduictsRight.appendChild(pProductPrice);
-
-				// 	container.appendChild(cardProdict);
-				// }
+				let cardProdict = document.createElement("div");
+				cardProdict.setAttribute("class", "card-product");
+				let imgContainer = document.createElement("img");
+				imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
+				imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
+				cardProdict.appendChild(imgContainer);
+				let cardProduictsRight = document.createElement("div");
+				cardProduictsRight.setAttribute("class", "card-product-right");
+				cardProdict.appendChild(cardProduictsRight);
+				let pProductName = document.createElement("p");
+				let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
+				pProductName.appendChild(pProductNameContent);
+				cardProduictsRight.appendChild(pProductName);
+				let pBrandName = document.createElement("p");
+				let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
+				pBrandName.appendChild(pPBrandNameContent);
+				cardProduictsRight.appendChild(pBrandName);
+				let pProductPrice = document.createElement("p");
+				let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
+				pProductPrice.appendChild(pProductPriceContent);
+				cardProduictsRight.appendChild(pProductPrice);
+				let cardProductTools = document.createElement("div");
+				cardProductTools.setAttribute("class", "card-product-tools");
+				cardProduictsRight.appendChild(cardProductTools);
+				let cardProductQuantity = document.createElement("div");
+				cardProductQuantity.setAttribute("class", "card-product-quantity");
+				let inputValueMinus = document.createElement("input");
+				inputValueMinus.setAttribute("type", "button");
+				inputValueMinus.setAttribute("class", "quantityRegul");
+				inputValueMinus.setAttribute("data-id", `${item.id}`);
+				inputValueMinus.setAttribute("value", "-");
+				cardProductQuantity.appendChild(inputValueMinus);
+				let itemQuantity = document.createElement("p");
+				let itemQuantityContent = document.createTextNode(`${item.quantity}`);
+				itemQuantity.appendChild(itemQuantityContent);
+				cardProductQuantity.appendChild(itemQuantity);
+				let inputValuePlus = document.createElement("input");
+				inputValuePlus.setAttribute("type", "button");
+				inputValuePlus.setAttribute("class", "quantityRegul");
+				inputValuePlus.setAttribute("data-id", `${item.id}`);
+				inputValuePlus.setAttribute("value", "+");
+				cardProductQuantity.appendChild(inputValuePlus);
+				cardProductTools.appendChild(cardProductQuantity);
+				let iBin = document.createElement("i");
+				iBin.setAttribute("class", "fa fa-trash");
+				iBin.setAttribute("data-id", `${item.id}`);
+				iBin.setAttribute("aria-hidden", "true");
+				cardProductTools.appendChild(iBin);
+				container.appendChild(cardProdict);
 			}
 		} else {
 			// cardMessages("Deleted all products from card");
@@ -496,6 +445,36 @@ window.onload = () => {
 			pTag.appendChild(pTagContent);
 			pTag.setAttribute("id", "empty-card");
 			container.appendChild(pTag);
+		}
+
+		if (addToCardList != null && checkoutContainer != null) {
+			container = document.getElementById("checkout-product-list");
+			container.innerHTML = "";
+			for (let item of addToCardList) {
+				console.log(container);
+				let cardProdict = document.createElement("div");
+				cardProdict.setAttribute("class", "card-product");
+				let imgContainer = document.createElement("img");
+				imgContainer.setAttribute("src", `${showInCardProductData(item.id, "image", "src")}`);
+				imgContainer.setAttribute("alt", `${showInCardProductData(item.id, "image", "alt")}`);
+				cardProdict.appendChild(imgContainer);
+				let cardProduictsRight = document.createElement("div");
+				cardProduictsRight.setAttribute("class", "card-product-right");
+				cardProdict.appendChild(cardProduictsRight);
+				let pProductName = document.createElement("p");
+				let pProductNameContent = document.createTextNode(`${showInCardProductData(item.id, "name")}`);
+				pProductName.appendChild(pProductNameContent);
+				cardProduictsRight.appendChild(pProductName);
+				let pBrandName = document.createElement("p");
+				let pPBrandNameContent = document.createTextNode(`${showInCardProductData(item.id, "brandID")}`);
+				pBrandName.appendChild(pPBrandNameContent);
+				cardProduictsRight.appendChild(pBrandName);
+				let pProductPrice = document.createElement("p");
+				let pProductPriceContent = document.createTextNode(`${showInCardProductData(item.id, "price", "new")}`);
+				pProductPrice.appendChild(pProductPriceContent);
+				cardProduictsRight.appendChild(pProductPrice);
+				container.appendChild(cardProdict);
+			}
 		}
 		deleteProducts();
 		// inCardCount();
@@ -526,7 +505,6 @@ window.onload = () => {
 		// 	priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
 		// }
 		if (checkoutContainer != null && addToCardList != "undefined") {
-			console.log("radi");
 			checkoutContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
 		}
 		//  else {
@@ -752,7 +730,7 @@ window.onload = () => {
 		});
 		ShowSlide(slideIndex);
 	} else if (url == "/checkout.html") {
-		inCardProductsShow("checkout-product-list");
+		inCardProductsShow();
 	}
 
 	// Slideshow

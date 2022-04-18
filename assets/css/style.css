@@ -127,7 +127,7 @@ footer .wrapper #footer-down {
 	border-radius: 5px;
 	background-color: #ffffff;
 	height: 200px;
-	object-fit: scale-down;
+	object-fit: contain;
 }
 .product .product-category-name {
 	color: gray;
@@ -240,6 +240,8 @@ footer .wrapper #footer-down {
 }
 .card-product img {
 	height: 100px;
+	width: 100px;
+	object-fit: contain;
 	margin-right: 20px;
 	background-color: #ffffff;
 	border-radius: 5px;
@@ -355,6 +357,7 @@ footer .wrapper #footer-down {
 	display: block;
 	margin: 0 auto;
 	background-position: center;
+	object-fit: contain;
 	/* background-color: red; */
 }
 .prev,
@@ -392,6 +395,11 @@ footer .wrapper #footer-down {
 }
 #checkout-right {
 	background-color: gray;
+}
+
+#checkout-total {
+	font-weight: 800;
+	font-size: 1.4rem;
 }
 /* #checkout-left label {
 	display: block;
