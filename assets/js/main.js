@@ -1,12 +1,13 @@
 window.onload = () => {
 	// ! FIX NAVLINKS LOCAL - AFTER DELETE LOCALSTORAGE - NOT WORKING
 	const navLinksArray = fetchData("navLinks", createNavBar);
+	fetchData("navLinks", createFooterNavLinks);
 	const categoriesArray = fetchData("categories");
 	const brandsArray = fetchData("brands");
 	const connectionArray = fetchData("connectionTypes");
-	const socialLinksArray = fetchData("socialLinks");
+	const socialLinksArray = fetchData("socialLinks", createFooterSocialLinks);
 	const quotesArray = fetchData("quotes");
-	const documentArray = fetchData("documentLinks");
+	const documentArray = fetchData("documentLinks", createFooterDocumentLinks);
 
 	function fetchData(fileName, callBack) {
 		fetch(`./assets/data/${fileName}.json`)
@@ -33,6 +34,41 @@ window.onload = () => {
 		eventListener("card-close", "id", "click", closeCard);
 		aboutMePage();
 		createFooter();
+	}
+	function createFooterNavLinks(data) {
+		let footerTop = document.getElementById("footer-top");
+		createUlLinks(data, footerTop, "divId", "pContent");
+	}
+	function createFooterSocialLinks(data) {
+		let footerTop = document.getElementById("footer-top");
+		createUlLinks(data, footerTop, "divId", "pContent");
+	}
+	function createFooterDocumentLinks(data) {
+		let footerTop = document.getElementById("footer-top");
+		createUlLinks(data, footerTop, "divId", "pContent");
+	}
+
+	function createUlLinks(dataArray, mainContainer, divId, pContent) {
+		// console.log(dataArray);
+		let divContainer = document.createElement("div");
+		divContainer.setAttribute("class", `${divId}`);
+		let pContaier = document.createElement("p");
+		let pContaierContent = document.createTextNode(`${pContent}`);
+		pContaier.appendChild(pContaierContent);
+		divContainer.appendChild(pContaier);
+		let containerUl = document.createElement("ul");
+		divContainer.appendChild(containerUl);
+		for (let link of dataArray) {
+			let navLinksLi = document.createElement("li");
+			let navLinksA = document.createElement("a");
+			let navLinksAContent = document.createTextNode(`${link.name}`);
+			navLinksA.setAttribute("href", `${link.link}`);
+
+			navLinksA.appendChild(navLinksAContent);
+			navLinksLi.appendChild(navLinksA);
+			containerUl.appendChild(navLinksLi);
+		}
+		mainContainer.append(divContainer);
 	}
 
 	function navLinkShop(ulID) {
@@ -247,15 +283,18 @@ window.onload = () => {
 		footerWrapper.setAttribute("class", "wrapper");
 		let footerTop = document.createElement("div");
 		let navLinksLocal = jsonParse("navLinksLocal");
-		let socialLinksLocal = jsonParse("socialLinksLocal");
-		let documentLinksLocal = jsonParse("documentLinksLocal");
-		console.log(navLinksLocal);
-		console.log(socialLinksLocal);
-		console.log(documentLinksLocal);
+		// let socialLinksLocal = jsonParse("socialLinksLocal");
+		// let documentLinksLocal = jsonParse("documentLinksLocal");
+		// console.log(navLinksLocal);
+		// console.log(socialLinksLocal);
+		// console.log(documentLinksLocal);
 		// Call function
-		createUlLinks(navLinksLocal, footerTop, "divId", "pContent");
-		createUlLinks(socialLinksLocal, footerTop, "divId", "pContent");
-		createUlLinks(documentLinksLocal, footerTop, "divId", "pContent");
+		// console.log(navLinksLocal);
+		// createUlLinks(navLinksLocal, footerTop, "divId", "pContent");
+
+		// createUlLinks(navLinksLocal, footerTop, "divId", "pContent");
+		// createUlLinks(socialLinksLocal, footerTop, "divId", "pContent");
+		// createUlLinks(documentLinksLocal, footerTop, "divId", "pContent");
 		//
 		footerTop.setAttribute("id", "footer-top");
 		let footerBottom = document.createElement("div");
@@ -269,28 +308,28 @@ window.onload = () => {
 		footerId.appendChild(footerWrapper);
 	}
 
-	function createUlLinks(dataArray, mainContainer, divId, pContent) {
-		// console.log(dataArray);
-		let divContainer = document.createElement("div");
-		divContainer.setAttribute("class", `${divId}`);
-		let pContaier = document.createElement("p");
-		let pContaierContent = document.createTextNode(`${pContent}`);
-		pContaier.appendChild(pContaierContent);
-		divContainer.appendChild(pContaier);
-		let containerUl = document.createElement("ul");
-		divContainer.appendChild(containerUl);
-		for (let link of dataArray) {
-			let navLinksLi = document.createElement("li");
-			let navLinksA = document.createElement("a");
-			let navLinksAContent = document.createTextNode(`${link.name}`);
-			navLinksA.setAttribute("href", `${link.link}`);
+	// function createUlLinks(dataArray, mainContainer, divId, pContent) {
+	// 	// console.log(dataArray);
+	// 	let divContainer = document.createElement("div");
+	// 	divContainer.setAttribute("class", `${divId}`);
+	// 	let pContaier = document.createElement("p");
+	// 	let pContaierContent = document.createTextNode(`${pContent}`);
+	// 	pContaier.appendChild(pContaierContent);
+	// 	divContainer.appendChild(pContaier);
+	// 	let containerUl = document.createElement("ul");
+	// 	divContainer.appendChild(containerUl);
+	// 	for (let link of dataArray) {
+	// 		let navLinksLi = document.createElement("li");
+	// 		let navLinksA = document.createElement("a");
+	// 		let navLinksAContent = document.createTextNode(`${link.name}`);
+	// 		navLinksA.setAttribute("href", `${link.link}`);
 
-			navLinksA.appendChild(navLinksAContent);
-			navLinksLi.appendChild(navLinksA);
-			containerUl.appendChild(navLinksLi);
-		}
-		mainContainer.append(divContainer);
-	}
+	// 		navLinksA.appendChild(navLinksAContent);
+	// 		navLinksLi.appendChild(navLinksA);
+	// 		containerUl.appendChild(navLinksLi);
+	// 	}
+	// 	mainContainer.append(divContainer);
+	// }
 
 	function eventListener(name, tagType, eventMethod, functionName) {
 		if (tagType == "id") {
