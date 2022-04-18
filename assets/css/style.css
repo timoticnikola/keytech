@@ -39,6 +39,9 @@ nav {
 	background-color: #f2f2f2;
 	z-index: 2;
 }
+nav ul li a {
+	font-size: 1.3rem;
+}
 
 header {
 	margin-top: 90px;
@@ -72,7 +75,7 @@ nav .wrapper {
 }
 header {
 	position: relative;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 }
 #store-container {
 	display: flex;
@@ -139,6 +142,7 @@ footer .wrapper {
 	font-weight: 600;
 	margin-bottom: 5px;
 	position: relative;
+	font-size: 1.4rem;
 }
 #footer-top > div > p::after {
 	position: absolute;
@@ -151,12 +155,16 @@ footer .wrapper {
 }
 #footer-top ul li a {
 	color: #f2f2f2;
+	font-size: 1.2rem;
+}
+#footerNav p {
+	margin-left: 25px;
 }
 #footerSocial p {
-	margin-left: -30px;
+	margin-left: -25px;
 }
 #footerDocument p {
-	margin-left: -70px;
+	margin-left: -75px;
 }
 #footer-bottom {
 	padding: 10px 0;
@@ -709,17 +717,31 @@ footer .wrapper {
 
 /* About us */
 #about-us {
-	height: 50vh;
+	min-height: 80vh;
+}
+#about-us h1 {
+	padding-top: 50px;
+	font-size: 3rem;
 }
 #about-us-container {
 	display: flex;
 	margin-top: 50px;
+	gap: 20px;
+}
+#about-us-container p {
+	font-size: 1.5rem;
+	line-height: 1.5;
 }
 #about-us-container img {
 	width: 40%;
 	border-radius: 10px;
 }
-
+#about-us-map iframe {
+	display: block;
+	height: 30vh;
+	width: 100%;
+	border: 0;
+}
 /* Response */
 @media only screen and (max-width: 769px) {
 	/* About me */
