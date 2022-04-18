@@ -73,13 +73,20 @@ header {
 	position: relative;
 	min-height: 100vh;
 }
+#store-container {
+	display: flex;
+	flex-direction: row-reverse;
+	height: 100vh;
+}
 #side-filter {
-	position: absolute;
-	top: -10px;
-	height: 100%;
-	padding-top: 150px;
+	/* position: absolute; */
+	/* top: -10px; */
+	/* height: 100%; */
+	width: 200px;
+	padding-top: 20px;
+	/* padding-top: 150px; */
 	padding-left: 10px;
-	min-width: 10vw;
+	/* min-width: 10vw; */
 	background-color: rgb(189, 189, 189);
 }
 #side-filter p {
@@ -152,12 +159,13 @@ footer .wrapper {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	gap: 50px;
+	width: 100%;
 }
 .product {
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	min-height: 200px;
+	height: 450px;
 	width: 20vw;
 	background-color: rgb(255, 216, 216);
 	padding: 20px;

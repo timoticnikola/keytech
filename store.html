@@ -13,28 +13,29 @@
 				<img src="#" id="logo" alt="logo" />
 			</div>
 		</nav>
-		<header>
-			<div class="wrapper">
-				<h1>Products</h1>
-				<div id="sort-products">
-					<select name="sortProduct" id="sort-product-placeholder">
-						<option value="0">Sort</option>
-						<option value="1">Price asc</option>
-						<option value="2">Price desc</option>
-						<option value="3">Name asc</option>
-						<option value="4">Name desc</option>
-						<option value="5">Reviews asc</option>
-						<option value="6">Reviews desc</option>
-					</select>
-				</div>
+		<header id="store">
+			<h1>Products</h1>
+
+			<div id="store-container">
 				<div id="products"></div>
-			</div>
-			<div id="side-filter">
-				<div id="brands-filter"></div>
-				<div id="category-filter"></div>
-				<div id="connection-type-filter"></div>
-				<div id="reviews-filter"></div>
-				<input type="button" id="reset-filter" value="resetFilter" />
+				<div id="side-filter">
+					<div id="sort-products">
+						<select name="sortProduct" id="sort-product-placeholder">
+							<option value="0">Sort</option>
+							<option value="1">Price asc</option>
+							<option value="2">Price desc</option>
+							<option value="3">Name asc</option>
+							<option value="4">Name desc</option>
+							<option value="5">Reviews asc</option>
+							<option value="6">Reviews desc</option>
+						</select>
+					</div>
+					<div id="brands-filter"></div>
+					<div id="category-filter"></div>
+					<div id="connection-type-filter"></div>
+					<div id="reviews-filter"></div>
+					<input type="button" id="reset-filter" value="resetFilter" />
+				</div>
 			</div>
 		</header>
 		<section class="shopping-card-container">
