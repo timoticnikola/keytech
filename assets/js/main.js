@@ -290,7 +290,7 @@ window.onload = () => {
 			navLinksLi.appendChild(navLinksA);
 			containerUl.appendChild(navLinksLi);
 		}
-		mainContainer.append(divContainer);
+		mainContainer.appendChild(divContainer);
 	}
 
 	function eventListener(name, tagType, eventMethod, functionName) {
