@@ -713,7 +713,7 @@ window.onload = () => {
 		});
 		let resetBtn = document.getElementById("reset-filter");
 		resetBtn.addEventListener("click", resetFilters);
-	} else if (url == "/index.html") {
+	} else if (url == "/index.html" || url == "/") {
 		fetchData("products", topDiscountProducts);
 		let slideIndex = 0;
 		let slideTimer;
