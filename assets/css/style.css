@@ -470,6 +470,26 @@ footer .wrapper {
 	min-height: 150px;
 	width: 50%;
 }
+.button-container .btn-primary {
+	height: 35px;
+	width: 100px;
+	display: block;
+	margin-top: 20px;
+}
+.btn-primary {
+	background-color: gray;
+	position: relative;
+	border: none;
+	z-index: 1;
+	cursor: pointer;
+	display: block;
+	border-bottom: #65a10e 2px solid;
+}
+.btn-primary:hover {
+	transition: 0.5s ease-in-out;
+	background-color: rgb(17, 148, 17);
+}
+
 #checkout-container {
 	margin-top: 50px;
 }
