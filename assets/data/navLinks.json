@@ -21,8 +21,8 @@
 	},
 	{
 		"id": 4,
-		"name": "Contact us",
-		"link": "contact-us.html",
+		"name": "Checkout",
+		"link": "checkout.html",
 		"icon": "fa-solid fa-basket-shopping"
 	}
 ]

@@ -91,27 +91,29 @@ footer .wrapper {
 	align-items: center;
 	flex-direction: column;
 }
-/* footer .wrapper #footer-up {
-}
-footer .wrapper #footer-down {
-} */
+
 #footer-top {
 	display: flex;
 	justify-content: space-between;
-	/* align-items: flex-start; */
+	align-items: center;
+	padding: 10px 0;
 }
 #footer-top > div {
 	width: 30vw;
-}
-/* #footer-navlinks ul {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
 }
-
-#footer-navlinks ul li a {
-	text-align: left;
-} */
+#footerSocial p {
+	margin-left: -30px;
+}
+#footerDocument p {
+	margin-left: -70px;
+}
+#footer-bottom {
+	padding: 10px 0;
+}
 
 /* Product */
 #products {

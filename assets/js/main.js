@@ -274,7 +274,7 @@ window.onload = () => {
 
 	function createUlLinks(dataArray, mainContainer, divId, pContent) {
 		let divContainer = document.createElement("div");
-		divContainer.setAttribute("class", `${divId}`);
+		divContainer.setAttribute("id", `${divId}`);
 		let pContaier = document.createElement("p");
 		let pContaierContent = document.createTextNode(`${pContent}`);
 		pContaier.appendChild(pContaierContent);
