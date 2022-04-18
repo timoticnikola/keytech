@@ -335,12 +335,10 @@ window.onload = () => {
 	}
 
 	// Test shopping-card-container
-	// eventListener("shopping-card", "id", "click", openCard);
 	function openCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.add("shopping-card-active");
 	}
-	// eventListener("card-close", "id", "click", closeCard);
 	function closeCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.remove("shopping-card-active");
@@ -469,7 +467,6 @@ window.onload = () => {
 				container.appendChild(cardProdict);
 			}
 		} else {
-			// cardMessages("Deleted all products from card");
 			let pTag = document.createElement("p");
 			let pTagContent = document.createTextNode("Card is empty.");
 			pTag.appendChild(pTagContent);
@@ -506,7 +503,6 @@ window.onload = () => {
 			}
 		}
 		deleteProducts();
-		// inCardCount();
 		classGe();
 	}
 
@@ -530,16 +526,9 @@ window.onload = () => {
 			}
 			priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
 		}
-		// else {
-		// 	priceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
-		// }
 		if (checkoutContainer != null && addToCardList != "undefined") {
 			checkoutContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
 		}
-		//  else {
-		// 	console.log("ne radi");
-		// 	checkoutContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
-		// }
 	}
 	function calculateItemPrice(itemID, price = null) {
 		let addToCardList = jsonParse("addToCardList");
