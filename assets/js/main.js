@@ -31,6 +31,7 @@ window.onload = () => {
 		eventListener("shopping-card", "id", "click", openCard);
 		eventListener("card-close", "id", "click", closeCard);
 		aboutMePage();
+		createFooter();
 	}
 
 	function navLinkShop(ulID) {
@@ -239,17 +240,30 @@ window.onload = () => {
 		});
 	}
 
-	function createFooter(data) {
+	function createFooter() {
 		let footerId = document.getElementById("footer");
 		let footerWrapper = document.createElement("div");
 		footerWrapper.setAttribute("class", "wrapper");
 		let footerTop = document.createElement("div");
 		let footerNavLinks = document.createElement("div");
 		footerNavLinks.setAttribute("id", "footer-navlinks");
+		let navLinksLocal = jsonParse("navLinksLocal");
+		let navLinksUl = document.createElement("ul");
 		let footerNavLinksP = document.createElement("p");
 		let footerNavLinksPContent = document.createTextNode("Navigation");
 		footerNavLinksP.appendChild(footerNavLinksPContent);
 		footerNavLinks.appendChild(footerNavLinksP);
+		for (let link of navLinksLocal) {
+			let navLinksLi = document.createElement("li");
+			let navLinksA = document.createElement("a");
+			let navLinksAContent = document.createTextNode(`${link.name}`);
+			navLinksA.setAttribute("href", `${link.link}`);
+
+			navLinksA.appendChild(navLinksAContent);
+			navLinksLi.appendChild(navLinksA);
+			navLinksUl.appendChild(navLinksLi);
+		}
+		footerNavLinks.appendChild(navLinksUl);
 		footerTop.appendChild(footerNavLinks);
 		footerTop.setAttribute("id", "footer-top");
 		let footerBottom = document.createElement("div");
@@ -261,8 +275,8 @@ window.onload = () => {
 		footerWrapper.appendChild(footerTop);
 		footerWrapper.appendChild(footerBottom);
 		footerId.appendChild(footerWrapper);
-		navLinks("footer-navlinks", data);
 	}
+
 	function eventListener(name, tagType, eventMethod, functionName) {
 		if (tagType == "id") {
 			let item = document.querySelector(`#${name}`);
@@ -451,7 +465,6 @@ window.onload = () => {
 			container = document.getElementById("checkout-product-list");
 			container.innerHTML = "";
 			for (let item of addToCardList) {
-				console.log(container);
 				let cardProdict = document.createElement("div");
 				cardProdict.setAttribute("class", "card-product");
 				let imgContainer = document.createElement("img");
