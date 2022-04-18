@@ -478,7 +478,6 @@ footer .wrapper {
 	position: absolute;
 	top: 10vh;
 	left: 10vw;
-	/* display: none; */
 	animation: fadeIn 1s;
 }
 #about-me {
