@@ -95,7 +95,7 @@ header {
 #store-container {
 	display: flex;
 	flex-direction: row-reverse;
-	height: 100vh;
+	min-height: 100vh;
 }
 #side-filter {
 	width: 200px;
@@ -198,6 +198,7 @@ footer .wrapper {
 	justify-content: space-around;
 	gap: 50px;
 	width: 100%;
+	padding-bottom: 50px;
 }
 #right-products-container {
 	width: 100%;
@@ -763,6 +764,7 @@ footer .wrapper {
 #about-us-container img {
 	width: 40%;
 	border-radius: 10px;
+	object-fit: cover;
 }
 #about-us-map iframe {
 	display: block;
@@ -807,6 +809,34 @@ footer .wrapper {
 	}
 	.sponsor-item i {
 		font-size: 5rem;
+	}
+	#store-container {
+		flex-direction: column-reverse;
+	}
+	#side-filter {
+		width: 100%;
+		/* align-items: center; */
+		/* justify-content: center; */
+		/* margin: 0 auto; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 5%;
+	}
+	#side-filter > div {
+		width: 40%;
+	}
+	#side-filter > input {
+		display: block;
+		width: 40%;
+	}
+	#footer-top {
+		flex-wrap: wrap;
+		/* align-items: center; */
+		justify-content: center;
+		gap: 25px;
 	}
 }
 
