@@ -42,6 +42,9 @@ nav {
 header {
 	margin-top: 90px;
 }
+header .wrapper h1 {
+	margin: 50px 0;
+}
 nav .wrapper {
 	display: flex;
 	justify-content: space-between;
@@ -402,11 +405,10 @@ footer .wrapper {
 #checkout-right {
 	width: 50%;
 }
-#checkout-left {
-	background-color: rgb(170, 170, 170);
-}
+
 #checkout-right {
-	background-color: gray;
+	background-color: rgb(201, 201, 201);
+	border-radius: 20px;
 }
 #checkout-product-list {
 	display: flex;
@@ -453,16 +455,23 @@ footer .wrapper {
 #checkout-product-list .card-product:last-child::after {
 	display: none;
 }
-/* #checkout-left label {
-	display: block;
-} */
 
-/* #checkout-name {
-	display: flex;
-	justify-content: space-between;
-} */
-#checkout-name label {
+.label-container label {
 	display: block;
+}
+
+.label-container input[type="text"] {
+	/* background-color: red; */
+	padding: 5px;
+	width: 50%;
+}
+.label-container textarea {
+	padding: 5px;
+	min-height: 150px;
+	width: 50%;
+}
+#checkout-container {
+	margin-top: 50px;
 }
 /* About me */
 #about-me-container {
@@ -637,6 +646,19 @@ footer .wrapper {
 .cross::after {
 	transform: rotate(45deg) translate(-8px, -6px);
 	opacity: 1;
+}
+
+/* About us */
+#about-us {
+	height: 50vh;
+}
+#about-us-container {
+	display: flex;
+	margin-top: 50px;
+}
+#about-us-container img {
+	width: 40%;
+	border-radius: 10px;
 }
 
 /* Response */
