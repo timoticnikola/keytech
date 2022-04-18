@@ -95,7 +95,15 @@ footer .wrapper {
 }
 footer .wrapper #footer-down {
 } */
-#footer-navlinks ul {
+#footer-top {
+	display: flex;
+	justify-content: space-between;
+	/* align-items: flex-start; */
+}
+#footer-top > div {
+	width: 30vw;
+}
+/* #footer-navlinks ul {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -103,7 +111,7 @@ footer .wrapper #footer-down {
 
 #footer-navlinks ul li a {
 	text-align: left;
-}
+} */
 
 /* Product */
 #products {

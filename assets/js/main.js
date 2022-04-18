@@ -6,6 +6,7 @@ window.onload = () => {
 	const connectionArray = fetchData("connectionTypes");
 	const socialLinksArray = fetchData("socialLinks");
 	const quotesArray = fetchData("quotes");
+	const documentArray = fetchData("documentLinks");
 
 	function fetchData(fileName, callBack) {
 		fetch(`./assets/data/${fileName}.json`)
@@ -245,15 +246,40 @@ window.onload = () => {
 		let footerWrapper = document.createElement("div");
 		footerWrapper.setAttribute("class", "wrapper");
 		let footerTop = document.createElement("div");
-		let footerNavLinks = document.createElement("div");
-		footerNavLinks.setAttribute("id", "footer-navlinks");
 		let navLinksLocal = jsonParse("navLinksLocal");
-		let navLinksUl = document.createElement("ul");
-		let footerNavLinksP = document.createElement("p");
-		let footerNavLinksPContent = document.createTextNode("Navigation");
-		footerNavLinksP.appendChild(footerNavLinksPContent);
-		footerNavLinks.appendChild(footerNavLinksP);
-		for (let link of navLinksLocal) {
+		let socialLinksLocal = jsonParse("socialLinksLocal");
+		let documentLinksLocal = jsonParse("documentLinksLocal");
+		console.log(navLinksLocal);
+		console.log(socialLinksLocal);
+		console.log(documentLinksLocal);
+		// Call function
+		createUlLinks(navLinksLocal, footerTop, "divId", "pContent");
+		createUlLinks(socialLinksLocal, footerTop, "divId", "pContent");
+		createUlLinks(documentLinksLocal, footerTop, "divId", "pContent");
+		//
+		footerTop.setAttribute("id", "footer-top");
+		let footerBottom = document.createElement("div");
+		let footerCopyright = document.createElement("p");
+		let footerCopyrightContent = document.createTextNode("© Copyright 2022");
+		footerCopyright.appendChild(footerCopyrightContent);
+		footerBottom.appendChild(footerCopyright);
+		footerBottom.setAttribute("id", "footer-bottom");
+		footerWrapper.appendChild(footerTop);
+		footerWrapper.appendChild(footerBottom);
+		footerId.appendChild(footerWrapper);
+	}
+
+	function createUlLinks(dataArray, mainContainer, divId, pContent) {
+		// console.log(dataArray);
+		let divContainer = document.createElement("div");
+		divContainer.setAttribute("class", `${divId}`);
+		let pContaier = document.createElement("p");
+		let pContaierContent = document.createTextNode(`${pContent}`);
+		pContaier.appendChild(pContaierContent);
+		divContainer.appendChild(pContaier);
+		let containerUl = document.createElement("ul");
+		divContainer.appendChild(containerUl);
+		for (let link of dataArray) {
 			let navLinksLi = document.createElement("li");
 			let navLinksA = document.createElement("a");
 			let navLinksAContent = document.createTextNode(`${link.name}`);
@@ -261,20 +287,9 @@ window.onload = () => {
 
 			navLinksA.appendChild(navLinksAContent);
 			navLinksLi.appendChild(navLinksA);
-			navLinksUl.appendChild(navLinksLi);
+			containerUl.appendChild(navLinksLi);
 		}
-		footerNavLinks.appendChild(navLinksUl);
-		footerTop.appendChild(footerNavLinks);
-		footerTop.setAttribute("id", "footer-top");
-		let footerBottom = document.createElement("div");
-		let footerCopyright = document.createElement("p");
-		let footerCopyrightContent = document.createTextNode("© Copyright 2022");
-		footerCopyright.appendChild(footerCopyrightContent);
-		footerBottom.appendChild(footerCopyright);
-		footerBottom.setAttribute("id", "footer-top");
-		footerWrapper.appendChild(footerTop);
-		footerWrapper.appendChild(footerBottom);
-		footerId.appendChild(footerWrapper);
+		mainContainer.append(divContainer);
 	}
 
 	function eventListener(name, tagType, eventMethod, functionName) {

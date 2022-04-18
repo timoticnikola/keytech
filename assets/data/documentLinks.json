@@ -1,33 +1,17 @@
 [
-  {
-    "id": 0,
-    "name": "Home",
-    "link": "index.html"
-  },
-  {
-    "id": 1,
-    "name": "Store",
-    "link": "store.html"
-  },
-  {
-    "id": 2,
-    "name": "About us",
-    "link": "about-us.html"
-  },
-  {
-    "id": 3,
-    "name": "About me",
-    "link": "about-me.html"
-  },
-  {
-    "id": 4,
-    "name": "Contact us",
-    "link": "contact-us.html"
-  },
-  {
-    "id": 5,
-    "name": "Contact us",
-    "link": "contact-us.html",
-    "icon": "fa-solid fa-basket-shopping"
-  }
+	{
+		"id": 0,
+		"name": "Documentation",
+		"link": "documentation.pdf"
+	},
+	{
+		"id": 1,
+		"name": "Sitemap",
+		"link": "sitemap.xml"
+	},
+	{
+		"id": 2,
+		"name": "RSS",
+		"link": "rss.xml"
+	}
 ]
