@@ -303,7 +303,6 @@ window.onload = () => {
 				item.addEventListener(`${eventMethod}`, functionName);
 			}
 		}
-		// ! Dodaj proveru da li je niz ili ne..
 	}
 
 	function addToCard() {
@@ -592,7 +591,6 @@ window.onload = () => {
 						}
 					}
 				}
-				// ! TotalPriceChange
 				totalPrice();
 				calculateItemPrice(item.getAttribute("data-id"));
 				inCardProductsShow();
@@ -798,7 +796,6 @@ window.onload = () => {
 				messageBox.nextElementSibling.setAttribute("class", "good-form-element");
 				messageConfirm = true;
 			}
-			// ! FIX PRICE CHECK
 			let addToCardLocal = jsonParse("addToCardList");
 			console.log(addToCardLocal);
 			if (fullNameConfirm && mailConfirm && messageConfirm && mailNotSent && addToCardLocal != null) {
