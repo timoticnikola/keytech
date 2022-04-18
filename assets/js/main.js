@@ -31,7 +31,6 @@ window.onload = () => {
 		navLinkShop("nav");
 		eventListener("shopping-card", "id", "click", openCard);
 		eventListener("card-close", "id", "click", closeCard);
-		aboutMePage();
 		createFooter();
 	}
 
@@ -262,6 +261,7 @@ window.onload = () => {
 	function createFooterNavLinks(data) {
 		let footerTop = document.getElementById("footer-top");
 		createUlLinks(data, footerTop, "footerNav", "Navigation");
+		aboutMePage();
 	}
 	function createFooterSocialLinks(data) {
 		let footerTop = document.getElementById("footer-top");
@@ -817,79 +817,81 @@ window.onload = () => {
 	}
 
 	function aboutMePage() {
-		let aboutMeLink = document.querySelector(`[href="#about-me.html"]`);
-		aboutMeLink.addEventListener("click", () => {
-			let bodyEl = document.getElementsByTagName("body");
-			let header = document.getElementsByTagName("header");
-			let aboutMeContainer = document.querySelector("#about-me-container");
-			if (aboutMeContainer == null) {
-				header[0].innerHTML += `<section id="about-me-container">
-					<div id="about-me">
-						<div id="about-me-left">
-							<img src="assets/img/nikola-timotic.png" alt="profile-img" />
-							<div id="about-me-info">
-								<ul id="about-me-info-content">
-									<li>
-										<p>
-											Mail:
-											<a href="mailto:nt&#46;timotic&#64;gmail&#46;com">nt&#46;timotic&#64;gmail&#46;com</a>
-										</p>
-									</li>
-									<li>
-										<p>
-											Phone:
-											<a href="tel:060-123-4567">0601234567</a>
-										</p>
-									</li>
-									<li>
-										<p>Index: <span>173/20</span></p>
-									</li>
-								</ul>
-								<ul id="about-social">
-									<li>
-										<a href="https://www.facebook.com">
-											<i class="fab fa-facebook-square"></i>
-										</a>
-									</li>
-									<li>
-										<a href="https://www.instagram.com">
-											<i class="fab fa-instagram-square"></i>
-										</a>
-									</li>
-									<li>
-										<a href="https://www.linkedin.com/in/nikolatimotic/">
-											<i class="fab fa-linkedin"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div id="about-me-right">
-							<h2>About Me</h2>
-							<div id="about-me-content">
-								<p id="about-me-text">Hi, my name is Nikola. I’m a Web Developer located in Serbia. I have a passion for UI and UX design. I'm quietly confident, naturally curious, and perpetually working on improving my chops one design problem at a time. I'm a very well-organized person and a problem solver.</p>
-								<div id="quote-box">
-									<cite id="quote"></cite>
-									<p id="author"></p>
+		let aboutMeLink = document.querySelectorAll(`[href="#about-me.html"]`);
+		for (let item of aboutMeLink) {
+			item.addEventListener("click", () => {
+				let bodyEl = document.getElementsByTagName("body");
+				let header = document.getElementsByTagName("header");
+				let aboutMeContainer = document.querySelector("#about-me-container");
+				if (aboutMeContainer == null) {
+					header[0].innerHTML += `<section id="about-me-container">
+						<div id="about-me">
+							<div id="about-me-left">
+								<img src="assets/img/nikola-timotic.png" alt="profile-img" />
+								<div id="about-me-info">
+									<ul id="about-me-info-content">
+										<li>
+											<p>
+												Mail:
+												<a href="mailto:nt&#46;timotic&#64;gmail&#46;com">nt&#46;timotic&#64;gmail&#46;com</a>
+											</p>
+										</li>
+										<li>
+											<p>
+												Phone:
+												<a href="tel:060-123-4567">0601234567</a>
+											</p>
+										</li>
+										<li>
+											<p>Index: <span>173/20</span></p>
+										</li>
+									</ul>
+									<ul id="about-social">
+										<li>
+											<a href="https://www.facebook.com">
+												<i class="fab fa-facebook-square"></i>
+											</a>
+										</li>
+										<li>
+											<a href="https://www.instagram.com">
+												<i class="fab fa-instagram-square"></i>
+											</a>
+										</li>
+										<li>
+											<a href="https://www.linkedin.com/in/nikolatimotic/">
+												<i class="fab fa-linkedin"></i>
+											</a>
+										</li>
+									</ul>
 								</div>
 							</div>
+							<div id="about-me-right">
+								<h2>About Me</h2>
+								<div id="about-me-content">
+									<p id="about-me-text">Hi, my name is Nikola. I’m a Web Developer located in Serbia. I have a passion for UI and UX design. I'm quietly confident, naturally curious, and perpetually working on improving my chops one design problem at a time. I'm a very well-organized person and a problem solver.</p>
+									<div id="quote-box">
+										<cite id="quote"></cite>
+										<p id="author"></p>
+									</div>
+								</div>
+							</div>
+							<div id="about-me-close">
+								<div class="close cross" id="about-me-exit"></div>
+							</div>
 						</div>
-						<div id="about-me-close">
-							<div class="close cross" id="about-me-exit"></div>
-						</div>
-					</div>
-				</section>`;
-				quoteGeneratorInterval = setInterval(quoteGenerator, 2000);
-				aboutMeModalRemoved = false;
-			}
-			// About me
-			let aboutMeExit = document.getElementById("about-me-close");
-			aboutMeExit.addEventListener("click", () => {
-				header[0].removeChild(header[0].lastChild);
-				aboutMeModalRemoved = true;
-				clearInterval(quoteGeneratorInterval);
+					</section>`;
+					quoteGeneratorInterval = setInterval(quoteGenerator, 2000);
+					aboutMeModalRemoved = false;
+				}
+				// About me
+				let aboutMeExit = document.getElementById("about-me-close");
+				aboutMeExit.addEventListener("click", () => {
+					header[0].removeChild(header[0].lastChild);
+					aboutMeModalRemoved = true;
+					clearInterval(quoteGeneratorInterval);
+				});
 			});
-		});
+		}
 	}
 	// Quote generator
 	var random1;

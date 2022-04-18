@@ -404,15 +404,13 @@ footer .wrapper {
 
 .slide {
 	display: none;
-	height: 100px;
+	height: 100%;
 	text-align: center;
 	transition: all;
 }
 .slide img {
-	display: block;
-	margin: 0 auto;
-	background-position: center;
-	object-fit: contain;
+	object-fit: scale-down;
+	height: 120%;
 }
 .prev,
 .next {
