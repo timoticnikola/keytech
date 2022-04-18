@@ -471,6 +471,9 @@ footer .wrapper {
 }
 
 /* Checkout */
+#checkout {
+	min-height: 100vh;
+}
 #checkout-container {
 	display: flex;
 }
@@ -793,6 +796,14 @@ footer .wrapper {
 	}
 	#quote {
 		font-size: 1rem;
+	}
+	#checkout-container {
+		flex-direction: column-reverse;
+		gap: 30px;
+	}
+	#checkout-right,
+	#checkout-left {
+		width: 100%;
 	}
 }
 
