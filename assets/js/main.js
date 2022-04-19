@@ -746,11 +746,12 @@ window.onload = () => {
 		ShowSlide(slideIndex);
 	} else if (url == "/checkout.html") {
 		inCardProductsShow();
-		// Contact form
+
+		// Buying form validation
 		let contactSubmit = document.getElementById("contact-submit");
 		let mailNotSent = true;
 		contactSubmit.addEventListener("click", () => {
-			let regularFullName = /^[A-ZČĆŽĐŠ][a-zćčžđš]{1,14}\s([A-ZČĆŽĐŠ][a-zćčžđš]{1,14})?\s?[A-ZČĆŽŠĐ][a-zćčžđš]{1,19}$/;
+			const regularFullName = /^[A-ZČĆŽĐŠ][a-zćčžđš]{1,14}\s([A-ZČĆŽĐŠ][a-zćčžđš]{1,14})?\s?[A-ZČĆŽŠĐ][a-zćčžđš]{1,19}$/;
 			let fullNameField = document.getElementById("fullName");
 			let fullNameFieldValue = fullNameField.value;
 			let fullNameConfirm;
@@ -765,7 +766,7 @@ window.onload = () => {
 				fullNameField.nextElementSibling.setAttribute("class", "bad-form-element");
 				fullNameConfirm = false;
 			}
-			let regularMail = /^[a-zA-Z0-9]([a-z]|[0-9])+\.?-?_?([a-z]|[0-9])*\.?([a-z]|[0-9])*\@[a-z]{3,}\.([a-z]{2,4}\.)?([a-z]{2,4})$/g;
+			const regularMail = /^[a-zA-Z0-9]([a-z]|[0-9])+\.?-?_?([a-z]|[0-9])*\.?([a-z]|[0-9])*\@[a-z]{3,}\.([a-z]{2,4}\.)?([a-z]{2,4})$/g;
 			let mailField = document.getElementById("email");
 			let mailFieldFieldValue = mailField.value;
 			if (regularMail.test(mailFieldFieldValue)) {
@@ -777,7 +778,31 @@ window.onload = () => {
 				mailField.nextElementSibling.setAttribute("class", "bad-form-element");
 				mailConfirm = false;
 			}
-
+			//
+			const regularPostalCode = /^[0-9]{5}$/;
+			let postalCode = document.getElementById("postal-code");
+			postalCodeFieldValue = postalCode.value;
+			if (regularPostalCode.test(postalCodeFieldValue)) {
+				postalCode.nextElementSibling.innerHTML = "";
+				postalCode.nextElementSibling.setAttribute("class", "good-form-element");
+				mailConfirm = true;
+			} else {
+				postalCode.nextElementSibling.innerHTML = "Postal code is not as expected!";
+				postalCode.nextElementSibling.setAttribute("class", "bad-form-element");
+				mailConfirm = false;
+			}
+			const regularStreetAddress = /^[A-Za-zČĆŽĐŠčćžđš'\.\-\s\,0-9]{3,}$/;
+			let streetAddress = document.getElementById("address");
+			streetAddressFieldValue = streetAddress.value;
+			if (regularStreetAddress.test(streetAddressFieldValue)) {
+				streetAddress.nextElementSibling.innerHTML = "";
+				streetAddress.nextElementSibling.setAttribute("class", "good-form-element");
+				mailConfirm = true;
+			} else {
+				streetAddress.nextElementSibling.innerHTML = "Address is not as expected!";
+				streetAddress.nextElementSibling.setAttribute("class", "bad-form-element");
+			}
+			//
 			let messageBox = document.getElementById("message");
 			if (messageBox.value.length > 450) {
 				messageBox.nextElementSibling.innerHTML = "Message can't be longer than 450 characters!";
@@ -797,7 +822,6 @@ window.onload = () => {
 				messageConfirm = true;
 			}
 			let addToCardLocal = jsonParse("addToCardList");
-			console.log(addToCardLocal);
 			if (fullNameConfirm && mailConfirm && messageConfirm && mailNotSent && addToCardLocal != null) {
 				cardMessages("Mail sent!");
 				mailNotSent = false;
