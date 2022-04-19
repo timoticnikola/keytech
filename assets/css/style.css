@@ -599,7 +599,8 @@ footer .wrapper {
 	padding: 7px 0;
 }
 
-.label-container input[type="text"] {
+.label-container input[type="text"],
+.label-container input[type="number"] {
 	padding: 5px;
 	width: 60%;
 }
@@ -852,6 +853,7 @@ footer .wrapper {
 /* Response */
 @media only screen and (max-width: 1025px) {
 	#checkout-left input[type="text"],
+	.label-container input[type="number"],
 	#checkout-left textarea {
 		width: 80%;
 	}
@@ -920,6 +922,7 @@ footer .wrapper {
 		padding-bottom: 50px;
 	}
 	#checkout-left input[type="text"],
+	.label-container input[type="number"],
 	#checkout-left textarea {
 		width: 100%;
 	}

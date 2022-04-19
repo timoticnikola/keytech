@@ -474,7 +474,6 @@ window.onload = () => {
 		}
 
 		if (addToCardList != null && checkoutContainer != null) {
-			console.log(2);
 			container = document.getElementById("checkout-product-list");
 			container.innerHTML = "";
 			for (let item of addToCardList) {
