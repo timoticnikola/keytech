@@ -92,7 +92,8 @@ window.onload = () => {
 		if (selectedCategory.length != 0) {
 			return productsArray.filter(function (el) {
 				for (let item of selectedCategory) {
-					if (el.brandID == item) {
+					console.log(item);
+					if (el.categoryID == item) {
 						return el;
 					}
 				}
@@ -847,7 +848,7 @@ window.onload = () => {
 
 	function topDiscountProducts(data) {
 		let filteredDiscount = data.filter(function (el) {
-			return el.price.discount >= 10;
+			return el.price.discount >= 30;
 		});
 		showProducts(filteredDiscount);
 	}

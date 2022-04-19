@@ -35,23 +35,6 @@
 	},
 	{
 		"id": 2,
-		"name": "K845 Mechanical Illuminated",
-		"image": {
-			"src": "assets/img/k845-mechanical-illuminated.png",
-			"alt": "k845 mechanical illuminated keyboard"
-		},
-		"brandID": 0,
-		"categoryID": 1,
-		"connectionTypeID": 0,
-		"price": {
-			"old": 59.9,
-			"discount": 0
-		},
-		"descript": "This keyboard have: ",
-		"score": 4.3
-	},
-	{
-		"id": 3,
 		"name": "Q60 QMK",
 		"image": {
 			"src": "assets/img/Keychron-Q60-QMK.png",
@@ -68,7 +51,7 @@
 		"score": 4.5
 	},
 	{
-		"id": 4,
+		"id": 3,
 		"name": "Keychron K14",
 		"image": {
 			"src": "assets/img/keychron-K14.png",
@@ -83,5 +66,39 @@
 		},
 		"descript": "This keyboard have: ",
 		"score": 4.9
+	},
+	{
+		"id": 4,
+		"name": "Redragon K618",
+		"image": {
+			"src": "assets/img/redragon_k618.png",
+			"alt": "Redragon K618 Horus Wireless RGB Mechanical Keyboard"
+		},
+		"brandID": 2,
+		"categoryID": 1,
+		"connectionTypeID": 1,
+		"price": {
+			"old": 79.99,
+			"discount": 60
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.2
+	},
+	{
+		"id": 5,
+		"name": "Redragon K578",
+		"image": {
+			"src": "assets/img/redragon_k578.png",
+			"alt": "Redragon K578 RGB Gaming Mechanical Keyboard"
+		},
+		"brandID": 2,
+		"categoryID": 1,
+		"connectionTypeID": 0,
+		"price": {
+			"old": 45.99,
+			"discount": 45
+		},
+		"descript": "This keyboard have: ",
+		"score": 4.0
 	}
 ]
