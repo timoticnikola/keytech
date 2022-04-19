@@ -51,7 +51,6 @@ window.onload = () => {
 	function navLinks(id, navLinksLocal) {
 		let container = document.getElementById(`${id}`);
 		let ulTag = document.createElement("ul");
-		// ulTag.setAttribute("id", "nav");
 		ulTag.setAttribute("id", "navbar-container");
 		ulTag.setAttribute("class", "navbar-list");
 		for (let link of navLinksLocal) {
@@ -780,7 +779,6 @@ window.onload = () => {
 				mailField.nextElementSibling.setAttribute("class", "bad-form-element");
 				mailConfirm = false;
 			}
-			//
 			const regularPostalCode = /^[0-9]{5}$/;
 			let postalCode = document.getElementById("postal-code");
 			postalCodeFieldValue = postalCode.value;
@@ -804,7 +802,6 @@ window.onload = () => {
 				streetAddress.nextElementSibling.innerHTML = "Address is not as expected!";
 				streetAddress.nextElementSibling.setAttribute("class", "bad-form-element");
 			}
-			//
 			let messageBox = document.getElementById("message");
 			if (messageBox.value.length > 450) {
 				messageBox.nextElementSibling.innerHTML = "Message can't be longer than 450 characters!";
@@ -937,7 +934,6 @@ window.onload = () => {
 			clearInterval(quoteGeneratorInterval);
 		}
 	}
-	// ! WIP
 	var burger = document.getElementById("nav-close-container");
 	burger.addEventListener("click", () => {
 		document.getElementById("nav-close").classList.toggle("cross");
