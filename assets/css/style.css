@@ -598,6 +598,13 @@ footer .wrapper {
 	font-size: 1.2rem;
 	padding: 7px 0;
 }
+#form-bottom label {
+	display: inline-block;
+}
+#form-bottom input[type="checkbox"] {
+	transform: scale(1.2);
+	margin-right: 3px;
+}
 
 .label-container input[type="text"],
 .label-container input[type="number"] {

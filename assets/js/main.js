@@ -786,11 +786,11 @@ window.onload = () => {
 			if (regularPostalCode.test(postalCodeFieldValue)) {
 				postalCode.nextElementSibling.innerHTML = "";
 				postalCode.nextElementSibling.setAttribute("class", "good-form-element");
-				mailConfirm = true;
+				postalCodeConfirm = true;
 			} else {
 				postalCode.nextElementSibling.innerHTML = "Postal code is not as expected!";
 				postalCode.nextElementSibling.setAttribute("class", "bad-form-element");
-				mailConfirm = false;
+				postalCodeConfirm = false;
 			}
 			const regularStreetAddress = /^[A-Za-zČĆŽĐŠčćžđš'\.\-\s\,0-9]{3,}$/;
 			let streetAddress = document.getElementById("address");
@@ -798,21 +798,28 @@ window.onload = () => {
 			if (regularStreetAddress.test(streetAddressFieldValue)) {
 				streetAddress.nextElementSibling.innerHTML = "";
 				streetAddress.nextElementSibling.setAttribute("class", "good-form-element");
-				mailConfirm = true;
+				streetAddressConfirm = true;
 			} else {
 				streetAddress.nextElementSibling.innerHTML = "Address is not as expected!";
 				streetAddress.nextElementSibling.setAttribute("class", "bad-form-element");
+				streetAddressConfirm = false;
+			}
+			let acceptToS = document.getElementById("accept-tos");
+			if (acceptToS.checked == true) {
+				acceptToS.nextElementSibling.nextElementSibling.innerHTML = "";
+				acceptToS.nextElementSibling.nextElementSibling.setAttribute("class", "good-form-element");
+				acceptToSConfirm = true;
+			} else {
+				acceptToS.nextElementSibling.nextElementSibling.innerHTML = "You must accept our Terms Of Use!";
+				acceptToS.nextElementSibling.nextElementSibling.setAttribute("class", "bad-form-element");
+				acceptToSConfirm = false;
 			}
 			let messageBox = document.getElementById("message");
 			if (messageBox.value.length > 450) {
 				messageBox.nextElementSibling.innerHTML = "Message can't be longer than 450 characters!";
 				messageBox.nextElementSibling.setAttribute("class", "bad-form-element");
 				messageConfirm = false;
-			} else if (messageBox.value == "" || messageBox.value == null || messageBox.value.length == 0) {
-				messageBox.nextElementSibling.innerHTML = "Message can't be empty!";
-				messageBox.nextElementSibling.setAttribute("class", "bad-form-element");
-				messageConfirm = false;
-			} else if (messageBox.value != "" && messageBox.value != null && messageBox.value.length < 20) {
+			} else if (messageBox.value.length > 0 && messageBox.value.length < 20) {
 				messageBox.nextElementSibling.innerHTML = "Message can't be smaller then 20 characters!";
 				messageBox.nextElementSibling.setAttribute("class", "bad-form-element");
 				messageConfirm = false;
@@ -822,7 +829,7 @@ window.onload = () => {
 				messageConfirm = true;
 			}
 			let addToCardLocal = jsonParse("addToCardList");
-			if (fullNameConfirm && mailConfirm && messageConfirm && mailNotSent && addToCardLocal != null) {
+			if (fullNameConfirm && mailConfirm && postalCodeConfirm && streetAddressConfirm && acceptToSConfirm && messageConfirm && mailNotSent && addToCardLocal != null) {
 				cardMessages("Mail sent!");
 				mailNotSent = false;
 			} else if (mailNotSent == false) {
