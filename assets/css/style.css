@@ -729,7 +729,7 @@ footer .wrapper {
 	right: 20px;
 	width: 28px;
 	height: 24px;
-	z-index: 2;
+	/* z-index: 2; */
 }
 #about-me #about-me-close .close {
 	position: absolute;
@@ -851,13 +851,13 @@ footer .wrapper {
 		position: fixed;
 		right: 20px;
 		top: 20px;
-		z-index: 3;
+		z-index: 5;
 		/* background-color: red; */
 	}
 	.nav-active {
 		transform: translateX(0%);
 	}
-	/* .navbar-list */
+
 	/* About me */
 	#about-me-container {
 		left: 5vw;
@@ -895,6 +895,7 @@ footer .wrapper {
 	}
 	#about-us-container img {
 		width: 100%;
+		margin-bottom: 20px;
 	}
 }
 
