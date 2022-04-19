@@ -298,7 +298,7 @@ footer .wrapper {
 	position: fixed;
 	display: flex;
 	flex-direction: column;
-	min-width: 300px;
+	min-width: 400px;
 	height: 100%;
 	background-color: #004d80;
 	padding: 20px;
@@ -382,6 +382,9 @@ footer .wrapper {
 	background-color: #ffffff;
 	border-radius: 5px;
 }
+.card-product-right {
+	width: 80%;
+}
 .card-product-right p {
 	margin-bottom: 5px;
 }
@@ -390,6 +393,9 @@ footer .wrapper {
 	justify-content: space-between;
 	margin-top: 20px;
 }
+/* .card-product-tools i {
+	display: block;
+} */
 .card-product-quantity {
 	display: flex;
 	justify-content: space-between;
@@ -446,6 +452,7 @@ footer .wrapper {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+	color: #f2f2f2;
 }
 .btn-sec:hover {
 	background-color: #003355;
@@ -529,7 +536,11 @@ footer .wrapper {
 #checkout-right {
 	width: 50%;
 }
-
+#checkout-left input,
+#checkout-left textarea {
+	border: 2px solid rgb(164, 211, 255);
+	border-radius: 5px;
+}
 #checkout-right {
 	background-color: rgb(164, 211, 255);
 	border-radius: 20px;
@@ -948,6 +959,10 @@ footer .wrapper {
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 25px;
+	}
+	.shopping-card-container {
+		width: 100%;
+		min-width: auto;
 	}
 }
 
