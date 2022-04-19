@@ -654,16 +654,8 @@ window.onload = () => {
 	}
 
 	inCardProductsShow();
-
-	const url = window.location.pathname;
-	if (url == "/store.html") {
-		fetchData("products", showProducts);
-		fetchData("brands", showFiltersBrand);
-		fetchData("categories", showFiltersCategory);
-		fetchData("connectionTypes", showFiltersConnectionType);
-		showReviews();
-		var sortingPlaceholder = document.getElementById("sort-product-placeholder");
-		sortingPlaceholder.addEventListener("change", function () {
+	function sortProduct(container) {
+		container.addEventListener("change", function () {
 			let productsArray = jsonParse("productsLocal");
 			productsArray.sort(function (a, b) {
 				if (sortingPlaceholder.value == 0) {
@@ -713,6 +705,67 @@ window.onload = () => {
 			});
 			showProducts(productsArray);
 		});
+	}
+
+	const url = window.location.pathname;
+	if (url == "/store.html") {
+		fetchData("products", showProducts);
+		fetchData("brands", showFiltersBrand);
+		fetchData("categories", showFiltersCategory);
+		fetchData("connectionTypes", showFiltersConnectionType);
+		showReviews();
+		var sortingPlaceholder = document.getElementById("sort-product-placeholder");
+		sortProduct(sortingPlaceholder);
+		// sortingPlaceholder.addEventListener("change", function () {
+		// 	let productsArray = jsonParse("productsLocal");
+		// 	productsArray.sort(function (a, b) {
+		// 		if (sortingPlaceholder.value == 0) {
+		// 			return 0;
+		// 		} else if (sortingPlaceholder.value == 1) {
+		// 			a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+		// 			b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+		// 			if (a < b) {
+		// 				return -1;
+		// 			}
+		// 			if (a > b) {
+		// 				return 1;
+		// 			}
+		// 			if (a == b) {
+		// 				return 0;
+		// 			}
+		// 		} else if (sortingPlaceholder.value == 2) {
+		// 			a = parseFloat(priceCalculator(a.price.old, a.price.discount));
+		// 			b = parseFloat(priceCalculator(b.price.old, b.price.discount));
+		// 			if (a > b) {
+		// 				return -1;
+		// 			}
+		// 			if (a < b) {
+		// 				return 1;
+		// 			} else {
+		// 				return 0;
+		// 			}
+		// 		} else if (sortingPlaceholder.value == 3) {
+		// 			if (a.name < b.name) {
+		// 				return -1;
+		// 			}
+		// 			if (a.name > b.name) {
+		// 				return 1;
+		// 			} else {
+		// 				return 0;
+		// 			}
+		// 		} else if (sortingPlaceholder.value == 4) {
+		// 			if (a.name > b.name) {
+		// 				return -1;
+		// 			}
+		// 			if (a.name < b.name) {
+		// 				return 1;
+		// 			} else {
+		// 				return 0;
+		// 			}
+		// 		}
+		// 	});
+		// 	showProducts(productsArray);
+		// });
 		let resetBtn = document.getElementById("reset-filter");
 		resetBtn.addEventListener("click", resetFilters);
 	} else if (url == "/index.html" || url == "/") {
