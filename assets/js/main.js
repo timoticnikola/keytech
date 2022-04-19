@@ -28,7 +28,7 @@ window.onload = () => {
 
 	function createNavBar(data) {
 		navLinks("nav-warpper", data);
-		navLinkShop("nav");
+		navLinkShop("navbar-container");
 		eventListener("shopping-card", "id", "click", openCard);
 		eventListener("card-close", "id", "click", closeCard);
 		createFooter();
@@ -51,7 +51,9 @@ window.onload = () => {
 	function navLinks(id, navLinksLocal) {
 		let container = document.getElementById(`${id}`);
 		let ulTag = document.createElement("ul");
-		ulTag.setAttribute("id", "nav");
+		// ulTag.setAttribute("id", "nav");
+		ulTag.setAttribute("id", "navbar-container");
+		ulTag.setAttribute("class", "navbar-list");
 		for (let link of navLinksLocal) {
 			let liTag = document.createElement("li");
 			let aTag = document.createElement("a");
@@ -935,4 +937,10 @@ window.onload = () => {
 			clearInterval(quoteGeneratorInterval);
 		}
 	}
+	// ! WIP
+	var burger = document.getElementById("nav-close-container");
+	burger.addEventListener("click", () => {
+		document.getElementById("nav-close").classList.toggle("cross");
+		document.getElementById("navbar-container").classList.toggle("nav-active");
+	});
 };

@@ -70,23 +70,54 @@ nav .wrapper {
 	align-items: center;
 	/* position: sticky; */
 	padding: 30px 0;
+	z-index: 3;
 }
-#nav {
+.navbar-list {
 	display: flex;
+	/* background-color: red; */
 	justify-content: space-between;
 	align-items: center;
 }
-#nav li {
+.navbar-list li {
 	list-style-type: none;
 }
 
-#nav li a {
+.navbar-list li a {
 	padding: 5px;
 	margin: 0 5px;
 	color: black;
 }
-#nav li a:hover {
+.navbar-list li a:hover {
 	background-color: red;
+}
+
+#nav-close-container {
+	display: none;
+	position: relative;
+	width: 28px;
+	height: 24px;
+	z-index: 2;
+}
+#nav-close-container:hover .close {
+	opacity: 1;
+}
+#nav-close {
+	z-index: 2;
+}
+#nav-close,
+#nav-close::after,
+#nav-close::before {
+	background-color: #3d3d3d;
+}
+
+/* Landing page */
+#landing-page {
+	background-image: url("/assets/img/header-graphic.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#landing-page h1 {
+	color: #f2f2f2;
 }
 header {
 	position: relative;
@@ -101,7 +132,8 @@ header {
 	width: 200px;
 	padding-top: 20px;
 	padding-left: 10px;
-	background-color: rgb(189, 189, 189);
+	background-color: #006bb2;
+	/* color: #f2f2f2; */
 }
 #side-filter p {
 	font-size: 1.2rem;
@@ -127,7 +159,7 @@ input {
 	color: #f2f2f2;
 }
 footer {
-	background-color: gray;
+	background-color: #006bb2;
 }
 footer .wrapper {
 	display: flex;
@@ -149,7 +181,7 @@ footer .wrapper {
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background-color: rgb(172, 172, 172);
+	background-color: #00497a;
 	border-radius: 50%;
 }
 #footer-top > div {
@@ -164,6 +196,7 @@ footer .wrapper {
 	margin-bottom: 5px;
 	position: relative;
 	font-size: 1.4rem;
+	color: #f2f2f2;
 }
 #footer-top > div > p::after {
 	position: absolute;
@@ -172,12 +205,13 @@ footer .wrapper {
 	left: 0;
 	width: 130%;
 	height: 3px;
-	background-color: #2a427c;
+	background-color: #ffffff;
 }
 #footer-top ul li a {
 	color: #f2f2f2;
 	font-size: 1.2rem;
 }
+
 #footerNav p {
 	margin-left: 25px;
 }
@@ -190,7 +224,9 @@ footer .wrapper {
 #footer-bottom {
 	padding: 10px 0;
 }
-
+#footer-bottom p {
+	color: #002d4b;
+}
 /* Product */
 #products {
 	display: flex;
@@ -201,10 +237,14 @@ footer .wrapper {
 	padding-bottom: 50px;
 }
 #right-products-container {
+	background-image: url("/assets/img/store-background.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
 	width: 100%;
 }
 #right-products-container h1 {
 	margin-left: 20px;
+	color: #f2f2f2;
 }
 .product {
 	display: flex;
@@ -212,7 +252,7 @@ footer .wrapper {
 	position: relative;
 	height: 450px;
 	width: 250px;
-	background-color: rgb(255, 216, 216);
+	background-color: rgb(164 211 255);
 	padding: 20px;
 	border-radius: 10px;
 }
@@ -245,10 +285,11 @@ footer .wrapper {
 	align-self: center;
 }
 .product .product-add-to-card-btn {
-	background-color: rgb(255, 162, 162);
+	background-color: #42a3ff;
 	border: 0;
 	padding: 10px;
 	border-radius: 5px;
+	margin-top: 5px;
 }
 
 /* Shop card menu */
@@ -473,6 +514,10 @@ footer .wrapper {
 /* Checkout */
 #checkout {
 	min-height: 100vh;
+	background-image: url("/assets/img/checkout-bg.svg");
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 #checkout-container {
 	display: flex;
@@ -712,7 +757,7 @@ footer .wrapper {
 	height: 3px;
 	opacity: 0.5;
 	transition: all 0.3s;
-	background-color: #ffffff;
+	background-color: red;
 	transition: all 0.3s ease;
 }
 .close:hover {
@@ -749,6 +794,10 @@ footer .wrapper {
 /* About us */
 #about-us {
 	min-height: 80vh;
+	background-image: url("/assets/img/about-us-bg.svg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 /* #about-us h1 {
 
@@ -777,6 +826,39 @@ footer .wrapper {
 }
 /* Response */
 @media only screen and (max-width: 769px) {
+	/* Navigation */
+	.navbar-list {
+		position: fixed;
+		right: 10vw;
+		top: 0;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 100vh;
+		width: 60%;
+		padding-top: 40px;
+		transform: translateX(100%);
+		transition: transform 0.5s ease-in-out;
+		background-color: gray;
+		margin: 0 -10vw;
+	}
+	.navbar-list li {
+		padding: 20px;
+	}
+	.navbar-list li a {
+		color: #f2f2f2;
+	}
+	#nav-close-container {
+		display: block;
+		position: fixed;
+		right: 20px;
+		top: 20px;
+		z-index: 3;
+		/* background-color: red; */
+	}
+	.nav-active {
+		transform: translateX(0%);
+	}
+	/* .navbar-list */
 	/* About me */
 	#about-me-container {
 		left: 5vw;
@@ -829,6 +911,7 @@ footer .wrapper {
 		/* align-items: center; */
 		/* justify-content: center; */
 		/* margin: 0 auto; */
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
