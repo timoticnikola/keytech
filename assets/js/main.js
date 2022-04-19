@@ -92,7 +92,6 @@ window.onload = () => {
 		if (selectedCategory.length != 0) {
 			return productsArray.filter(function (el) {
 				for (let item of selectedCategory) {
-					console.log(item);
 					if (el.categoryID == item) {
 						return el;
 					}
