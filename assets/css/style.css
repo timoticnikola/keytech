@@ -533,6 +533,7 @@ footer .wrapper {
 #checkout-right {
 	background-color: rgb(201, 201, 201);
 	border-radius: 20px;
+	height: 50%;
 }
 #checkout-product-list {
 	display: flex;

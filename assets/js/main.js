@@ -412,7 +412,6 @@ window.onload = () => {
 		let addToCardList = jsonParse("addToCardList");
 		let container = document.getElementById("card-products");
 		let checkoutContainer = document.getElementById("checkout-product-list");
-
 		container.innerHTML = "";
 		if (addToCardList != null) {
 			for (let item of addToCardList) {
@@ -475,6 +474,7 @@ window.onload = () => {
 		}
 
 		if (addToCardList != null && checkoutContainer != null) {
+			console.log(2);
 			container = document.getElementById("checkout-product-list");
 			container.innerHTML = "";
 			for (let item of addToCardList) {
@@ -501,6 +501,9 @@ window.onload = () => {
 				cardProduictsRight.appendChild(pProductPrice);
 				container.appendChild(cardProdict);
 			}
+		} else if (checkoutContainer != null) {
+			container = document.getElementById("checkout-product-list");
+			container.innerHTML = "";
 		}
 		deleteProducts();
 		classGe();
@@ -629,7 +632,6 @@ window.onload = () => {
 	}
 
 	eventListener("delete-all-products", "id", "click", deleteAllProducts);
-
 	function jsonParse(data) {
 		let jsonData = JSON.parse(localStorage.getItem(`${data}`));
 		return jsonData;
