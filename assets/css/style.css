@@ -799,11 +799,9 @@ footer .wrapper {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-/* #about-us h1 {
-
-	padding-top: 50px;
-	font-size: 3rem;
-} */
+#about-us h1 {
+	color: #f2f2f2;
+}
 #about-us-container {
 	display: flex;
 	margin-top: 50px;
@@ -886,6 +884,16 @@ footer .wrapper {
 	}
 	#checkout-right,
 	#checkout-left {
+		width: 100%;
+	}
+	/* About us */
+	#about-us h1 {
+		margin: 50px 0 0 0;
+	}
+	#about-us-container {
+		flex-direction: column;
+	}
+	#about-us-container img {
 		width: 100%;
 	}
 }
