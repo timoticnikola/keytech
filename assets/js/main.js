@@ -133,7 +133,6 @@ window.onload = () => {
 	              <p class="product-category-name">${categoryName(product.categoryID)}</p>
 	              <p class="product-brandname">${showBrand(product.brandID)}</p>
 	              <p class="product-name">${product.name}</p>
-	              <p class="product-description">${product.descript}</p>
 	              <p class="product-reviews">Reviews: ${product.score}<i class="fa-solid fa-star"></i></p>
 	              <div class="product-price">
 	                <p>Price:</p>

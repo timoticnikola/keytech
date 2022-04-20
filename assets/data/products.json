@@ -13,7 +13,6 @@
 			"old": 200,
 			"discount": 15
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.8
 	},
 	{
@@ -30,7 +29,6 @@
 			"old": 119.9,
 			"discount": 10
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.7
 	},
 	{
@@ -47,7 +45,6 @@
 			"old": 219,
 			"discount": 0
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.5
 	},
 	{
@@ -64,7 +61,6 @@
 			"old": 59,
 			"discount": 0
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.9
 	},
 	{
@@ -81,7 +77,6 @@
 			"old": 79.99,
 			"discount": 60
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.2
 	},
 	{
@@ -98,7 +93,6 @@
 			"old": 45.99,
 			"discount": 45
 		},
-		"descript": "This keyboard have: ",
 		"score": 4.0
 	}
 ]
