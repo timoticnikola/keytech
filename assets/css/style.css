@@ -440,6 +440,9 @@ footer .wrapper {
 .fa-trash:hover {
 	color: #ff0000;
 }
+#card-total-price {
+	margin-top: 10px;
+}
 /* Btns */
 #card-btns {
 	display: flex;

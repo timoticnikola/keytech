@@ -1,5 +1,5 @@
 window.onload = () => {
-	fetchData("navLinks", createNavBar);
+	fetchData("navLinks", createNavBarAndFooter);
 	fetchData("categories");
 	fetchData("brands");
 	fetchData("connectionTypes");
@@ -8,6 +8,7 @@ window.onload = () => {
 	fetchData("socialLinks", createFooterSocialLinks);
 	fetchData("documentLinks", createFooterDocumentLinks);
 
+	// Fetch data function
 	function fetchData(fileName, callBack) {
 		fetch(`./assets/data/${fileName}.json`)
 			.then((response1) => response1.json())
@@ -26,7 +27,8 @@ window.onload = () => {
 			});
 	}
 
-	function createNavBar(data) {
+	// Create navbar and footer
+	function createNavBarAndFooter(data) {
 		navLinks(data);
 		navLinkShop("navbar-container");
 		eventListener("shopping-card", "id", "click", openCard);
@@ -34,6 +36,7 @@ window.onload = () => {
 		createFooter();
 	}
 
+	// Create incard basket
 	function navLinkShop(ulID) {
 		let ulTag = document.getElementById(`${ulID}`);
 		let liTag = document.createElement("li");
@@ -48,6 +51,7 @@ window.onload = () => {
 		inCardCount();
 	}
 
+	// Create navigation links
 	function navLinks(navLinksLocal) {
 		let container = document.getElementsByTagName("nav");
 		let wrapperContainer = document.createElement("div");
@@ -84,6 +88,7 @@ window.onload = () => {
 		burgerMenu();
 	}
 
+	// Brands filter
 	function brandsFilter(productsArray) {
 		let selectedBrands = [];
 		let brandsElements = document.querySelectorAll(".brands-filter-item:checked");
@@ -102,6 +107,7 @@ window.onload = () => {
 		return productsArray;
 	}
 
+	// Category filter
 	function categoryFilter(productsArray) {
 		let selectedCategory = [];
 		let categoryElements = document.querySelectorAll(".category-filter-item:checked");
@@ -120,6 +126,7 @@ window.onload = () => {
 		return productsArray;
 	}
 
+	// Connection type filter
 	function connectionTypeFilter(productsArray) {
 		let connectionTypes = [];
 		let connectionTypeElement = document.querySelectorAll(".connection-type-filter-item:checked");
@@ -138,6 +145,7 @@ window.onload = () => {
 		return productsArray;
 	}
 
+	// Show products
 	function showProducts(productsArray) {
 		productsArray = brandsFilter(productsArray);
 		productsArray = categoryFilter(productsArray);
@@ -175,6 +183,8 @@ window.onload = () => {
 		}
 		eventListener("product-add-to-card-btn", "class", "click", addToCard);
 	}
+
+	// Show category name
 	function categoryName(productCategoryID) {
 		let categoriesArray = jsonParse("categoriesLocal");
 		let categoryName = categoriesArray.filter(function (el) {
@@ -182,10 +192,14 @@ window.onload = () => {
 		});
 		return categoryName[0].name;
 	}
+
+	// Return calculated price
 	function priceCalculator(productPrice, productDiscount) {
 		let price = productPrice * ((100 - productDiscount) / 100);
 		return price.toFixed(2);
 	}
+
+	// Return brand name
 	function showBrand(brandID) {
 		let html = "";
 		let brandsArray = jsonParse("brandsLocal");
@@ -197,10 +211,12 @@ window.onload = () => {
 		return html;
 	}
 
+	// Filter products
 	function filterProducts() {
 		let productsArray = jsonParse("productsLocal");
 		showProducts(productsArray);
 	}
+
 	// Make side filters
 	function showFiltersBrand(data) {
 		showProductsFilter("Brands", "brands-filter", data, "brands-filter-item");
@@ -229,7 +245,6 @@ window.onload = () => {
 	}
 
 	// Show Reviews side filter
-
 	function showReviews() {
 		let container = document.getElementById("reviews-filter");
 		let html = `<p>Reviews</p>
@@ -243,6 +258,7 @@ window.onload = () => {
 		scoreP.innerHTML = "1";
 		score.addEventListener("click", filterProducts);
 	}
+
 	// Filter products per reviews
 	function reviewsFilter(productsArray) {
 		let scoreContainer = document.getElementById("reviews-range-sllider");
@@ -259,6 +275,7 @@ window.onload = () => {
 		});
 	}
 
+	// Create footer function
 	function createFooter() {
 		let footerId = document.getElementById("footer");
 		let footerWrapper = document.createElement("div");
@@ -277,20 +294,26 @@ window.onload = () => {
 		footerId.appendChild(footerWrapper);
 	}
 
+	// Create footer navigation links
 	function createFooterNavLinks(data) {
 		let footerTop = document.getElementById("footer-top");
 		createUlLinks(data, footerTop, "footerNav", "Navigation");
 		aboutMePage();
 	}
+
+	// Create footer social links
 	function createFooterSocialLinks(data) {
 		let footerTop = document.getElementById("footer-top");
 		createUlLinks(data, footerTop, "footerSocial", "Social");
 	}
+
+	// Create footer document links
 	function createFooterDocumentLinks(data) {
 		let footerTop = document.getElementById("footer-top");
 		createUlLinks(data, footerTop, "footerDocument", "Links");
 	}
 
+	// Reusable function for creating ul list of links with custom parameters
 	function createUlLinks(dataArray, mainContainer, divId, pContent) {
 		let divContainer = document.createElement("div");
 		divContainer.setAttribute("id", `${divId}`);
@@ -312,6 +335,7 @@ window.onload = () => {
 		mainContainer.appendChild(divContainer);
 	}
 
+	// Reusable function for fast creating eventListener with event method and callback function
 	function eventListener(name, tagType, eventMethod, functionName) {
 		if (tagType == "id") {
 			let item = document.querySelector(`#${name}`);
@@ -324,6 +348,7 @@ window.onload = () => {
 		}
 	}
 
+	// Add to card product function
 	function addToCard() {
 		let dataID = this.getAttribute("data-id");
 		if (localStorage.getItem("addToCardList")) {
@@ -349,14 +374,14 @@ window.onload = () => {
 		}
 		inCardCount();
 		inCardProductsShow();
-		classGe();
 	}
 
-	// Test shopping-card-container
+	// Open card container
 	function openCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.add("shopping-card-active");
 	}
+	// Close card container
 	function closeCard() {
 		let shoppingCardContainer = document.querySelector(".shopping-card-container");
 		shoppingCardContainer.classList.remove("shopping-card-active");
@@ -488,6 +513,8 @@ window.onload = () => {
 			let pTagContent = document.createTextNode("Card is empty.");
 			pTag.appendChild(pTagContent);
 			pTag.setAttribute("id", "empty-card");
+			let totalPriceContainer = document.getElementById("card-total-price");
+			totalPriceContainer.innerHTML = "";
 			container.appendChild(pTag);
 		}
 
@@ -523,15 +550,15 @@ window.onload = () => {
 			container.innerHTML = "";
 		}
 		deleteProducts();
-		classGe();
+		changeQuantity();
 	}
 
+	// Show total price calculator
 	function totalPrice() {
 		let addToCardList = jsonParse("addToCardList");
 		let totalPrice = 0;
 		let priceContainer = document.getElementById("card-total-price");
 		let checkoutContainer = document.getElementById("checkout-total");
-
 		if (addToCardList != null && addToCardList != "undefined") {
 			let quantityPrice = addToCardList.map(function (el) {
 				let productsArray = jsonParse("productsLocal");
@@ -550,6 +577,8 @@ window.onload = () => {
 			checkoutContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}$`;
 		}
 	}
+
+	// Calculate item price with quantitiy for product
 	function calculateItemPrice(itemID, price = null) {
 		let addToCardList = jsonParse("addToCardList");
 		let filtered = addToCardList.filter(function (el) {
@@ -566,6 +595,7 @@ window.onload = () => {
 		return `${price}$ x ${filtered[0].quantity} = ${totalPrice.toFixed(2)}$`;
 	}
 
+	// Show product data details
 	function showInCardProductData(itemID, objectName, objectName2 = null) {
 		let productsArray = jsonParse("productsLocal");
 		let productName = productsArray.filter(function (el) {
@@ -588,7 +618,9 @@ window.onload = () => {
 			return productName[0][objectName];
 		}
 	}
-	function classGe() {
+
+	// Change item quantity in card and LocalStorage
+	function changeQuantity() {
 		let quantityRegulList = document.querySelectorAll(".quantityRegul");
 		for (let item of quantityRegulList) {
 			item.addEventListener("click", function () {
@@ -619,6 +651,7 @@ window.onload = () => {
 		}
 	}
 
+	// Delete products from card
 	function deleteProducts() {
 		let binItems = document.querySelectorAll(".fa-trash");
 		for (let item of binItems) {
@@ -641,6 +674,8 @@ window.onload = () => {
 		}
 		totalPrice();
 	}
+
+	// Delete all products from card
 	function deleteAllProducts() {
 		localStorage.removeItem("addToCardList");
 		cardMessages("Deleted all products from card");
@@ -649,10 +684,14 @@ window.onload = () => {
 	}
 
 	eventListener("delete-all-products", "id", "click", deleteAllProducts);
+
+	// Function for parsing LocalStorage data
 	function jsonParse(data) {
 		let jsonData = JSON.parse(localStorage.getItem(`${data}`));
+		let priceContainer = document.getElementById("card-total-price");
 		return jsonData;
 	}
+
 	function resetFilters() {
 		let brandsFilters = document.querySelectorAll(".brands-filter-item");
 		let categoriesFilters = document.querySelectorAll(".category-filter-item");
@@ -674,6 +713,7 @@ window.onload = () => {
 	}
 
 	inCardProductsShow();
+
 	function sortProduct(container) {
 		container.addEventListener("change", function () {
 			let productsArray = jsonParse("productsLocal");
@@ -863,6 +903,7 @@ window.onload = () => {
 		});
 	}
 
+	// Top discount products for index page
 	function topDiscountProducts(data) {
 		let filteredDiscount = data.filter(function (el) {
 			return el.price.discount >= 30;
@@ -870,6 +911,7 @@ window.onload = () => {
 		showProducts(filteredDiscount);
 	}
 
+	// About me page
 	function aboutMePage() {
 		let aboutMeLink = document.querySelectorAll(`[href="#about-me.html"]`);
 		for (let item of aboutMeLink) {
