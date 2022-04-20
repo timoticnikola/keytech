@@ -27,7 +27,7 @@ window.onload = () => {
 	}
 
 	function createNavBar(data) {
-		navLinks("nav-warpper", data);
+		navLinks(data);
 		navLinkShop("navbar-container");
 		eventListener("shopping-card", "id", "click", openCard);
 		eventListener("card-close", "id", "click", closeCard);
@@ -48,8 +48,18 @@ window.onload = () => {
 		inCardCount();
 	}
 
-	function navLinks(id, navLinksLocal) {
-		let container = document.getElementById(`${id}`);
+	function navLinks(navLinksLocal) {
+		let container = document.getElementsByTagName("nav");
+		let wrapperContainer = document.createElement("div");
+		wrapperContainer.setAttribute("id", "nav-wrapper");
+		wrapperContainer.setAttribute("class", "wrapper");
+		let aTag = document.createElement("a");
+		aTag.setAttribute("href", "index.html");
+		let imgTag = document.createElement("img");
+		imgTag.setAttribute("src", "assets/img/logo.png");
+		imgTag.setAttribute("alt", "logo");
+		aTag.appendChild(imgTag);
+		wrapperContainer.appendChild(aTag);
 		let ulTag = document.createElement("ul");
 		ulTag.setAttribute("id", "navbar-container");
 		ulTag.setAttribute("class", "navbar-list");
@@ -62,7 +72,16 @@ window.onload = () => {
 			liTag.appendChild(aTag);
 			ulTag.appendChild(liTag);
 		}
-		container.appendChild(ulTag);
+		wrapperContainer.appendChild(ulTag);
+		let navCloseContainer = document.createElement("div");
+		navCloseContainer.setAttribute("id", "nav-close-container");
+		let navClose = document.createElement("div");
+		navClose.setAttribute("id", "nav-close");
+		navClose.setAttribute("class", "close");
+		navCloseContainer.appendChild(navClose);
+		wrapperContainer.appendChild(navCloseContainer);
+		container[0].appendChild(wrapperContainer);
+		burgerMenu();
 	}
 
 	function brandsFilter(productsArray) {
@@ -946,9 +965,11 @@ window.onload = () => {
 			clearInterval(quoteGeneratorInterval);
 		}
 	}
-	var burger = document.getElementById("nav-close-container");
-	burger.addEventListener("click", () => {
-		document.getElementById("nav-close").classList.toggle("cross");
-		document.getElementById("navbar-container").classList.toggle("nav-active");
-	});
+	function burgerMenu() {
+		var burger = document.getElementById("nav-close-container");
+		burger.addEventListener("click", () => {
+			document.getElementById("nav-close").classList.toggle("cross");
+			document.getElementById("navbar-container").classList.toggle("nav-active");
+		});
+	}
 };
