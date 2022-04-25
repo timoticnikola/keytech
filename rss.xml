@@ -3,14 +3,20 @@
     <channel>
         <title>KeyTech | Keyboard world</title>
         <link>https://keytech-world.netlify.app/index.html</link>
-        <description>Learning platform</description>
+        <description>KeyTech is online store.</description>
         <language>en</language>
         <copyright>Copyright 2022 Nikola Timotic</copyright>
         <category>Store</category>
         <item>
-            <title>KeyTech</title>
+            <title>Redragon K618</title>
             <link>https://keytech-world.netlify.app/</link>
-            <description>KeyTech is online store.</description>
+            <description>Price: 32.00$</description>
+            <pubDate>Thu, 15 Apr 2022 00:08:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>Redragon K578</title>
+            <link>https://keytech-world.netlify.app/</link>
+            <description>Price: 25.29$</description>
             <pubDate>Thu, 15 Apr 2022 00:08:00 +0000</pubDate>
         </item>
     </channel>
